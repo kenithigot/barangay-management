@@ -5,10 +5,11 @@
   "dependencies": {
     "datatables.net-dt": "^2.2.1",
     "datatables.net-responsive-dt": "^3.0.3",
-    "preline": "^2.7.0"
+    "preline": "^2.7.0",
+    "sweetalert2": "^11.15.10"
   },
   "scripts": {
-  "dev": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch",
-  "build": "npx tailwindcss -i ./src/input.css -o ./src/output.css --minify"
-}
+    "dev": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch",
+    "build": "npx tailwindcss -i ./src/input.css -o ./src/output.css --minify"
+  }
 }

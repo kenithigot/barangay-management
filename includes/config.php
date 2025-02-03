@@ -2,7 +2,8 @@
 crossorigin="anonymous"></script>
 
 <?php
-define('BASE_URL', '/barangay');
-define('BASE_DIR', __DIR__); 
-include(BASE_DIR . '/../src/database/auth.php'); 
+define('BASE_URL', '/barangay-management');
+
+include("../src/database.php");
+
 ?>
