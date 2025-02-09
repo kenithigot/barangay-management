@@ -11,6 +11,7 @@ module.exports = {
     "./register/",
     "./dashboard/",
     "./settings/",
+    "settings/*.js",
     "./official and staff/",
     "./residents record/",
     "./certifications/",

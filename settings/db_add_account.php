@@ -1,15 +1,17 @@
 <?php
 include("../src/database.php"); 
 
-//handling form submission
+//handling form submission 
+
 if (isset($_POST['btn-addAccount'])) {
-    $user_type = $_POST['userType'];
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
-    $contactNum = $_POST['contactNum'];
-    $userAddress = $_POST['userAddress'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $user_type = isset($_POST['userType']) ? $_POST['userType'] : '';
+    $firstName = isset($_POST['firstName']) ? $_POST['firstName'] : '';
+    $lastName = isset($_POST['lastName']) ? $_POST['lastName'] : '';
+    $contactNum = isset($_POST['contactNum']) ? $_POST['contactNum'] : '';
+    $userAddress = isset($_POST['userAddress']) ? $_POST['userAddress'] : '';
+    $email_address = isset($_POST['email_address']) ? $_POST['email_address'] : '';
+    $username = isset($_POST['username']) ? $_POST['username'] : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
 
     //Check duplication account
     $check_query = $conn->prepare("SELECT id FROM admin_staff_account WHERE username = ?");
@@ -27,6 +29,7 @@ if (isset($_POST['btn-addAccount'])) {
                     text: "The username is already exist. Please choose another one."
                 }).then(() => {
                     window.location.href = "add account.php";
+                    window.location.reload();
                 });
             });
         </script>';
@@ -41,8 +44,8 @@ if (isset($_POST['btn-addAccount'])) {
 
     //Prepare statement query insert
     $query = $conn->prepare("INSERT INTO admin_staff_account
-            (user_role, firstName, lastName, contactNum, address, username, password, timestamp)
-            VALUES (?, ?, ?, ?, ?, ?, ?, NOW())
+            (user_role, firstName, lastName, contactNum, address, email_address, username, password, timestamp)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())
         ");
 
     if (!$query) {
@@ -51,12 +54,13 @@ if (isset($_POST['btn-addAccount'])) {
 
     //Binding variable
     $query->bind_param(
-        "issssss",
+        "isssssss",
         $user_type,
         $firstName,
         $lastName,
         $contactNum,
         $userAddress,
+        $email_address,
         $username,
         $hashedpassword
     );
