@@ -80,38 +80,38 @@ document.addEventListener("click", function (event) {
 });
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('.tab-button');
-    const contents = document.querySelectorAll('.tab-content');
-    const defaultTab = 'goal';
+// document.addEventListener('DOMContentLoaded', () => {
+//     const buttons = document.querySelectorAll('.tab-button');
+//     const contents = document.querySelectorAll('.tab-content');
+//     const defaultTab = 'goal';
 
-    // Function to deactivate all tabs and contents
-    function deactivateAll() {
-        buttons.forEach(button => button.classList.remove('bg-slate-500'));
-        buttons.forEach(button => button.querySelector('button').classList.remove('active'));
-        contents.forEach(content => content.classList.add('hidden'));
-    }
+//     // Function to deactivate all tabs and contents
+//     function deactivateAll() {
+//         buttons.forEach(button => button.classList.remove('bg-slate-500'));
+//         buttons.forEach(button => button.querySelector('button').classList.remove('active'));
+//         contents.forEach(content => content.classList.add('hidden'));
+//     }
 
-    // Function to activate the clicked tab
-    function activateTab(tabName) {
-        deactivateAll();
-        const activeButton = document.querySelector(`[data-tab="${tabName}"]`);
-        activeButton.classList.add('bg-slate-500');
-        activeButton.querySelector('button').classList.add('active');
-        document.getElementById(tabName).classList.remove('hidden');
-    }
+//     // Function to activate the clicked tab
+//     function activateTab(tabName) {
+//         deactivateAll();
+//         const activeButton = document.querySelector(`[data-tab="${tabName}"]`);
+//         activeButton.classList.add('bg-slate-500');
+//         activeButton.querySelector('button').classList.add('active');
+//         document.getElementById(tabName).classList.remove('hidden');
+//     }
 
-    // Set default tab
-    activateTab(defaultTab);
+//     // Set default tab
+//     activateTab(defaultTab);
 
-    // Add event listeners to buttons
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            const tabName = button.getAttribute('data-tab');
-            activateTab(tabName);
-        });
-    });
-});
+//     // Add event listeners to buttons
+//     buttons.forEach(button => {
+//         button.addEventListener('click', () => {
+//             const tabName = button.getAttribute('data-tab');
+//             activateTab(tabName);
+//         });
+//     });
+// });
 
 
 

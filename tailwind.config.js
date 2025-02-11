@@ -11,12 +11,14 @@ module.exports = {
     "./register/",
     "./dashboard/",
     "./settings/",
+    "./request document/",
     "settings/*.js",
     "./official and staff/",
     "./residents record/",
     "./certifications/",
     "./certifications/certificates/",
     "./certifications/barangay certifications/",
+    
   ],
   theme: {
     extend: {
