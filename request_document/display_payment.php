@@ -9,23 +9,9 @@
     <!-- Import Google Font: Raleway -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <?php
-    // Start the session to temporarily store form data
-    session_start();
+    <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
-    // If the form was submitted, store the data in the session
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $_SESSION['documentType'] = $_POST['documentType'];
-        $_SESSION['firstName'] = $_POST['firstName'];
-        $_SESSION['middleInitial'] = $_POST['middleInitial'];
-        $_SESSION['lastName'] = $_POST['lastName'];
-        $_SESSION['ageUserRequest'] = $_POST['ageUserRequest'];
-        $_SESSION['contactNum'] = $_POST['contactNum'];
-        $_SESSION['address'] = $_POST['address'];
-        $_SESSION['emailAddress'] = $_POST['emailAddress'];
-        $_SESSION['purposeText'] = $_POST['purposeText'];
-    }
-    ?>
+    <?php include("db_request_docs.php") ?>
 </head>
 
 <body class="font-sans">
@@ -68,8 +54,8 @@
                                 ];
 
                                 // Get the document type value from session and map it
-                                $documentType = isset($_SESSION['documentType']) ? $_SESSION['documentType'] : '';
-                                $documentLabel = isset($documentTypes[$documentType]) ? $documentTypes[$documentType] : " ";
+                                $documentType = $_SESSION['documentType'] ?? '';
+                                $documentLabel = $documentTypes[$documentType] ?? " ";
                                 ?>
 
                                 <input value="<?php echo htmlspecialchars($documentLabel, ENT_QUOTES, 'UTF-8'); ?>" required id="documentType" name="documentType" type="text" class="font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
@@ -112,7 +98,7 @@
                                 </label>
                             </div>
                             <div class="col-span-8 flex items-center">
-                                <input value="<?php echo $_SESSION['contactNum'] ?? " "; ?>" required id="view_address" name="view_address" type="text" class="font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
+                                <input value="<?php echo $_SESSION['contactNum'] ?? " "; ?>" required id="contactNum" name="contactNum" type="text" class="font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
                             </div>
                             <div class="col-span-4 flex items-center">
                                 <label for="address" class="text-sm lg:text-base font-medium text-gray-800">
@@ -140,6 +126,20 @@
                             </div>
                         </div>
                     </div>
+                    <?php
+
+                    include("../src/database.php");
+
+                    $stmt = "SELECT gcashPicCode FROM payment_method WHERE id = 6";
+                    $stmt_run = mysqli_query($conn, $stmt);
+
+                    if ($stmt_run && mysqli_num_rows($stmt_run) > 0) {
+                        $row = mysqli_fetch_array($stmt_run);
+                        $gcashPicCode = $row['gcashPicCode'];
+                    } else {
+                        $gcashPicCode = '../src/imgs-vid/default_qrCode.jpg'; // Display default image if no record is found
+                    }
+                    ?>
 
                     <div class="flex-1">
                         <div class="grid grid-col-12 py-3">
@@ -147,9 +147,9 @@
                                 <h3 class="text-lg font-bold text-gray-800">Total Payment:</h3>
                                 <p class="text-2xl lg:text-4xl font-bold text-gray-800 underline underline-offset-8">₱<span class="text-3xl lg:text-5xl">&nbsp200.00</span></p>
                             </div><br>
-                            <form action="" class="space-y-4">
+                            <form action="" method="POST" class="space-y-4">
                                 <div class="space-y-1">
-                                    <label for="documentType" class="flex text-sm lg:text-xl font-medium text-gray-800 mt-2.5">
+                                    <label for="documentType" class="flex text-sm lg:text-base font-medium text-gray-800 mt-2.5">
                                         Payment Method <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
                                             <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
                                         </svg>
@@ -163,13 +163,13 @@
                                 <div class="hidden space-y-1" ID="onhandPaymentNote">
                                     <p class="text-sm text-blue-600 mt-1">
                                         <i>Make sure to upload a <span class="font-semibold">CLEAR and CORRECT receipt</span> in order to process your request.
-                                        If the receipt is incorrect, it will be <span class="text-red-600 font-semibold">DISCARDED</span>.</i>
+                                            If the receipt is incorrect, it will be <span class="text-red-600 font-semibold">DISCARDED</span>.</i>
                                     </p>
                                 </div>
                                 <div class="hidden space-y-1" ID="gcashPaymentNote">
                                     <p class="text-sm text-blue-600 mt-1">
                                         <i>Make sure to upload a <span class="font-semibold">CLEAR and CORRECT receipt and REFERENCE NO.</span> in order to process your request.
-                                        If the receipt or reference no. is incorrect, it will be <span class="text-red-600 font-semibold">DISCARDED</span>.</i>
+                                            If the receipt or reference no. is incorrect, it will be <span class="text-red-600 font-semibold">DISCARDED</span>.</i>
                                     </p>
                                 </div>
                                 <div id="gcashPaymentBlock" class="hidden px-4 py-4 border rounded-lg">
@@ -178,90 +178,47 @@
                                     </h4>
                                     <p class="text-sm text-red-600">&nbsp<i>Scan the QR CODE to pay the total payment</i></p>
                                     <div class="flex justify-center items-center">
-                                        <img src="../src/imgs-vid/logo.png" alt="QRCODE payment" class="object-auto">
+                                        <img src="../src/imgs-vid/<?php echo $gcashPicCode?>" alt="QRCODE payment" class="object-auto">
                                     </div>
                                 </div>
-                                <div id="onHandPaymentBlock" class="hidden space-y-1">
-                                    <label for="onHandPaymentBlock" class="flex text-sm lg:text-xl font-medium text-gray-800 mt-2.5">
+                                <!-- <div id="onHandPaymentBlock" class="hidden space-y-1">
+                                    <label for="onHandPaymentBlock" class="flex text-sm lg:text-base font-medium text-gray-800 mt-2.5">
                                         Upload Receipt <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
                                             <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
                                         </svg>
                                     </label>
-                                    <input type="file" name="" id="" class="border rounded-lg w-full py-3 px-5 bg-green-700 text-white">
-                                </div>
+                                    <div class="">
+                                        <label for="uploadReceipt" class="px-3 cursor-pointer text-blue-800 text-base font-bold underline underline-offset-4">Click Here</label>
+                                        <label id="fileName" name="fileName">No choosen file</label>
+                                    </div>
+                                    
+                                    <input type="file" name="uploadReceipt" id="uploadReceipt" onchange="displayFileName()" class="hidden border rounded-lg w-full py-3 px-5 bg-green-700 text-white">
+                                </div> -->
 
                                 <div id="gcashReferenceNumBlock" class="hidden space-y-1 ">
-                                    <!-- Line styling -->
                                     <div class="py-1 flex items-center text-base text-gray-800 uppercase before:flex-1 before:border-t before:border-gray-800 before:me-6 after:flex-1 after:border-t after:border-gray-800 after:ms-6">Or</div>
-                                    <label for="ageUserRequest" class="flex text-base font-medium text-gray-800 mt-2.5">
+                                    <label for="referenceNum" class="flex text-base font-medium text-gray-800 mt-2.5">
                                         GCASH - Reference No. Receipt
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
                                             <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
                                         </svg>
                                     </label>
-                                    <input required id="ageUserRequest" name="ageUserRequest" type="number" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter reference number">
+                                    <input required id="referenceNum" name="referenceNum" type="number" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter reference number">
                                 </div>
                                 <div class="pt-8">
-                                    <button type="button" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                                    <button type="submit" id="btn-confirmPayment" name="btn-confirmPayment" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
                                         Confirm Payment
                                     </button>
                                 </div>
                             </form>
-                            
-                            <script>
-                                function paymentClicked() {
-                                    var paymentSelection = document.getElementById("paymentSelectionBlock").value;
-                                    var onHandPayment = document.getElementById("onHandPaymentBlock");
-                                    var gcashPayment = document.getElementById("gcashPaymentBlock");
-                                    var gcashReferenceNum = document.getElementById("gcashReferenceNumBlock");
-                                    var noteMessage = document.getElementById("noteMessageBlock")
-                                    
-                                    // Note Message
-                                    var onhandNote =document.getElementById("onhandPaymentNote");
-                                    var gcashNote =document.getElementById("gcashPaymentNote");
-
-                                    if (paymentSelection === "1") {
-                                        onHandPayment.style.display = "block";
-                                        gcashPayment.style.display = "none";
-                                        gcashReferenceNum.style.display = "none";
-
-                                        // Display Note
-                                        onhandNote.style.display = "block";
-                                        gcashNote.style.display = "none";
-
-                                    } else if (paymentSelection === "2") {
-                                        gcashPayment.style.display = "block";
-                                        gcashReferenceNum.style.display = "block";
-                                        onHandPayment.style.display = "block";
-
-                                        // Display Note
-                                        onhandNote.style.display = "none";
-                                        gcashNote.style.display = "block";
-
-                                    } else {
-                                        onHandPayment.style.display = "none";
-                                        gcashPayment.style.display = "none";
-                                        gcashReferenceNum.style.display = "none";
-
-                                        // Display Note
-                                        onhandNote.style.display = "none";
-                                        gcashNote.style.display = "none";
-                                    }
-                                }
-                            </script>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    <script>
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-    </script>
 
+    <script src="script.js"></script>
     <script src="<?= BASE_URL ?>/src/script.js"></script>
 </body>
 

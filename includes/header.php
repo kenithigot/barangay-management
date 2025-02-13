@@ -78,7 +78,7 @@
                 class="text-base font-semibold text-gray-900 hover:text-slate-600">Projects/Programs</a>
             <a href="#"
                 class="text-base font-semibold text-gray-900 hover:text-slate-600">Contact</a>
-            <a href="<?= BASE_URL ?>/request document/"
+            <a href="<?= BASE_URL ?>/request_document/"
                 class="text-base font-semibold text-gray-900 hover:text-slate-600">Request Document</a>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
