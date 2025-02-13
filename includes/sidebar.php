@@ -5,7 +5,7 @@
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php include("config.php") ?>
+    <?php include("../../config.php") ?>
     <link rel="stylesheet" href="<?php echo BASE_URL ?>/src/output.css">
 </head>
 

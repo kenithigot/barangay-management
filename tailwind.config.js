@@ -4,21 +4,8 @@ module.exports = {
     "./index.php",
     "src/*.{html,js}",
     'node_modules/preline/dist/*.js',
-    "./includes/header.php",
-    "./includes/sidebar.php",
-    "./includes/footer.php",
-    "./account login/",
-    "./register/",
-    "./dashboard/",
-    "./settings/",
-    "./request document/",
-    "settings/*.js",
-    "./official and staff/",
-    "./residents record/",
-    "./certifications/",
-    "./certifications/certificates/",
-    "./certifications/barangay certifications/",
-    
+    './includes/*.php',
+    './admin/**/*.php'
   ],
   theme: {
     extend: {
