@@ -1,53 +1,61 @@
 <?php 
+include_once("../../src/database.php");
 
-    include_once("../../src/database.php");
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['uploadImg'])){
-
-        // Upload path directory
-        $folderDir = "folder/";
-        $fileType = strtolower(pathinfo($_FILES['uploadImg']['name'], PATHINFO_EXTENSION));
+if (isset($_POST['btn-uploadCode']) && isset($_FILES['uploadImg'])) {
+    $fileType = strtolower(pathinfo($_FILES['uploadImg']['name'], PATHINFO_EXTENSION));
     
-        // Validate file type
-        $validateTypeFile = ['jpg', 'jpeg', 'png'];
+    // Validate file type
+    $validateTypeFile = ['jpg', 'jpeg', 'png'];
 
-        if (in_array($fileType, $validateTypeFile)) {
-            $fileName = "qrcode"; // Base Name of file
-            $fileCount = 1;
+    if (in_array($fileType, $validateTypeFile)) {
+        $uniqueFileName = "qrcode" . time() . '.' . $fileType; // Generate a unique file name
+        $targetDir = "../../src/imgs-vid/"; // Directory where the file will be saved
+        $targetFile = $targetDir . $uniqueFileName;
 
-            // Check existing Base name of file
-            while (file_exists($folderDir . $fileName . $fileCount . '.' . $fileType)){
-                $fileCount++; // Generate unique increment name
-            }
+        // Fetch the current file name from the database
+        $stmt = $conn->prepare("SELECT gcashPicCode FROM payment_method WHERE id = ?");
+        $id = 6;
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->bind_result($currentFileName);
+        $stmt->fetch();
+        $stmt->close();
 
-            $uniqueFileName = $fileName . $fileCount . '.' . $fileType; //Final file name
-            $targetFile = $folderDir . $uniqueFileName;
-
-            // Move the file in directory to the database
-            if(move_uploaded_file($_FILES['uploadImg']['tmp_name'], $targetFile)){
-
-                $stmt = $conn->prepare("INSERT INTO payment_method (gcashPicCode, fileNames)
-                    VALUES (?, ?)
-                ");
-                $stmt->bind_param('ss', $uniqueFileName, $targetFile);
-            
-                if ($stmt->execute()) {
-                    echo "File has been uploaded and saved to the database successfully.";
-                } else {
-                    echo "Error: " . $stmt->error;
-                }
-
-                // Close the database connection
-                $stmt->close();
-                $conn->close();
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
-
-        }else {
-            echo "Invaasdasdlid file type. Only JPG, JPEG, and PNG files are allowed.";
+        // Delete the existing file if it exists
+        if ($currentFileName && file_exists($targetDir . $currentFileName)) {
+            unlink($targetDir . $currentFileName);
         }
+
+        // Move the uploaded file to the target directory
+        if (move_uploaded_file($_FILES['uploadImg']['tmp_name'], $targetFile)) {
+            // Update the database with the new file name
+            $stmt = $conn->prepare("UPDATE payment_method SET gcashPicCode = ? WHERE id = ?");
+            $stmt->bind_param('si', $uniqueFileName, $id);
+
+            if ($stmt->execute()) {
+                echo '<script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        Swal.fire({
+                            icon: "success",
+                            title: "QR CODE updated!",
+                            text: "QR CODE has been updated successfully."
+                        }).then(() => {
+                            window.location.href = "../payment/";
+                        });
+                    });
+                </script>';
+            } else {
+                echo "<script>alert('Database Error: " . $stmt->error . "');</script>";
+            }
+
+            // Close the database connection
+            $stmt->close();
+            $conn->close();
+        } else {
+            echo "<script>alert('Error uploading file.');</script>";
+        }
+    } else {
+        echo "<script>alert('Invalid file type. Only JPG, JPEG, and PNG files are allowed.');</script>";
     }
-
-
+}
 ?>

@@ -5,12 +5,13 @@ module.exports = {
     "src/*.{html,js}",
     'node_modules/preline/dist/*.js',
     './includes/*.php',
-    './admin/**/*.php'
+    './admin/**/*.php',
+    './request_document/**/*.php'
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Raleway', 'sans-serif'], // Define Raleway as the default sans font
+        sans: ['Raleway', 'sans-serif'],
       },
     },
   },

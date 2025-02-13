@@ -11,7 +11,7 @@
 </head>
 
 <body class="font-sans">
-    <?php require_once '../includes/header.php' ?>
+    <?php include '../includes/header.php' ?>
     <div class="bg-slate-600">
         <div class="pt-32 md:p-32 lg:p-40 text-gray-800">
             <div class="border-white bg-white rounded-xl shadow-lg pt-8">
