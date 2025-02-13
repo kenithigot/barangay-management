@@ -45,7 +45,7 @@
             }
 
         }else {
-            echo "Invalid file type. Only JPG, JPEG, and PNG files are allowed.";
+            echo "Invaasdasdlid file type. Only JPG, JPEG, and PNG files are allowed.";
         }
     }
 
