@@ -4,5 +4,4 @@ crossorigin="anonymous"></script>
 <?php
 define('BASE_URL', '/barangay-management');
 
-include $_SERVER['DOCUMENT_ROOT'] . BASE_URL . "../src/database.php";
 ?>

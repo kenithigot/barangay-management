@@ -13,6 +13,27 @@ if (isset($_POST['btn-submit'])) {
     $_SESSION['address'] = $_POST['address'] ?? '';
     $_SESSION['emailAddress'] = $_POST['emailAddress'] ?? '';
     $_SESSION['purposeText'] = $_POST['purposeText'] ?? '';
+
+    // Check and fetch the price for the selected document type
+    if (!empty($_SESSION['documentType'])) {
+        include "../src/database.php"; 
+
+        $documentType = $_SESSION['documentType'];
+
+        // Prepare the query to fetch the price
+        $check_query = $conn->prepare("SELECT documentPrice FROM document_types WHERE documentType = ?");
+        $check_query->bind_param("i", $documentType);
+        $check_query->execute();
+        $check_query->store_result();
+        $check_query->bind_result($fetchedDocumentPrice);
+        $check_query->fetch();
+        
+        // Store the fetched price in session
+        $_SESSION['fetchedDocumentPrice'] = $fetchedDocumentPrice;
+
+        $check_query->close();
+        $conn->close();
+    }
 }
 
 if (isset($_POST['btn-confirmPayment'])) {
@@ -32,6 +53,7 @@ if (isset($_POST['btn-confirmPayment'])) {
     $purposeText = $_SESSION['purposeText'] ?? '';
     $referenceNum = $_POST['referenceNum'] ?? '';
     $paymentSelection = $_POST['paymentSelectionBlock'] ?? '';
+    $documentPrice = $_POST['documentPrice'] ?? '';
 
     // Handle file upload
     if (isset($_FILES['uploadReceipt']) && $_FILES['uploadReceipt']['error'] == 0) {
@@ -56,10 +78,8 @@ if (isset($_POST['btn-confirmPayment'])) {
                                     icon: "success",
                                     title: "Request Submitted!",
                                     text: "Your document request has been submitted successfully. Please wait for confirmation."
-                                }).then(() => {
-                                    setTimeout(() => {
-                                        window.location.href = "../request_document/";
-                                    }, 2000); // 2 seconds delay
+                                }).then(() => {                                 
+                                    window.location.href = "../request_document/";    
                                 });
                             });
                         </script>';

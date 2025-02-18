@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/../config.php'; ?>
+<?php require __DIR__ . '/config.php'; ?>
 
 <header class="fixed left-0 w-full inset-x-0 top-0 z-50 bg-white">
     <nav class="flex items-center justify-between p-4 lg:px-8"
@@ -57,7 +57,7 @@
                         <div id="purok-dropdown" class="hidden absolute w-32 right-0 z-10 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu">
                             <div class="py-1" role="none">
                                 <?php
-                                
+                                    include('src/database.php');
 
                                 $query = mysqli_query($conn, "SELECT prk FROM purok");
 

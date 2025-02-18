@@ -143,11 +143,20 @@
 
                     <div class="flex-1">
                         <div class="grid grid-col-12 py-3">
-                            <div class="flex justify-center sm:justify-start md:justify-start lg:justify-start items-center gap-x-3">
-                                <h3 class="text-lg font-bold text-gray-800">Total Payment:</h3>
-                                <p class="text-2xl lg:text-4xl font-bold text-gray-800 underline underline-offset-8">₱<span class="text-3xl lg:text-5xl">&nbsp200.00</span></p>
-                            </div><br>
                             <form action="" method="POST" class="space-y-4" enctype="multipart/form-data">
+                                <div class="flex justify-center sm:justify-start md:justify-start lg:justify-start items-center gap-x-3">
+                                    <h3 class="text-lg font-bold text-gray-800">Total Payment:</h3>
+                                    <p class="text-2xl lg:text-4xl font-bold text-gray-800 underline underline-offset-8">₱
+                                        <span class="text-3xl lg:text-5xl" id="documentPrice">
+                                            <?php
+                                            echo isset($_SESSION['fetchedDocumentPrice'])
+                                                ? number_format(htmlspecialchars($_SESSION['fetchedDocumentPrice'], ENT_QUOTES, 'UTF-8'), 2)
+                                                : ' ';
+                                            ?>
+                                        </span>
+                                    </p>
+                                </div><br>
+
                                 <div class="space-y-1">
                                     <label for="documentType" class="flex text-sm lg:text-base font-medium text-gray-800 mt-2.5">
                                         Payment Method <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
@@ -178,7 +187,7 @@
                                     </h4>
                                     <p class="text-sm text-red-600">&nbsp<i>Scan the QR CODE to pay the total payment</i></p>
                                     <div class="flex justify-center items-center">
-                                        <img src="../src/imgs-vid/<?php echo $gcashPicCode?>" alt="QRCODE payment" class="object-auto">
+                                        <img src="../src/imgs-vid/<?php echo $gcashPicCode ?>" alt="QRCODE payment" class="object-auto">
                                     </div>
                                 </div>
                                 <div id="onHandPaymentBlock" class="hidden space-y-1">
@@ -191,7 +200,7 @@
                                         <label for="uploadReceipt" class="px-3 cursor-pointer text-blue-800 text-base font-bold underline underline-offset-4">Click Here</label>
                                         <label id="fileName" name="fileName">No choosen file</label>
                                     </div>
-                                    
+
                                     <input type="file" name="uploadReceipt" id="uploadReceipt" onchange="displayFileName()" class="hidden border rounded-lg w-full py-3 px-5 bg-green-700 text-white">
                                 </div>
 
