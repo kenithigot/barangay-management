@@ -171,7 +171,7 @@
         </div>
     </div>
     <script src="script.js"></script>
-    <?php require("../includes/footer.php") ?>
+    <?php require("../../includes/footer.php") ?>
 </body>
 
 </html>

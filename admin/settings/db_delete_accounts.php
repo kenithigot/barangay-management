@@ -1,5 +1,5 @@
 <?php
-include("../src/database.php");
+include("../../src/database.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Check if the request comes from the AJAX call

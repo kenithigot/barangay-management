@@ -22,6 +22,8 @@
     <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
     <?php include("db_save_qrcode.php") ?>
+    <?php include("routes.php") ?>
+    
 </head>
 
 <body class="font-sans">
@@ -66,10 +68,150 @@
             <div class="hidden lg:block">
                 <h1 class="text-2xl font-extrabold text-gray-800 underline">Payment</h1>
             </div>
+            <div class="grid md:grid-cols-12 lg:grid-cols-12 gap-4 mt-8">
+                <div class="lg:col-span-12">
+                    <h3 class="text-lg font-semibold text-gray-800">Barangay Documents Prices</h3>
+                    <div class="flex text-sm">
+                        <span class="text-blue-800 lg:indent-2">Note:</span>
+                        <span class=" text-red-600 lg:indent-1"><i>Click the edit icon on each document to edit it's price.</i></span>
+
+                    </div>
+                </div>
+                <?php 
+
+                    include("../../src/database.php");
+
+                    function fetchDocumentPrice($conn, $documentClassification) {
+                        $sql = "SELECT documentPrice FROM document_types WHERE documentClassification = ?";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bind_param("s", $documentClassification);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+
+                        if ($result && $result->num_rows > 0) {
+                            $row = $result->fetch_assoc();
+                            return $row['documentPrice'];
+                        } else {
+                            return "N/A";
+                        }
+                    }
+
+                    $barangayCertPrice = fetchDocumentPrice($conn, 'Barangay Certificate');
+                    $certificateIndigencyPrice = fetchDocumentPrice($conn, 'Certificate of Indigency');
+                    $businessClearancePrice = fetchDocumentPrice($conn, 'Business Clearance');
+
+                     include("modal.php")
+                ?>
+                <div class="lg:col-span-4">
+                    <!-- Card -->
+                    <div class="flex flex-col bg-green-700 border shadow-md rounded-xl overflow-hidden">
+                        <div class="p-4 md:p-5 flex gap-x-4">
+                            <div class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" />
+                                </svg>
+
+                            </div>
+
+                            <div class="grow">
+                                <div class="flex items-center gap-x-2">
+                                    <p class="text-xs uppercase tracking-wide text-slate-200 font-bold">
+                                        Barangay Certificate
+                                    </p>
+                                </div>
+                                <div class="mt-1 flex items-center gap-x-2">
+                                    <h3 class="text-base lg:text-2xl font-semibold text-slate-200">
+                                        Php <?php echo number_format((float)$barangayCertPrice, 2); ?>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="text-gray-100" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-scale-animation-modal" data-hs-overlay="#hs-barangayCertificate-modal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card  -->
+                </div>
+                <div class="lg:col-span-4">
+                    <!-- Card -->
+                    <div class="flex flex-col bg-green-700 border shadow-md rounded-xl overflow-hidden">
+                        <div class="p-4 md:p-5 flex gap-x-4">
+                            <div class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" />
+                                </svg>
+
+                            </div>
+
+                            <div class="grow">
+                                <div class="flex items-center gap-x-2">
+                                    <p class="text-xs uppercase tracking-wide text-slate-200 font-bold">
+                                        Certificate of Indigency
+                                    </p>
+                                </div>
+                                <div class="mt-1 flex items-center gap-x-2">
+                                    <h3 class="text-base lg:text-2xl font-semibold text-slate-200">
+                                        Php <?php echo number_format((float)$certificateIndigencyPrice, 2); ?>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="text-gray-100" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-scale-animation-modal" data-hs-overlay="#hs-certificateIndigency-modal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card  -->
+                </div>
+                <div class="lg:col-span-4">
+                    <!-- Card -->
+                    <div class="flex flex-col bg-green-700 border shadow-md rounded-xl overflow-hidden">
+                        <div class="p-4 md:p-5 flex gap-x-4">
+                            <div class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-800">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" />
+                                </svg>
+
+                            </div>
+
+                            <div class="grow">
+                                <div class="flex items-center gap-x-2">
+                                    <p class="text-xs uppercase tracking-wide text-slate-200 font-bold">
+                                        Business Clearance
+                                    </p>
+                                </div>
+                                <div class="mt-1 flex items-center gap-x-2">
+                                    <h3 class="text-base lg:text-2xl font-semibold text-slate-200">
+                                        Php <?php echo number_format((float)$businessClearancePrice, 2); ?>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="text-gray-100" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-scale-animation-modal" data-hs-overlay="#hs-businessClearance-modal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card  -->
+                </div>
+            </div>
             <div>
-                <div class="mt-12 grid md:grid-cols-10 lg:grid-cols-10 items-center gap-4 lg:gap-8">
+                <div class="mt-12 grid md:grid-cols-12 lg:grid-cols-12 items-center gap-4">
+                    <div class="col-span-12">
+                        <h3 class="text-lg font-semibold text-gray-800">GCASH Payment Method QR-Code</h3>
+                    </div>
                     <!-- Icon Block -->
-                    <form class="col-span-4" action="" method="POST" enctype="multipart/form-data">
+                    <form class="lg:col-span-4" action="" method="POST" enctype="multipart/form-data">
                         <div class="flex flex-col text-center rounded-lg border focus:outline-none p-4 sm:p-6">
                             <label for="uploadImg" class="group cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-9 mx-auto">

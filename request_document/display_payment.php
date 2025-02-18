@@ -147,7 +147,7 @@
                                 <h3 class="text-lg font-bold text-gray-800">Total Payment:</h3>
                                 <p class="text-2xl lg:text-4xl font-bold text-gray-800 underline underline-offset-8">₱<span class="text-3xl lg:text-5xl">&nbsp200.00</span></p>
                             </div><br>
-                            <form action="" method="POST" class="space-y-4">
+                            <form action="" method="POST" class="space-y-4" enctype="multipart/form-data">
                                 <div class="space-y-1">
                                     <label for="documentType" class="flex text-sm lg:text-base font-medium text-gray-800 mt-2.5">
                                         Payment Method <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
@@ -181,7 +181,7 @@
                                         <img src="../src/imgs-vid/<?php echo $gcashPicCode?>" alt="QRCODE payment" class="object-auto">
                                     </div>
                                 </div>
-                                <!-- <div id="onHandPaymentBlock" class="hidden space-y-1">
+                                <div id="onHandPaymentBlock" class="hidden space-y-1">
                                     <label for="onHandPaymentBlock" class="flex text-sm lg:text-base font-medium text-gray-800 mt-2.5">
                                         Upload Receipt <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
                                             <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
@@ -193,7 +193,7 @@
                                     </div>
                                     
                                     <input type="file" name="uploadReceipt" id="uploadReceipt" onchange="displayFileName()" class="hidden border rounded-lg w-full py-3 px-5 bg-green-700 text-white">
-                                </div> -->
+                                </div>
 
                                 <div id="gcashReferenceNumBlock" class="hidden space-y-1 ">
                                     <div class="py-1 flex items-center text-base text-gray-800 uppercase before:flex-1 before:border-t before:border-gray-800 before:me-6 after:flex-1 after:border-t after:border-gray-800 after:ms-6">Or</div>
@@ -203,7 +203,7 @@
                                             <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
                                         </svg>
                                     </label>
-                                    <input required id="referenceNum" name="referenceNum" type="number" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter reference number">
+                                    <input id="referenceNum" name="referenceNum" type="number" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter reference number">
                                 </div>
                                 <div class="pt-8">
                                     <button type="submit" id="btn-confirmPayment" name="btn-confirmPayment" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">

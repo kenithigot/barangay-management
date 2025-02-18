@@ -5,7 +5,7 @@
     <title>Account Login</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php include("../includes/config.php") ?>
+    <?php include("../config.php") ?>
     <link href="../src/output.css" rel="stylesheet">
 
     <!-- Import Google Font: Raleway -->

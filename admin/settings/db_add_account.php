@@ -1,5 +1,5 @@
 <?php
-include("../src/database.php"); 
+include("../../src/database.php"); 
 
 //handling form submission 
 

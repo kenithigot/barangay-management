@@ -6,7 +6,9 @@ module.exports = {
     'node_modules/preline/dist/*.js',
     './includes/*.php',
     './admin/**/*.php',
-    './request_document/**/*.php'
+    './request_document/**/*.php',
+    './account login/*.php',
+    './register/*.php',
   ],
   theme: {
     extend: {

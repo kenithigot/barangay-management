@@ -1,5 +1,5 @@
 <?php
-    include("../src/database.php");
+    include("../../src/database.php");
 
     $query = "SELECT admin_staff_role.user_type, 
         admin_staff_account.id, 
