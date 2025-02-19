@@ -23,7 +23,7 @@
 
 <body class="font-sans">
 
-    <?php require("../includes/sidebar.php"); ?>
+    <?php require("../../includes/sidebar.php"); ?>
     <!-- ========== MAIN CONTENT ========== -->
     <div class="-mt-px">
         <!-- Breadcrumb -->
@@ -506,7 +506,7 @@
         </div>
     </div>
 
-    <?php require("../includes/footer.php") ?>
+    <?php require("../../includes/footer.php") ?>
 
     <script type="text/javascript" src="script.js"></script>
 

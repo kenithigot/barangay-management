@@ -7,7 +7,7 @@
     <title>Dashboard - Barangay Labuay</title>
 
     <!-- Tailwind CSS -->
-    <link href="../src/output.css" rel="stylesheet">
+    <link href="../../src/output.css" rel="stylesheet">
 
     <!-- Google Font: Raleway -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
 
 <body class="font-sans">
 
-    <?php require("../includes/sidebar.php"); ?>
+    <?php require("../../includes/sidebar.php"); ?>
     <!-- ========== MAIN CONTENT ========== -->
     <div class="-mt-px">
         <!-- Breadcrumb -->
@@ -66,6 +66,6 @@
         </div>
     </div>
 
-    <?php require("../includes/footer.php") ?>
+    <?php require("../../includes/footer.php") ?>
 
 </html>
