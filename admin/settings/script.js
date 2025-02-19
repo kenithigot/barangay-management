@@ -1,154 +1,155 @@
-var table;
+var table
 
 //Display Datatable
 $(document).ready(function () {
-    table = $('#addAccount-table').DataTable({
-        processing: true,
-        scrollX: true,
-        ajax: {
-            url: "db_display_account.php",
-            type: "POST"
-        },
-        columns: [
-            {
-                data: null,
-                render: function (data, type, row) {
-                    return '<button type="submit" id="btn-viewAccount" class="border px-3 py-1 rounded-md text-xs text-gray-200 bg-slate-600" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-large-modal" data-hs-overlay="#hs-large-modal" data-id="' + row.id + '">View</button>';
-                }
-            },
-            {
-                data: null,
-                render: function (data, type, row, meta) {
-                    return meta.row + 1;
-                }
-            },
-            {
-                data: null,
-                render: function (data, type, row) {
-                    return row.firstName + " " + row.lastName;
-                }
-            },
-            { data: "contactNum" },
-            { data: "timestamp" },
-        ],
+  table = $('#addAccount-table').DataTable({
+    processing: true,
+    scrollX: true,
+    ajax: {
+      url: 'db_display_account.php',
+      type: 'POST'
+    },
+    columns: [
+      {
+        data: null,
+        render: function (data, type, row) {
+          return (
+            '<button type="submit" id="btn-viewAccount" class="border px-3 py-1 rounded-md text-xs text-white bg-slate-600" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-display-acc" data-hs-overlay="#hs-display-acc" data-id="' +
+            row.id +
+            '">View</button>'
+          )
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row, meta) {
+          return meta.row + 1
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return row.firstName + ' ' + row.lastName
+        }
+      },
+      { data: 'contactNum' },
+      { data: 'timestamp' }
+    ],
 
-        order: [[1, 'desc']]
-    })
+    order: [[1, 'asc']]
+  })
 })
 
 //Delete Data
 $(document).on('click', '#btn-delete', function (e) {
-    e.preventDefault();
+  e.preventDefault()
 
-    Swal.fire({
-        icon: "warning",
-        title: "Are you sure?",
-        text: "This action will delete all accounts except Admin accounts.",
-        showCancelButton: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
-        confirmButtonText: "Yes"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: 'db_delete_accounts.php',
-                type: 'POST',
-                dataType: 'json',
-                data: { 'btn-delete': true },
-                success: function (response) {
-                    if (response.success) {
-                        table.ajax.reload();
-                        Swal.fire({
-                            icon: "success",
-                            title: "Successfully Deleted!",
-                            text: "Successfully deleted all accounts."
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Error!",
-                            text: "Error Deleting all accounts."
-                        });
-                    }
-                },
-                error: function () {
-                    alert('Error deleting client');
-                }
-            });
+  Swal.fire({
+    icon: 'warning',
+    title: 'Are you sure?',
+    text: 'This action will delete all accounts except Admin accounts.',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes'
+  }).then(result => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: 'db_delete_accounts.php',
+        type: 'POST',
+        dataType: 'json',
+        data: { 'btn-delete': true },
+        success: function (response) {
+          if (response.success) {
+            table.ajax.reload()
+            Swal.fire({
+              icon: 'success',
+              title: 'Successfully Deleted!',
+              text: 'Successfully deleted all accounts.'
+            })
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error!',
+              text: 'Error Deleting all accounts.'
+            })
+          }
+        },
+        error: function () {
+          alert('Error deleting client')
         }
-    });
+      })
+    }
+  })
 })
 
 //Delete ID Data
 $(document).on('click', '#btn-viewDataDelete', function (e) {
-    e.preventDefault();
-    
-    var id = $('#id').val(); // Get the ID from the hidden input inside modal
+  e.preventDefault()
 
-    if (!id) {
-        Swal.fire({
-            icon: "error",
-            title: "Error!",
-            text: "User ID is missing!"
-        });
-        return;
-    }
+  var id = $('#id').val() // Get the ID from the hidden input inside modal
 
+  if (!id) {
     Swal.fire({
-        icon: "warning",
-        title: "Are you sure?",
-        text: "This action will delete the selected account.",
-        showCancelButton: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
-        confirmButtonText: "Yes"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: 'db_id_delete.php',
-                type: 'POST',
-                dataType: 'json',
-                data: { id: id },
-                success: function (response) {
-                    if (response.success) {
-                        Swal.fire({
-                            icon: "success",
-                            title: "Successfully Deleted!",
-                            text: "The account has been deleted."
-                        }).then(() => {
-                            location.reload(); // Reload page after deleting
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Error!",
-                            text: response.message || "Error deleting account."
-                        });
-                    }
-                },
-                error: function () {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error!",
-                        text: "Something went wrong while deleting."
-                    });
-                }
-            });
+      icon: 'error',
+      title: 'Error!',
+      text: 'User ID is missing!'
+    })
+    return
+  }
+
+  Swal.fire({
+    icon: 'warning',
+    title: 'Are you sure?',
+    text: 'This action will delete the selected account.',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes'
+  }).then(result => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: 'db_id_delete.php',
+        type: 'POST',
+        dataType: 'json',
+        data: { id: id },
+        success: function (response) {
+          if (response.success) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Successfully Deleted!',
+              text: 'The account has been deleted.'
+            }).then(() => {
+              location.reload() // Reload page after deleting
+            })
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error!',
+              text: response.message || 'Error deleting account.'
+            })
+          }
+        },
+        error: function () {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'Something went wrong while deleting.'
+          })
         }
-    });
-});
-
-
-
+      })
+    }
+  })
+})
 
 //Print Data
-$(document).on("click", "[name='btn-print']", function () {
-    var table = $("#addAccount-table").DataTable();
-    var tableData = table.rows({ search: "applied" }).data(); // Get filtered/displayed data
+$(document).on('click', "[name='btn-print']", function () {
+  var table = $('#addAccount-table').DataTable()
+  var tableData = table.rows({ search: 'applied' }).data() // Get filtered/displayed data
 
-    var printWindow = window.open("", "", "width=800,height=600");
+  var printWindow = window.open('', '', 'width=800,height=600')
 
-    var tableHTML = `
+  var tableHTML = `
         <html>
         <head>
             <title></title>
@@ -253,10 +254,10 @@ $(document).on("click", "[name='btn-print']", function () {
                         <th>Account Role</th>
                     </tr>
                 </thead>
-                <tbody>`;
+                <tbody>`
 
-    tableData.each(function (row, index) {
-        tableHTML += `
+  tableData.each(function (row, index) {
+    tableHTML += `
             <tr class="text-base">
                 <td>${index + 1}</td>
                 <td>${row.firstName} ${row.lastName}</td>
@@ -265,10 +266,10 @@ $(document).on("click", "[name='btn-print']", function () {
                 <td>${row.address}</td>
                 <td>${row.email_address}</td>
                 <td>${row.user_type}</td>
-            </tr>`;
-    });
+            </tr>`
+  })
 
-    tableHTML += `
+  tableHTML += `
                 </tbody>
             </table>
             <script>
@@ -280,50 +281,56 @@ $(document).on("click", "[name='btn-print']", function () {
                 };
             <\/script>
         </body>
-        </html>`;
+        </html>`
 
-    printWindow.document.write(tableHTML);
-    printWindow.document.close();
-});
-
+  printWindow.document.write(tableHTML)
+  printWindow.document.close()
+})
 
 // View Data
-$(document).on('click', '#btn-viewAccount', function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
+$(document).on('click', '#btn-viewAccount', function (e) {
+  e.preventDefault()
+  var id = $(this).data('id')
 
-    $.ajax({
-        url: 'db_view_account.php',
-        type: 'POST',
-        data: { id: id },
-        dataType: 'json',
-        success: function(response){
-            if(response && !response.error){
-                $('#id').val(response.id);
-                var nameMerge = response.firstName + " " + response.lastName;
-                $('#view_fullName').val(nameMerge);
-                $('#view_address').val(response.address);
-                $('#view_contactNum').val(response.contactNum);
-                $('#view_userRole').val(response.user_type);
-                $('#view_emailAddress').val(response.email_address);
+  $.ajax({
+    url: 'db_view_account.php',
+    type: 'POST',
+    data: { id: id },
+    dataType: 'json',
+    success: function (response) {
+      if (response && !response.error) {
+        $('#id').val(response.id)
+        var nameMerge = response.firstName + ' ' + response.lastName
+        $('#view_fullName').val(nameMerge)
+        $('#view_address').val(response.address)
+        $('#view_contactNum').val(response.contactNum)
+        $('#view_userRole').val(response.user_type)
+        $('#view_emailAddress').val(response.email_address)
 
-                // Dynamically update the "Edit" button link
-                var editUrl = 'edit account.php?id=' + response.id;
-                $('#edit-button').attr('href', editUrl);  // Assuming you gave the Edit button an id of 'edit-button'
+        // Dynamically update the "Edit" button link
+        var editUrl = 'edit account.php?id=' + response.id
+        $('#edit-button').attr('href', editUrl) // Assuming you gave the Edit button an id of 'edit-button'
 
-                // Show the modal
-                document.querySelector('#hs-large-modal').classList.remove('hidden');
-            } else {
-                console.error("No data available:", response.error);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error("AJAX Error:", error);
-            console.log("Response Text:", xhr.responseText);
-        }
-    });
-});
+        // Ensure other modals are closed
+        $('.hs-overlay').addClass('hidden').removeClass('block');
 
+        // Show the modal after a slight delay to ensure DOM is ready
+        setTimeout(function() {
+            var modal = document.querySelector('#hs-display-acc');
+            modal.classList.remove('hidden');
+            modal.classList.add('block');
+            modal.setAttribute('aria-expanded', 'true');
+        }, 100); // 100ms delay
+      } else {
+        console.error('No data available:', response.error)
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error('AJAX Error:', error)
+      console.log('Response Text:', xhr.responseText)
+    }
+  })
+})
 
 //Edit Account
 // $(document).on('click', '#editAccount', function(e){
@@ -338,13 +345,12 @@ $(document).on('click', '#btn-viewAccount', function(e){
 //         success: function(response){
 //             if(response && !response.error){
 //                 $('#id').val(response.id);
-                
+
 //                 $('#edit_firstName').val(response.firstName);
 //                 $('#edit_lastName').val(response.lastName);
 //                 $('#edit_contactNum').val(response.contactNum);
 //                 $('#edit_userRole').val(response.user_type);
 //                 $('#edit_emailAddress').val(response.email_address);
-                
 
 //             } else {
 //                 console.error("No data available:", response.error);

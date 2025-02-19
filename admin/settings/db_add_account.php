@@ -29,7 +29,6 @@ if (isset($_POST['btn-addAccount'])) {
                     text: "The username is already exist. Please choose another one."
                 }).then(() => {
                     window.location.href = "add account.php";
-                    window.location.reload();
                 });
             });
         </script>';
@@ -74,9 +73,14 @@ if (isset($_POST['btn-addAccount'])) {
                     text: "User account added successfully."
                 }).then(() => {
                     window.location.href = "add account.php";
+                    exit();
                 });
             });
+            
         </script>';
+        $conn->close();
+        $query->close();
+        exit();
     } else {
         echo '<script>
             document.addEventListener("DOMContentLoaded", function() {

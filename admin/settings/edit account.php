@@ -7,8 +7,7 @@
     <title>Add account - Barangay Labuay</title>
 
     <!-- Tailwind CSS -->
-    <link href="../src/output.css" rel="stylesheet">
-    <link rel="stylesheet" href="../src/style.css">
+    <link href="../../src/output.css" rel="stylesheet">
 
     <!-- Google Font: Raleway -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,16 +19,8 @@
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css">
 
-    <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
-    <style>
-        table.dataTable th.dt-type-numeric,
-        table.dataTable th.dt-type-date,
-        table.dataTable td.dt-type-numeric,
-        table.dataTable td.dt-type-date {
-            text-align: start;
-        }
-    </style>
 
 <?php include("db_id_displayUpdate.php"); ?> 
 
@@ -37,7 +28,7 @@
 
 <body class="font-sans">
 
-    <?php require("../includes/sidebar.php"); ?>
+    <?php require("../../includes/sidebar.php"); ?>
     <!-- ========== MAIN CONTENT ========== -->
     <div class="-mt-px">
         <!-- Breadcrumb -->

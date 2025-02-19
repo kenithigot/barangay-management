@@ -1,6 +1,6 @@
 <?php
 
-    include("../src/database.php");
+    include("../../src/database.php");
 
     if(isset($_POST["id"])){
         $id = isset($_GET['id']) ? $_GET['id'] : null;

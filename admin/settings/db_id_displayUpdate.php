@@ -1,6 +1,6 @@
 <?php
 
-include("../src/database.php");
+include("../../src/database.php");
 
 if (isset($_GET['id'])) {
     $userId = $_GET['id'];
