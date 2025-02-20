@@ -76,13 +76,13 @@
             <div class="md:flex lg:flex gap-x-8 lg:px-5 lg:py-8">
                 <div class="flex flex-col items-center py-10">
                     <div class="hs-tooltip inline-block">
-                        <a class="hs-tooltip-toggle relative inline-block" href="#">
+                        <div class="hs-tooltip-toggle relative inline-block">
                             <img id="imgDisplay" name="imgDisplay" class="inline-block w-40 h-40 object-cover object-center rounded-full border border-slate-600" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar">
                             <span class="absolute bottom-0 end-0 block size-8 rounded-full ring-2 ring-white bg-green-600"></span>
                             <div class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded-lg shadow-sm dark:bg-neutral-700" role="tooltip">
-                                Mark Wanner is online
+                                <?php echo $row['firstName']; ?> is currently active
                             </div>
-                        </a>
+                        </div>
                     </div>
                     <div class="flex text-center flex-col space-y-3 pt-2">
                         <label for="uploadImg" class="cursor-pointer hover:text-blue-600 hover:underline hover:underline-offset-4 text-sm font-medium">Choose a photo</label>
@@ -127,37 +127,58 @@
                         };
                     </script>
                 </div>
+                <?php
+                include '../../src/database.php';
+
+                $id = $_SESSION['id'];
+                $query = "SELECT admin_staff_account.id, 
+                    admin_staff_account.user_role, 
+                    admin_staff_account.firstName, 
+                    admin_staff_account.lastName, 
+                    admin_staff_account.contactNum, 
+                    admin_staff_account.address, 
+                    admin_staff_account.email_address, 
+                    admin_staff_role.user_type FROM admin_staff_account 
+                    INNER JOIN admin_staff_role ON admin_staff_role.user_role = admin_staff_account.user_role WHERE admin_staff_account.id = $id";
+                $result = mysqli_query($conn, $query);
+                if ($result) {
+                    $row = mysqli_fetch_array($result);
+                } else {
+                    $row = ['firstName' => 'Unknown User'];
+                }
+                ?>
                 <div class="pt-5">
                     <div class="space-y-3">
-                        <h2 class="font-bold text-gray-800 text-xl underline underline-offset-4 mb-6">Personal Information</h2>
-
+                        <div>
+                            <h2 class="font-bold text-gray-800 text-xl underline underline-offset-4 mb-6">Personal Information</h2>
+                        </div>
                         <div class="flex lg:grid lg:grid-cols-[minmax(90px,200px)_30px_auto] md:grid md:grid-cols-[minmax(90px,200px)_30px_auto] sm:grid sm:grid-cols-[minmax(90px,200px)_30px_auto] gap-x-4 items-center text-gray-800">
                             <h3 class="font-semibold lg:text-lg">Full Name</h3>
                             <span class="font-semibold text-lg text-start text-black">:</span>
-                            <span class="font-semibold lg:text-lg uppercase">John Doe</span>
+                            <span class="font-semibold lg:text-lg uppercase"><?php echo $row['firstName'] . ' ' . $row['lastName']; ?></span>
                         </div>
 
                         <div class="flex lg:grid lg:grid-cols-[minmax(90px,200px)_30px_auto] md:grid md:grid-cols-[minmax(90px,200px)_30px_auto] sm:grid sm:grid-cols-[minmax(90px,200px)_30px_auto] gap-x-4 items-center text-gray-800">
                             <h3 class="font-semibold lg:text-lg">Contact Number</h3>
                             <span class="font-semibold text-lg text-start text-black">:</span>
-                            <span class="font-semibold lg:text-lg">123-456-7890</span>
+                            <span class="font-semibold lg:text-lg"><?php echo $row['contactNum']; ?></span>
                         </div>
 
                         <div class="flex lg:grid lg:grid-cols-[minmax(90px,200px)_30px_auto] md:grid md:grid-cols-[minmax(90px,200px)_30px_auto] sm:grid sm:grid-cols-[minmax(90px,200px)_30px_auto] gap-x-4 items-center text-gray-800">
                             <h3 class="font-semibold lg:text-lg">Address</h3>
                             <span class="font-semibold text-lg text-start text-black">:</span>
-                            <span class="font-semibold lg:text-lg uppercase">P-3, Labuay, Maigo, Lanao del Norte</span>
+                            <span class="font-semibold lg:text-lg uppercase"><?php echo $row['address']; ?></span></span>
                         </div>
 
                         <div class="flex lg:grid lg:grid-cols-[minmax(90px,200px)_30px_auto] md:grid md:grid-cols-[minmax(90px,200px)_30px_auto] sm:grid sm:grid-cols-[minmax(90px,200px)_30px_auto] gap-x-4 items-center text-gray-800">
                             <h3 class="font-semibold lg:text-lg">Email Address</h3>
                             <span class="font-semibold text-lg text-start text-black">:</span>
-                            <span class="font-semibold lg:text-lg uppercase">admin@gmail.com</span>
+                            <span class="font-semibold lg:text-lg uppercase"><?php echo $row['email_address']; ?></span></span>
                         </div>
                         <div class="flex lg:grid lg:grid-cols-[minmax(90px,200px)_30px_auto] md:grid md:grid-cols-[minmax(90px,200px)_30px_auto] sm:grid sm:grid-cols-[minmax(90px,200px)_30px_auto] gap-x-4 items-center text-gray-800">
                             <h3 class="font-semibold lg:text-lg">User Role</h3>
                             <span class="font-semibold text-lg text-start text-black">:</span>
-                            <span class="font-semibold lg:text-lg uppercase">Admin</span>
+                            <span class="font-semibold lg:text-lg uppercase"><?php echo $row['user_type']; ?></span>
                         </div>
                     </div>
                 </div>

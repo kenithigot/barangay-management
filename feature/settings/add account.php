@@ -106,6 +106,7 @@
                                         </label>
                                         <select required id="select-user-type" name="userType" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
                                             <option selected disabled>Select user type</option>
+                                            <option value="1">Admin</option>
                                             <option value="2">Stafff</option>
                                             <option value="3">Barangay Member</option>
                                             <option value="4">Others</option>
