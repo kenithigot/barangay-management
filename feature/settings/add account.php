@@ -249,7 +249,7 @@
         });
     </script>
     <script src="script.js"></script>
-    <!-- <script src="../../node_modules/preline/dist/preline.js"></script> -->
+    <script src="../../node_modules/preline/dist/preline.js"></script>
     <?php require("../../includes/footer.php") ?>
 </body>
 

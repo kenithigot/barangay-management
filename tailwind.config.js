@@ -5,7 +5,7 @@ module.exports = {
     "src/*.{html,js}",
     'node_modules/preline/dist/*.js',
     './includes/*.php',
-    './admin/**/*.php',
+    './feature/**/*.php',
     './request_document/**/*.php',
     './account login/*.php',
     './register/*.php',
@@ -13,7 +13,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Raleway', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
       },
     },
   },

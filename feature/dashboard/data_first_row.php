@@ -1,3 +1,23 @@
+<?php
+    include('../../src/database.php');
+    $sql = "SELECT * FROM resident_request_docs";
+    $sql_result = mysqli_query($conn, $sql);
+    $male = 0;
+    $female = 0;
+    $residents = 0;
+
+    while ($row = mysqli_fetch_assoc($sql_result)) {
+        if ($row['gender'] == 'Male') {
+            $male++;
+        } elseif ($row['gender'] == 'Female') {
+            $female++;
+        }
+        // Increment the total number of residents
+        $residents++;
+    }
+    $conn->close();
+?>
+
 <!-- Card -->
 <div class="flex flex-col bg-gray-400 border shadow-md rounded-xl min-w-48">
     <div class="p-4 md:p-5 flex gap-x-4">
@@ -27,7 +47,7 @@
             </div>
             <div class="mt-1 flex items-center gap-x-2">
                 <h3 class="text-xl sm:text-2xl font-medium text-slate-800">
-                    72,540
+                    <?php echo $residents; ?>
                 </h3>
             </div>
         </div>
@@ -51,8 +71,8 @@
                 </p>
             </div>
             <div class="mt-1 flex items-center gap-x-2">
-                <h3 class="text-xl font-medium text-slate-800 ">
-                    29.4%
+                <h3 class="text-xl sm:text-2xl font-medium text-slate-800">
+                    <?php echo $male; ?>
                 </h3>
             </div>
         </div>
@@ -76,14 +96,38 @@
                 </p>
             </div>
             <div class="mt-1 flex items-center gap-x-2">
-                <h3 class="text-xl font-medium text-slate-800 ">
-                    29.4%
+                <h3 class="text-xl sm:text-2xl font-medium text-slate-800">
+                    <?php echo $female; ?>
                 </h3>
             </div>
         </div>
     </div>
 </div>
 <!-- End Card -->
+
+<?php
+include('../../src/database.php');
+
+$query = "SELECT admin_staff_account.id, 
+    admin_staff_account.user_role, 
+    admin_staff_account.firstName, 
+    admin_staff_account.lastName, 
+    admin_staff_account.contactNum, 
+    admin_staff_account.address, 
+    admin_staff_account.email_address, 
+    admin_staff_role.user_type FROM admin_staff_account 
+    INNER JOIN admin_staff_role ON admin_staff_role.user_role = admin_staff_account.user_role";
+$query_result = mysqli_query($conn, $query);
+
+$staffAndOfficials = 0;
+
+while ($row = mysqli_fetch_assoc($query_result)) {
+    if ($row['user_type'] == 'Staff' || $row['user_type'] == 'Barangay Member') {
+        $staffAndOfficials++;
+    }
+}
+$conn->close();
+?>
 
 <!-- Card -->
 <div class="flex flex-col bg-gray-400 border shadow-md rounded-xl min-w-48">
@@ -114,7 +158,7 @@
             </div>
             <div class="mt-1 flex items-center gap-x-2">
                 <h3 class="text-xl sm:text-2xl font-medium text-slate-800">
-                    72,540
+                    <?php echo $staffAndOfficials; ?>
                 </h3>
             </div>
         </div>

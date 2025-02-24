@@ -66,7 +66,7 @@
                                 </label>
                             </div>
                             <div class="col-span-8 flex items-center">
-                                <input value="<?php echo $_SESSION['firstName'] ?? " "; ?>" required id="firstName" name="firstName" type="text" class="font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
+                                <input value="<?php echo $_SESSION['firstName'] ?? " "; ?>" required id="firstName" name="firstName" type="text" class="uppercase font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
                             </div>
                             <div class="col-span-4 flex items-center">
                                 <label for="middleInitial" class="text-sm lg:text-base font-medium text-gray-800">
@@ -74,7 +74,7 @@
                                 </label>
                             </div>
                             <div class="col-span-8 flex items-center">
-                                <input value="<?php echo $_SESSION['middleInitial'] ?? " "; ?>" required id="middleInitial" name="middleInitial" type="text" class="font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
+                                <input value="<?php echo $_SESSION['middleInitial'] ?? " "; ?>" required id="middleInitial" name="middleInitial" type="text" class="uppercase font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
                             </div>
                             <div class="col-span-4 flex items-center">
                                 <label for="lastName" class="text-sm lg:text-base font-medium text-gray-800">
@@ -82,7 +82,7 @@
                                 </label>
                             </div>
                             <div class="col-span-8 flex items-center">
-                                <input value="<?php echo $_SESSION['lastName'] ?? " "; ?>" required id="lastName" name="lastName" type="text" class="font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
+                                <input value="<?php echo $_SESSION['lastName'] ?? " "; ?>" required id="lastName" name="lastName" type="text" class="uppercase font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
                             </div>
                             <div class="col-span-4 flex items-center">
                                 <label for="ageUserRequest" class="text-sm lg:text-base font-medium text-gray-800">
@@ -90,7 +90,15 @@
                                 </label>
                             </div>
                             <div class="col-span-8 flex items-center">
-                                <input value="<?php echo $_SESSION['ageUserRequest'] ?? " "; ?>" required id="ageUserRequest" name="ageUserRequest" type="text" class="font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
+                                <input value="<?php echo $_SESSION['ageUserRequest'] ?? " "; ?>" required id="ageUserRequest" name="ageUserRequest" type="text" class="uppercase font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
+                            </div>
+                            <div class="col-span-4 flex items-center">
+                                <label for="userGender" class="text-sm lg:text-base font-medium text-gray-800">
+                                    Gender
+                                </label>
+                            </div>
+                            <div class="col-span-8 flex items-center">
+                                <input value="<?php echo $_SESSION['userGender'] ?? " "; ?>" required id="userGender" name="userGender" type="text" class="uppercase font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
                             </div>
                             <div class="col-span-4 flex items-center">
                                 <label for="contactNum" class="text-sm lg:text-base font-medium text-gray-800">
@@ -98,7 +106,7 @@
                                 </label>
                             </div>
                             <div class="col-span-8 flex items-center">
-                                <input value="<?php echo $_SESSION['contactNum'] ?? " "; ?>" required id="contactNum" name="contactNum" type="text" class="font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
+                                <input value="<?php echo $_SESSION['contactNum'] ?? " "; ?>" required id="contactNum" name="contactNum" type="text" class="uppercase font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
                             </div>
                             <div class="col-span-4 flex items-center">
                                 <label for="address" class="text-sm lg:text-base font-medium text-gray-800">
@@ -106,7 +114,7 @@
                                 </label>
                             </div>
                             <div class="col-span-8 flex items-center">
-                                <input value="<?php echo $_SESSION['address'] ?? " "; ?>" required id="address" name="address" type="text" class="font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
+                                <input value="<?php echo $_SESSION['address'] ?? " "; ?>" required id="address" name="address" type="text" class="uppercase font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
                             </div>
                             <div class="col-span-4 flex items-center">
                                 <label for="emailAddress" class="text-sm lg:text-base font-medium text-gray-800">
@@ -114,7 +122,7 @@
                                 </label>
                             </div>
                             <div class="col-span-8 flex items-center">
-                                <input value="<?php echo $_SESSION['emailAddress'] ?? " "; ?>" required id="emailAddress" name="emailAddress" type="text" class="font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
+                                <input value="<?php echo $_SESSION['emailAddress'] ?? " "; ?>" required id="emailAddress" name="emailAddress" type="text" class="uppercase font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
                             </div>
                             <div class="col-span-4 flex items-center">
                                 <label for="purposeText" class="text-sm lg:text-base font-medium text-gray-800">
@@ -122,7 +130,7 @@
                                 </label>
                             </div>
                             <div class="col-span-8 flex items-center">
-                                <input value="<?php echo $_SESSION['purposeText'] ?? " "; ?>" required id="purposeText" name="purposeText" type="text" class="font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
+                                <input value="<?php echo $_SESSION['purposeText'] ?? " "; ?>" required id="purposeText" name="purposeText" type="text" class="uppercase font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800" readonly>
                             </div>
                         </div>
                     </div>
@@ -165,8 +173,8 @@
                                     </label>
                                     <select id="paymentSelectionBlock" name="paymentSelectionBlock" onchange="paymentClicked()" required class="py-2 px-3 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
                                         <option selected disabled>Select payment method</option>
-                                        <option value="1">On-Cash Payment</option>
-                                        <option value="2">GCASH Payment</option>
+                                        <option value="On-Cash Payment">On-Cash Payment</option>
+                                        <option value="GCASH Payment">GCASH Payment</option>
                                     </select>
                                 </div>
                                 <div class="hidden space-y-1" ID="onhandPaymentNote">

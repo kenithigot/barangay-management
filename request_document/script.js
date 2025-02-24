@@ -48,7 +48,7 @@ function paymentClicked() {
     var onhandNote = document.getElementById("onhandPaymentNote");
     var gcashNote = document.getElementById("gcashPaymentNote");
 
-    if (paymentSelection === "1") {
+    if (paymentSelection === "On-Cash Payment") {
         onHandPayment.style.display = "block";
         gcashPayment.style.display = "none";
         gcashReferenceNum.style.display = "none";
@@ -57,7 +57,7 @@ function paymentClicked() {
         onhandNote.style.display = "block";
         gcashNote.style.display = "none";
 
-    } else if (paymentSelection === "2") {
+    } else if (paymentSelection === "GCASH Payment") {
         gcashPayment.style.display = "block";
         gcashReferenceNum.style.display = "block";
         onHandPayment.style.display = "block";

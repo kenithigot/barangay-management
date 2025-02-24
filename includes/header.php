@@ -82,7 +82,7 @@
                 class="text-base font-semibold text-gray-900 hover:text-slate-600">Request Document</a>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="account login/"
+            <a href="<?= BASE_URL ?>/account login/"
                 class="text-base font-semibold text-gray-900">Log in
                 <span aria-hidden="true">&rarr;</span></a>
         </div>

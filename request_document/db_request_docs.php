@@ -9,6 +9,7 @@ if (isset($_POST['btn-submit'])) {
     $_SESSION['middleInitial'] = $_POST['middleInitial'] ?? '';
     $_SESSION['lastName'] = $_POST['lastName'] ?? '';
     $_SESSION['ageUserRequest'] = $_POST['ageUserRequest'] ?? '';
+    $_SESSION['userGender'] = $_POST['userGender'] ?? '';
     $_SESSION['contactNum'] = $_POST['contactNum'] ?? '';
     $_SESSION['address'] = $_POST['address'] ?? '';
     $_SESSION['emailAddress'] = $_POST['emailAddress'] ?? '';
@@ -47,6 +48,7 @@ if (isset($_POST['btn-confirmPayment'])) {
     $middleInitial = $_SESSION['middleInitial'] ?? '';
     $lastName = $_SESSION['lastName'] ?? '';
     $ageUserRequest = $_SESSION['ageUserRequest'] ?? '';
+    $userGender = $_SESSION['userGender'] ?? '';
     $contactNum = $_SESSION['contactNum'] ?? '';
     $address = $_SESSION['address'] ?? '';
     $emailAddress = $_SESSION['emailAddress'] ?? '';
@@ -54,6 +56,8 @@ if (isset($_POST['btn-confirmPayment'])) {
     $referenceNum = $_POST['referenceNum'] ?? '';
     $paymentSelection = $_POST['paymentSelectionBlock'] ?? '';
     $documentPrice = $_POST['documentPrice'] ?? '';
+
+    $requestStatus = "Pending";
 
     // Handle file upload
     if (isset($_FILES['uploadReceipt']) && $_FILES['uploadReceipt']['error'] == 0) {
@@ -68,8 +72,8 @@ if (isset($_POST['btn-confirmPayment'])) {
             // Move the uploaded file to the target directory
             if (move_uploaded_file($_FILES['uploadReceipt']['tmp_name'], $targetFile)) {
                 // Prepare the SQL statement
-                $stmt = $conn->prepare("INSERT INTO resident_request_docs (documentType, firstName, middleInitial, lastName, age, contactNum, address, emailAddress, purpose, referenceNum, paymentMethod, uploadReceipt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("ssssisssssss", $documentType, $firstName, $middleInitial, $lastName, $ageUserRequest, $contactNum, $address, $emailAddress, $purposeText, $referenceNum, $paymentSelection, $uniqueFileName);
+                $stmt = $conn->prepare("INSERT INTO resident_request_docs (documentType, firstName, middleInitial, lastName, age, gender, contactNum, address, emailAddress, purpose, referenceNum, paymentMethod, uploadReceipt, requestStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("ssssisssssssss", $documentType, $firstName, $middleInitial, $lastName, $ageUserRequest, $userGender, $contactNum, $address, $emailAddress, $purposeText, $referenceNum, $paymentSelection, $uniqueFileName, $requestStatus);
 
                 if ($stmt->execute()) {
                     echo '<script>

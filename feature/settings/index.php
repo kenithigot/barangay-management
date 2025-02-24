@@ -7,7 +7,7 @@
     <title>Settings - Barangay Labuay</title>
 
     <!-- Tailwind CSS -->
-    <link href="../src/output.css" rel="stylesheet">
+    <link href="../../src/output.css" rel="stylesheet">
 
     <!-- Google Font: Raleway -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -59,7 +59,7 @@
     </div>
     <!-- Content -->
     <div class="w-full lg:ps-64 min-h-screen">
-        <div class="p-8">
+        <div class="px-8">
             <div class="hidden lg:block">
                 <h1 class="text-2xl font-extrabold text-gray-800 underline">Settings</h1>
             </div>
