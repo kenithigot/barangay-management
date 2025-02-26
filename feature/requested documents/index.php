@@ -26,6 +26,8 @@
             text-align: start;
         }
     </style>
+
+    <?php include('db_approve_request.php')?>
 </head>
 
 <body class="font-sans ">
@@ -72,7 +74,7 @@
             </div>
             <div class="my-5 py-5 shadow-lg rounded-md bg-sla">
                 <div class="px-4">
-                    <h1 class="text-gray-800 text-lg font-semibold mb-5">Pending Request Documents</h1>
+                    <h1 class="text-gray-800 text-lg font-semibold mb-5">Pending Request</h1>
                     <!-- DataTable -->
                     <table id="displayData" class="w-full text-gray-800">
                         <thead>
@@ -86,13 +88,10 @@
                                 <th>Purpose Request</th>
                             </tr>
                         </thead>
-                        <tbody>
-
-                        </tbody>
                     </table>
 
                     <!-- Display Data Modal -->
-                    <div id="displayModal" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none" role="dialog" tabindex="-1" aria-labelledby="displayModal-label">
+                    <div id="displayModal" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-y-auto pointer-events-none" tabindex="-1" aria-labelledby="displayModal-label">
                         <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all md:max-w-2xl lg:max-w-4xl m-3 md:mx-auto">
                             <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto ">
                                 <div class="flex justify-between items-center py-3 px-4 border-b">
@@ -111,12 +110,12 @@
                                     <form action="" method="POST" enctype="multipart/form-data" class="py-5 lg:px-10">
                                         <input type="hidden" name="id" class="id" id="id">
                                         <div class="py-2">
-                                            <a href="#" id="btn-approveRequest" name="btn-approveRequest" type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                            <button href="#" id="btn-approveRequest" name="btn-approveRequest" type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none mr-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z" />
                                                 </svg>
                                                 Approve
-                                            </a>
+                                            </button>
                                             <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-700 text-white hover:bg-red-800 focus:outline-none focus:bg-red-900 disabled:opacity-50 disabled:pointer-events-none mr-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M7.498 15.25H4.372c-1.026 0-1.945-.694-2.054-1.715a12.137 12.137 0 0 1-.068-1.285c0-2.848.992-5.464 2.649-7.521C5.287 4.247 5.886 4 6.504 4h4.016a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23h1.294M7.498 15.25c.618 0 .991.724.725 1.282A7.471 7.471 0 0 0 7.5 19.75 2.25 2.25 0 0 0 9.75 22a.75.75 0 0 0 .75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 0 0 2.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384m-10.253 1.5H9.7m8.075-9.75c.01.05.027.1.05.148.593 1.2.925 2.55.925 3.977 0 1.487-.36 2.89-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398-.306.774-1.086 1.227-1.918 1.227h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 0 0 .303-.54" />
@@ -131,7 +130,7 @@
                                                     <a id="viewImageLink" href="#" target="_blank">
                                                         <img id="receiptImg" name="receiptImg"
                                                             class="w-auto h-[292px] object-cover object-center rounded-lg border border-slate-600"
-                                                            src="../../src/imgs-vid/receipts/sample.jpg" alt="Receipt">
+                                                            alt="Receipt">
                                                     </a>
                                                 </div>
                                                 <div id="gcashModeBlock" name="gcashModeBlock">
@@ -214,7 +213,7 @@
                 <div class="px-4">
                     <h1 class="text-gray-800 text-lg font-semibold mb-5 underline underline-offset-4">Requested Documents</h1>
                     <!-- DataTable -->
-                    <table id="displaysData" class="w-full text-gray-800">
+                    <table id="displayDatas" class="w-full text-gray-800">
                         <thead>
                             <tr>
                                 <th>Action</th>
@@ -226,9 +225,6 @@
                                 <th>Purpose Request</th>
                             </tr>
                         </thead>
-                        <tbody>
-
-                        </tbody>
                     </table>
                 </div>
             </div>

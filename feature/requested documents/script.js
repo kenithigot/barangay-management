@@ -1,8 +1,7 @@
-//Display Datatable
+// Display Datatable
 $(document).ready(function () {
   let table = $('#displayData').DataTable({
-    processing: true,
-    scrollX: true,
+    searching: true,
     ajax: {
       url: 'db_display_residents.php',
       type: 'POST'
@@ -12,7 +11,7 @@ $(document).ready(function () {
         data: null,
         render: function (data, type, row) {
           return (
-            '<button type="submit" id="btn-viewData" name="btn-viewData" class="border px-3 py-1 rounded-md text-xs text-white bg-slate-600" aria-haspopup="dialog" aria-expanded="false" aria-controls="displayModal" data-hs-overlay="#displayModal" data-id="' +
+            '<button type="button" class="btn-viewData border px-3 py-1 rounded-md text-xs text-white bg-slate-600" data-id="' +
             row.id +
             '">View</button>'
           )
@@ -30,15 +29,18 @@ $(document).ready(function () {
       { data: 'documentClassification' },
       { data: 'purpose' }
     ],
-
     order: [[1, 'desc']]
-  })
-})
+  });
+
+  setInterval(function () {
+    table.ajax.reload(null, false);
+  }, 2000);
+});
 
 // View Data
-$(document).on('click', '#btn-viewData', function (e) {
-  e.preventDefault()
-  var id = $(this).data('id')
+$(document).on('click', '.btn-viewData', function (e) {
+  e.preventDefault();
+  var id = $(this).data('id');
 
   $.ajax({
     url: 'db_view_residents.php',
@@ -46,47 +48,45 @@ $(document).on('click', '#btn-viewData', function (e) {
     data: { id: id },
     dataType: 'json',
     success: function (response) {
-      if (response && !response.error) {
-        $('#id').val(response.id)
+      if (response) {
+        $('#id').val(response.id);
         var nameMerge =
-          response.firstName +
-          ' ' +
-          response.middleInitial +
-          ' ' +
-          response.lastName
-        $('#view_fullName').val(nameMerge)
-        $('#view_userAge').val(response.age)
-        $('#view_gender').val(response.gender)
-        $('#view_contactNum').val(response.contactNum)
-        $('#view_address').val(response.address)
-        $('#view_documentType').val(response.documentClassification)
-        $('#view_documentPurpose').val(response.purpose)
-        $('#view_paymentMethod').val(response.paymentMethod)
-        $('#view_referenceNum').val(response.referenceNum)
+          response.firstName + ' ' + response.middleInitial + ' ' + response.lastName;
+        $('#view_fullName').val(nameMerge);
+        $('#view_userAge').val(response.age);
+        $('#view_gender').val(response.gender);
+        $('#view_contactNum').val(response.contactNum);
+        $('#view_address').val(response.address);
+        $('#view_documentType').val(response.documentClassification);
+        $('#view_documentPurpose').val(response.purpose);
+        $('#view_paymentMethod').val(response.paymentMethod);
+        $('#view_referenceNum').val(response.referenceNum);
+
         if (response.uploadReceipt) {
-          $('#receiptImg').attr('src', response.uploadReceipt)
+          $('#receiptImg').attr('src', response.uploadReceipt);
         } else {
-          $('#receiptImg').attr('src', '../../src/imgs-vid/profile-man.jpg') // Placeholder if no image is found
+          $('#receiptImg').attr('src', '../../src/imgs-vid/profile-man.jpg');
         }
 
         if (response.paymentMethod === 'On-Cash Payment') {
-          $('#gcashModeBlock').hide()
+          $('#gcashModeBlock').hide();
         } else {
-          $('#gcashModeBlock').show()
+          $('#gcashModeBlock').show();
         }
 
-        // // Ensure other modals are closed
-        // $('.hs-overlay').addClass('hidden').removeClass('block')
+        // Manually trigger the modal
+        HSOverlay.open('#displayModal');
       } else {
-        console.error('No data available:', response.error)
+        console.error('No data available:', response.error);
       }
     },
     error: function (xhr, status, error) {
-      console.error('AJAX Error:', error)
-      console.log('Response Text:', xhr.responseText)
+      console.error('AJAX Error:', error);
+      console.log('Response Text:', xhr.responseText);
     }
-  })
-})
+  });
+});
+
 
 
 // View receipt image

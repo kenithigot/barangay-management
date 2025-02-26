@@ -14,7 +14,7 @@ $(document).ready(function () {
         data: null,
         render: function (data, type, row) {
           return (
-            '<button type="submit" id="btn-viewAccount" class="border px-3 py-1 rounded-md text-xs text-white bg-slate-600" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-display-acc" data-hs-overlay="#hs-display-acc" data-id="' +
+            '<button type="submit" id="btn-viewAccount" class="border px-3 py-1 rounded-md text-xs text-white bg-slate-600" data-id="' +
             row.id +
             '">View</button>'
           )
@@ -311,16 +311,8 @@ $(document).on('click', '#btn-viewAccount', function (e) {
         var editUrl = 'edit account.php?id=' + response.id
         $('#edit-button').attr('href', editUrl) // Assuming you gave the Edit button an id of 'edit-button'
 
-        // Ensure other modals are closed
-        $('.hs-overlay').addClass('hidden').removeClass('block');
-
-        // Show the modal after a slight delay to ensure DOM is ready
-        setTimeout(function() {
-            var modal = document.querySelector('#hs-display-acc');
-            modal.classList.remove('hidden');
-            modal.classList.add('block');
-            modal.setAttribute('aria-expanded', 'true');
-        }, 100); // 100ms delay
+        // Manually trigger the modal
+        HSOverlay.open('#hs-display-acc');
       } else {
         console.error('No data available:', response.error)
       }
