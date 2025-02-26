@@ -104,44 +104,44 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //Pending to Approved
 //Delete Data
-// $(document).on('click', '#btn-delete', function (e) {
-//   e.preventDefault()
+$(document).on('click', '#btn-delete', function (e) {
+  e.preventDefault()
 
-//   Swal.fire({
-//     icon: 'warning',
-//     title: 'Are you sure?',
-//     text: 'This action will delete all accounts except Admin accounts.',
-//     showCancelButton: true,
-//     confirmButtonColor: '#d33',
-//     cancelButtonColor: '#3085d6',
-//     confirmButtonText: 'Yes'
-//   }).then(result => {
-//     if (result.isConfirmed) {
-//       $.ajax({
-//         url: 'db_delete_accounts.php',
-//         type: 'POST',
-//         dataType: 'json',
-//         data: { 'btn-delete': true },
-//         success: function (response) {
-//           if (response.success) {
-//             table.ajax.reload()
-//             Swal.fire({
-//               icon: 'success',
-//               title: 'Successfully Deleted!',
-//               text: 'Successfully deleted all accounts.'
-//             })
-//           } else {
-//             Swal.fire({
-//               icon: 'error',
-//               title: 'Error!',
-//               text: 'Error Deleting all accounts.'
-//             })
-//           }
-//         },
-//         error: function () {
-//           alert('Error deleting client')
-//         }
-//       })
-//     }
-//   })
-// })
+  Swal.fire({
+    icon: 'warning',
+    title: 'Are you sure?',
+    text: 'This action will delete all accounts except Admin accounts.',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes'
+  }).then(result => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: 'db_delete_accounts.php',
+        type: 'POST',
+        dataType: 'json',
+        data: { 'btn-delete': true },
+        success: function (response) {
+          if (response.success) {
+            table.ajax.reload()
+            Swal.fire({
+              icon: 'success',
+              title: 'Successfully Deleted!',
+              text: 'Successfully deleted all accounts.'
+            })
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error!',
+              text: 'Error Deleting all accounts.'
+            })
+          }
+        },
+        error: function () {
+          alert('Error deleting client')
+        }
+      })
+    }
+  })
+})
