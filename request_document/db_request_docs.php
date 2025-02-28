@@ -2,7 +2,8 @@
 // Start the session
 session_start();
 
-function generateTransactionCode($codeLength = 10){
+function generateTransactionCode($codeLength = 10)
+{
     return strtoupper(substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, $codeLength));
 }
 
@@ -71,6 +72,11 @@ if (isset($_POST['btn-confirmPayment'])) {
     $documentPrice = $_POST['documentPrice'] ?? '';
     $transactionCode = $_SESSION['transactionCode'];
 
+    //Timestamp for each request
+    $currentDate = date('d-F-Y');
+    $docs_timestamp = $currentDate;
+
+    //Hashed transaction Code
     $hashedTransactionCode = password_hash($transactionCode, PASSWORD_BCRYPT);
 
     $requestStatus = "Pending";
@@ -85,43 +91,43 @@ if (isset($_POST['btn-confirmPayment'])) {
             $targetDir = "../src/imgs-vid/receipts/";
             $targetFile = $targetDir . $uniqueFileName;
 
-            // Move the uploaded file to the target directory
-            if (move_uploaded_file($_FILES['uploadReceipt']['tmp_name'], $targetFile)) {
-                // Prepare the SQL statement
-                $stmt = $conn->prepare("INSERT INTO resident_request_docs (documentType, firstName, middleInitial, lastName, age, gender, contactNum, address, purpose, referenceNum, paymentMethod, uploadReceipt, requestStatus, residencyYear, transactionCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("ssssissssssssss", $documentType, $firstName, $middleInitial, $lastName, $ageUserRequest, $userGender, $contactNum, $address, $purposeText, $referenceNum, $paymentSelection, $uniqueFileName, $requestStatus, $residencyYear, $hashedTransactionCode);
+            // Prepare the SQL statement
+            $stmt = $conn->prepare("INSERT INTO resident_request_docs (documentType, firstName, middleInitial, lastName, age, gender, contactNum, address, purpose, referenceNum, paymentMethod, uploadReceipt, requestStatus, residencyYear, transactionCode, docs_timestamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssisssssssssss", $documentType, $firstName, $middleInitial, $lastName, $ageUserRequest, $userGender, $contactNum, $address, $purposeText, $referenceNum, $paymentSelection, $uniqueFileName, $requestStatus, $residencyYear, $hashedTransactionCode, $docs_timestamp);
 
-                if ($stmt->execute()) {
+            if ($stmt->execute()) {
+                // Move the uploaded file to the target directory
+                if (move_uploaded_file($_FILES['uploadReceipt']['tmp_name'], $targetFile)) {
                     echo '<script>
-                            document.addEventListener("DOMContentLoaded", function() {
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "Request Submitted!",
-                                    text: "Your document request has been submitted successfully. Please wait for confirmation."
-                                }).then(() => {                                 
-                                    window.location.href = "../request_document/";    
-                                });
+                        document.addEventListener("DOMContentLoaded", function() {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Request Submitted!",
+                                text: "Your document request has been submitted successfully. Please wait for confirmation."
+                            }).then(() => {                                 
+                                window.location.href = "../request_document/";    
                             });
-                        </script>';
+                        });
+                    </script>';
                 } else {
-                    echo '<script>
-                            document.addEventListener("DOMContentLoaded", function() {
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Request Failed!",
-                                    text: "Your data was not submitted. Please try again."
-                                }).then(() => {                                 
-                                    window.location.href = "../request_document/";    
-                                });
-                            });
-                        </script>';
+                    echo '<script>alert("Sorry, there was an error uploading your file.");</script>';
                 }
-
-                // Close the database connection
-                $stmt->close();
             } else {
-                echo '<script>alert("Sorry, there was an error uploading your file.");</script>';
+                echo '<script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Request Failed!",
+                                text: "Your data was not submitted. Please try again."
+                            }).then(() => {                                 
+                                window.location.href = "../request_document/";    
+                            });
+                        });
+                    </script>';
             }
+
+            // Close the database connection
+            $stmt->close();
         } else {
             echo '<script>alert("Sorry, only JPG, JPEG, and PNG files are allowed.");</script>';
         }
