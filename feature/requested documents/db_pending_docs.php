@@ -11,7 +11,8 @@
         resident_request_docs.gender, 
         resident_request_docs.contactNum, 
         resident_request_docs.address, 
-        resident_request_docs.purpose
+        resident_request_docs.purpose,
+        resident_request_docs.residencyYear
     FROM resident_request_docs INNER JOIN document_types
     ON document_types.documentType = resident_request_docs.documentType
     WHERE resident_request_docs.requestStatus = 'Pending'";

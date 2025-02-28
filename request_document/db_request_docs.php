@@ -2,9 +2,14 @@
 // Start the session
 session_start();
 
+function generateTransactionCode($codeLength = 10){
+    return strtoupper(substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, $codeLength));
+}
+
 // If the form was submitted, store the data in the session
 if (isset($_POST['btn-submit'])) {
     $_SESSION['documentType'] = $_POST['documentType'] ?? '';
+    $_SESSION['residencyYear'] = $_POST['residencyYear'] ?? '';
     $_SESSION['firstName'] = $_POST['firstName'] ?? '';
     $_SESSION['middleInitial'] = $_POST['middleInitial'] ?? '';
     $_SESSION['lastName'] = $_POST['lastName'] ?? '';
@@ -12,12 +17,20 @@ if (isset($_POST['btn-submit'])) {
     $_SESSION['userGender'] = $_POST['userGender'] ?? '';
     $_SESSION['contactNum'] = $_POST['contactNum'] ?? '';
     $_SESSION['address'] = $_POST['address'] ?? '';
-    $_SESSION['emailAddress'] = $_POST['emailAddress'] ?? '';
     $_SESSION['purposeText'] = $_POST['purposeText'] ?? '';
+
+    // Year converted to whole years residency
+    $currentYear = date('Y');
+    $enteredYear = $_SESSION['residencyYear'] ?? 0;
+    $residencyYearConverted = ($enteredYear > 0) ? ($currentYear - $enteredYear) : 0;
+    $_SESSION['residencyYearConverted'] = $residencyYearConverted;
+
+    //Session of Transaction Code 
+    $_SESSION['transactionCode'] = generateTransactionCode();
 
     // Check and fetch the price for the selected document type
     if (!empty($_SESSION['documentType'])) {
-        include "../src/database.php"; 
+        include "../src/database.php";
 
         $documentType = $_SESSION['documentType'];
 
@@ -28,7 +41,7 @@ if (isset($_POST['btn-submit'])) {
         $check_query->store_result();
         $check_query->bind_result($fetchedDocumentPrice);
         $check_query->fetch();
-        
+
         // Store the fetched price in session
         $_SESSION['fetchedDocumentPrice'] = $fetchedDocumentPrice;
 
@@ -45,17 +58,20 @@ if (isset($_POST['btn-confirmPayment'])) {
     // Get the session data
     $documentType = $_SESSION['documentType'] ?? '';
     $firstName = $_SESSION['firstName'] ?? '';
+    $residencyYear = $_SESSION['residencyYearConverted'] ?? 0;
     $middleInitial = $_SESSION['middleInitial'] ?? '';
     $lastName = $_SESSION['lastName'] ?? '';
     $ageUserRequest = $_SESSION['ageUserRequest'] ?? '';
     $userGender = $_SESSION['userGender'] ?? '';
     $contactNum = $_SESSION['contactNum'] ?? '';
     $address = $_SESSION['address'] ?? '';
-    $emailAddress = $_SESSION['emailAddress'] ?? '';
     $purposeText = $_SESSION['purposeText'] ?? '';
     $referenceNum = $_POST['referenceNum'] ?? '';
     $paymentSelection = $_POST['paymentSelectionBlock'] ?? '';
     $documentPrice = $_POST['documentPrice'] ?? '';
+    $transactionCode = $_SESSION['transactionCode'];
+
+    $hashedTransactionCode = password_hash($transactionCode, PASSWORD_BCRYPT);
 
     $requestStatus = "Pending";
 
@@ -72,8 +88,8 @@ if (isset($_POST['btn-confirmPayment'])) {
             // Move the uploaded file to the target directory
             if (move_uploaded_file($_FILES['uploadReceipt']['tmp_name'], $targetFile)) {
                 // Prepare the SQL statement
-                $stmt = $conn->prepare("INSERT INTO resident_request_docs (documentType, firstName, middleInitial, lastName, age, gender, contactNum, address, emailAddress, purpose, referenceNum, paymentMethod, uploadReceipt, requestStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("ssssisssssssss", $documentType, $firstName, $middleInitial, $lastName, $ageUserRequest, $userGender, $contactNum, $address, $emailAddress, $purposeText, $referenceNum, $paymentSelection, $uniqueFileName, $requestStatus);
+                $stmt = $conn->prepare("INSERT INTO resident_request_docs (documentType, firstName, middleInitial, lastName, age, gender, contactNum, address, purpose, referenceNum, paymentMethod, uploadReceipt, requestStatus, residencyYear, transactionCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("ssssissssssssss", $documentType, $firstName, $middleInitial, $lastName, $ageUserRequest, $userGender, $contactNum, $address, $purposeText, $referenceNum, $paymentSelection, $uniqueFileName, $requestStatus, $residencyYear, $hashedTransactionCode);
 
                 if ($stmt->execute()) {
                     echo '<script>
@@ -94,8 +110,8 @@ if (isset($_POST['btn-confirmPayment'])) {
                                     icon: "error",
                                     title: "Request Failed!",
                                     text: "Your data was not submitted. Please try again."
-                                }).then(() => {
-                                    window.location.href = "../request_document/";
+                                }).then(() => {                                 
+                                    window.location.href = "../request_document/";    
                                 });
                             });
                         </script>';

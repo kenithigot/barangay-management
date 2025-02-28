@@ -42,7 +42,7 @@ function paymentClicked() {
     var onHandPayment = document.getElementById("onHandPaymentBlock");
     var gcashPayment = document.getElementById("gcashPaymentBlock");
     var gcashReferenceNum = document.getElementById("gcashReferenceNumBlock");
-    var noteMessage = document.getElementById("noteMessageBlock")
+    var transactionCodeBlock = document.getElementById("transactionCodeBlock")
 
     // Note Message
     var onhandNote = document.getElementById("onhandPaymentNote");
@@ -52,6 +52,7 @@ function paymentClicked() {
         onHandPayment.style.display = "block";
         gcashPayment.style.display = "none";
         gcashReferenceNum.style.display = "none";
+        transactionCodeBlock.style.display = "block";
 
         // Display Note
         onhandNote.style.display = "block";
@@ -61,6 +62,7 @@ function paymentClicked() {
         gcashPayment.style.display = "block";
         gcashReferenceNum.style.display = "block";
         onHandPayment.style.display = "block";
+        transactionCodeBlock.style.display = "block";
 
         // Display Note
         onhandNote.style.display = "none";
@@ -70,6 +72,7 @@ function paymentClicked() {
         onHandPayment.style.display = "none";
         gcashPayment.style.display = "none";
         gcashReferenceNum.style.display = "none";
+        transactionCodeBlock.style.display = "none";
 
         // Display Note
         onhandNote.style.display = "none";

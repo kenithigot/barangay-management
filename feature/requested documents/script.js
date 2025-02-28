@@ -104,6 +104,7 @@ $(document).on('click', '.btn-viewData', function (e) {
         $('#view_documentPurpose').val(response.purpose)
         $('#view_paymentMethod').val(response.paymentMethod)
         $('#view_referenceNum').val(response.referenceNum)
+        $('#view_residencyYear').val(response.residencyYear)
 
         if (response.uploadReceipt) {
           $('#receiptImg').attr('src', response.uploadReceipt)

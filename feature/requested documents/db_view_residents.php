@@ -17,7 +17,8 @@ if (isset($_POST["id"])) {
         resident_request_docs.purpose,
         resident_request_docs.paymentMethod, 
         resident_request_docs.referenceNum,
-        resident_request_docs.uploadReceipt 
+        resident_request_docs.uploadReceipt,
+        resident_request_docs.residencyYear  
     FROM resident_request_docs 
     INNER JOIN document_types
     ON document_types.documentType = resident_request_docs.documentType

@@ -27,6 +27,7 @@
         }
     </style>
 
+    <?php include('db_approve_request.php') ?>
 </head>
 
 <body class="font-sans">
