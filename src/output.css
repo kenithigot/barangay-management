@@ -742,6 +742,10 @@ video {
   margin: 0.75rem;
 }
 
+.m-0 {
+  margin: 0px;
+}
+
 .-mx-3 {
   margin-left: -0.75rem;
   margin-right: -0.75rem;
@@ -1064,8 +1068,16 @@ video {
   height: 180px;
 }
 
+.h-\[1px\] {
+  height: 1px;
+}
+
 .h-\[292px\] {
   height: 292px;
+}
+
+.h-\[2px\] {
+  height: 2px;
 }
 
 .h-\[64rem\] {
@@ -1213,6 +1225,10 @@ video {
   flex: 1 1 0%;
 }
 
+.flex-\[0\.5\] {
+  flex: 0.5;
+}
+
 .flex-\[1\.5\] {
   flex: 1.5;
 }
@@ -1321,6 +1337,10 @@ video {
 
 .items-start {
   align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
 }
 
 .items-center {
@@ -1679,6 +1699,11 @@ video {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
 }
 
+.bg-gray-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
+}
+
 .bg-gray-900 {
   --tw-bg-opacity: 1;
   background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
@@ -1697,6 +1722,11 @@ video {
 .bg-green-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(22 101 52 / var(--tw-bg-opacity, 1));
+}
+
+.bg-red-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 113 113 / var(--tw-bg-opacity, 1));
 }
 
 .bg-red-700 {
@@ -1727,6 +1757,11 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity, 1));
 }
 
 .bg-opacity-50 {
@@ -1813,6 +1848,10 @@ video {
 
 .p-8 {
   padding: 2rem;
+}
+
+.p-0 {
+  padding: 0px;
 }
 
 .\!py-0\.5 {
@@ -1990,6 +2029,18 @@ video {
   padding-top: 2rem;
 }
 
+.pt-6 {
+  padding-top: 1.5rem;
+}
+
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+
+.pt-28 {
+  padding-top: 7rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -2012,6 +2063,10 @@ video {
 
 .indent-10 {
   text-indent: 2.5rem;
+}
+
+.indent-12 {
+  text-indent: 3rem;
 }
 
 .indent-2 {
@@ -2143,6 +2198,10 @@ video {
   text-transform: lowercase;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .leading-loose {
   line-height: 2;
 }
@@ -2153,6 +2212,10 @@ video {
 
 .tracking-wide {
   letter-spacing: 0.025em;
+}
+
+.tracking-wider {
+  letter-spacing: 0.05em;
 }
 
 .tracking-widest {
@@ -3405,6 +3468,12 @@ video {
   .dark\:focus\:text-blue-400:focus {
     --tw-text-opacity: 1;
     color: rgb(96 165 250 / var(--tw-text-opacity, 1));
+  }
+}
+
+@media print {
+  .print\:block {
+    display: block;
   }
 }
 

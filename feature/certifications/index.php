@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Barangay Labuay</title>
+    <title>Certificate - Barangay Labuay</title>
 
     <!-- Tailwind CSS -->
     <link href="../../src/output.css" rel="stylesheet">
@@ -49,7 +49,7 @@
                         </svg>
                     </li>
                     <li class="text-sm font-semibold text-gray-800 truncate" aria-current="page">
-                        Settings
+                        Certificate
                     </li>
                 </ol>
                 <!-- End Breadcrumb -->
@@ -61,8 +61,31 @@
     <div class="w-full lg:ps-64 min-h-screen">
         <div class="p-8">
             <div class="hidden lg:block">
-                <h1 class="text-2xl font-extrabold text-gray-800 underline">Settings</h1>
-            </div>  
+                <h1 class="text-2xl font-extrabold text-gray-800 underline">Certificate</h1>
+            </div> 
+            <div class="py-2 lg:py-3 mx-auto text-gray-800"> 
+                <div class="flex flex-col bg-gray-200 border shadow-md rounded-xl" >
+                    <div class="flex py-6 px-8">
+                        <div class="flex-[0.5]">
+                        <img src="../../src/imgs-vid/logo.png" alt="Labuay Logo">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-col justify-center items-center space-y-2">
+                                <h3 class="text-3xl">Barangay Labuay</h3>
+                                <h3 class="text-xl">District 4, Labuay</h3>
+                                <div class="pt-8">
+                                    <h3 class="text-lg text-blue-600"><i>11-0 Maayusin Exten., Bry. San Vicente Diliman, Quezon City, 1101</i></h3>
+                                </div>
+                                <div class="h-[2px] w-full bg-gray-800"></div>
+                                <div>
+                                    <h3 class="uppercase text-xl tracking-w">Certification</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>   
+            </div> 
         </div>
     </div>
 
