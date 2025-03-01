@@ -138,6 +138,17 @@
                                     readonly>
                             </div>
                             <div class="col-span-4 flex items-center">
+                                <label for="userGender" class="text-sm lg:text-base font-medium text-gray-800">
+                                    Civil Status
+                                </label>
+                            </div>
+                            <div class="col-span-8 flex items-center">
+                                <input value="<?php echo $_SESSION['civilStatus'] ?? " "; ?>" required id="civilStatus"
+                                    name="civilStatus" type="text"
+                                    class="uppercase font-semibold w-full py-1 text-base sm:text-xl focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none placeholder-gray-800"
+                                    readonly>
+                            </div>
+                            <div class="col-span-4 flex items-center">
                                 <label for="contactNum" class="text-sm lg:text-base font-medium text-gray-800">
                                     Contact Number
                                 </label>

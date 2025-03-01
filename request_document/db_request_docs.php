@@ -16,6 +16,7 @@ if (isset($_POST['btn-submit'])) {
     $_SESSION['lastName'] = $_POST['lastName'] ?? '';
     $_SESSION['ageUserRequest'] = $_POST['ageUserRequest'] ?? '';
     $_SESSION['userGender'] = $_POST['userGender'] ?? '';
+    $_SESSION['civilStatus'] = $_POST['civilStatus'] ?? '';
     $_SESSION['contactNum'] = $_POST['contactNum'] ?? '';
     $_SESSION['address'] = $_POST['address'] ?? '';
     $_SESSION['purposeText'] = $_POST['purposeText'] ?? '';
@@ -64,6 +65,7 @@ if (isset($_POST['btn-confirmPayment'])) {
     $lastName = $_SESSION['lastName'] ?? '';
     $ageUserRequest = $_SESSION['ageUserRequest'] ?? '';
     $userGender = $_SESSION['userGender'] ?? '';
+    $civilStatus = $_SESSION['civilStatus'] ?? '';
     $contactNum = $_SESSION['contactNum'] ?? '';
     $address = $_SESSION['address'] ?? '';
     $purposeText = $_SESSION['purposeText'] ?? '';
@@ -92,8 +94,8 @@ if (isset($_POST['btn-confirmPayment'])) {
             $targetFile = $targetDir . $uniqueFileName;
 
             // Prepare the SQL statement
-            $stmt = $conn->prepare("INSERT INTO resident_request_docs (documentType, firstName, middleInitial, lastName, age, gender, contactNum, address, purpose, referenceNum, paymentMethod, uploadReceipt, requestStatus, residencyYear, transactionCode, docs_timestamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssisssssssssss", $documentType, $firstName, $middleInitial, $lastName, $ageUserRequest, $userGender, $contactNum, $address, $purposeText, $referenceNum, $paymentSelection, $uniqueFileName, $requestStatus, $residencyYear, $hashedTransactionCode, $docs_timestamp);
+            $stmt = $conn->prepare("INSERT INTO resident_request_docs (documentType, firstName, middleInitial, lastName, age, gender, civilStatus, contactNum, address, purpose, referenceNum, paymentMethod, uploadReceipt, requestStatus, residencyYear, transactionCode, docs_timestamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssissssssssssss", $documentType, $firstName, $middleInitial, $lastName, $ageUserRequest, $userGender, $civilStatus, $contactNum, $address, $purposeText, $referenceNum, $paymentSelection, $uniqueFileName, $requestStatus, $residencyYear, $hashedTransactionCode, $docs_timestamp);
 
             if ($stmt->execute()) {
                 // Move the uploaded file to the target directory

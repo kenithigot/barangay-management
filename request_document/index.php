@@ -61,12 +61,12 @@
                                 </div>
                                 <div class="flex-1 space-y-1">
                                     <label for="middleInitial" class="flex text-base font-medium text-gray-800 mt-2.5">
-                                        Middle Initial
+                                        Middle Initial (Optional)
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
                                             <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
                                         </svg>
                                     </label>
-                                    <input required id="middleInitial" name="middleInitial" type="text" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter last name">
+                                    <input id="middleInitial" name="middleInitial" type="text" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter last name">
                                 </div>
                                 <div class="flex-1 space-y-1">
                                     <label for="lastName" class="flex text-base font-medium text-gray-800 mt-2.5">
@@ -79,6 +79,15 @@
                                 </div>
                             </div>
                             <div class="lg:flex gap-x-5 space-y-5 lg:space-y-0">
+                                <div class="flex-1 space-y-1">
+                                    <label for="ageUserRequest" class="flex text-base font-medium text-gray-800 mt-2.5">
+                                        Age
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
+                                            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
+                                        </svg>
+                                    </label>
+                                    <input required id="ageUserRequest" name="ageUserRequest" type="number" class="py-2 px-3 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter age">
+                                </div>
                                 <div class="space-y-1 flex-1">
                                     <label for="userGender" class="flex text-base font-medium text-gray-800 mt-2.5">
                                         Gender
@@ -93,15 +102,23 @@
                                     </select>
                                 </div>
                                 <div class="flex-1 space-y-1">
-                                    <label for="ageUserRequest" class="flex text-base font-medium text-gray-800 mt-2.5">
-                                        Age
+                                    <label for="civilStatus" class="flex text-base font-medium text-gray-800 mt-2.5">
+                                        Civil Status
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
                                             <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
                                         </svg>
                                     </label>
-                                    <input required id="ageUserRequest" name="ageUserRequest" type="number" class="py-2 px-3 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter age">
+                                    <select required id="civilStatus" name="civilStatus" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
+                                        <option selected disabled>Select Civil Status</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Widowed">Widowed</option>
+                                        <option value="Widowed">Legally Separated</option>
+                                    </select>
                                 </div>
-                                <div class="flex-1 space-y-1">
+                            </div>
+                            <div class="lg:flex gap-x-5 space-y-5 lg:space-y-0">
+                                <div class="space-y-1 flex-1">
                                     <label for="contactNum" class="flex text-base font-medium text-gray-800 mt-2.5">
                                         Contact Number
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
@@ -110,25 +127,16 @@
                                     </label>
                                     <input required id="contactNum" name="contactNum" type="number" class="py-2 px-3 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter contact number">
                                 </div>
+                                <div class="flex-1 space-y-1">
+                                    <label for="address" class="flex text-base font-medium text-gray-800 mt-2.5">
+                                        Address
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
+                                            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
+                                        </svg>
+                                    </label>
+                                    <input required id="address" name="address" type="text" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter address">
+                                </div>
                             </div>
-                            <div class="space-y-1">
-                                <label for="address" class="flex text-base font-medium text-gray-800 mt-2.5">
-                                    Address
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
-                                        <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
-                                    </svg>
-                                </label>
-                                <input required id="address" name="address" type="text" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter address">
-                            </div>
-                            <!-- <div class="space-y-1">
-                                <label for="emailAddress" class="flex text-base font-medium text-gray-800 mt-2.5">
-                                    Email Address
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
-                                        <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
-                                    </svg>
-                                </label>
-                                <input required id="emailAddress" name="emailAddress" type="email" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter email address">
-                            </div> -->
                             <div class="space-y-1">
                                 <label for="purposeText" class="flex text-base font-medium text-gray-800 mt-2.5">
                                     Purpose
