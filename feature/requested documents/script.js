@@ -112,6 +112,7 @@ $(document).on('click', '.btn-viewData', function (e) {
         $('#view_fullName').val(nameMerge)
         $('#view_userAge').val(response.age)
         $('#view_gender').val(response.gender)
+        $('#view_civilStatus').val(response.civilStatus)
         $('#view_contactNum').val(response.contactNum)
         $('#view_address').val(response.address)
         $('#view_documentType').val(response.documentClassification)

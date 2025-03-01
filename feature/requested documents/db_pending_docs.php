@@ -9,6 +9,7 @@
         resident_request_docs.lastName, 
         resident_request_docs.age, 
         resident_request_docs.gender, 
+        resident_request_docs.civilStatus,
         resident_request_docs.contactNum, 
         resident_request_docs.address, 
         resident_request_docs.purpose,
