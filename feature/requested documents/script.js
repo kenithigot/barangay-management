@@ -19,6 +19,12 @@ $(document).ready(function () {
       },
       {
         data: null,
+        render: function (data, type, row, meta) {
+          return meta.row + 1
+        }
+      },
+      {
+        data: null,
         render: function (data, type, row) {
           return row.firstName + ' ' + row.middleInitial + ' ' + row.lastName
         }
@@ -28,8 +34,7 @@ $(document).ready(function () {
       { data: 'address' },
       { data: 'documentClassification' },
       { data: 'purpose' }
-    ],
-    order: [[1, 'desc']]
+    ]
   })
 
   setInterval(function () {
@@ -52,8 +57,19 @@ $(document).ready(function () {
           return (
             '<button type="button" class="btn-printDocs border px-3 py-1 rounded-md text-xs text-white bg-green-800" data-id="' +
             row.id +
-            '">Print</button>'
+            '" data-documentType="' +
+            row.documentType +
+            '">Print</button>' +
+            '<button type="button" class="btn-doneDocs border px-3 py-1 rounded-md text-xs text-white bg-slate-600" data-id="' +
+            row.id +
+            '">Done</button>'
           )
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row, meta) {
+          return meta.row + 1
         }
       },
       {
@@ -67,10 +83,8 @@ $(document).ready(function () {
       { data: 'address' },
       { data: 'documentClassification' },
       { data: 'purpose' }
-    ],
-    order: [[1, 'desc']]
+    ]
   })
-
   setInterval(function () {
     table.ajax.reload(null, false)
   }, 2000)
@@ -145,58 +159,98 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 //Print Docs
-$(document).on('click', '.btn-printDocs', function () {
+$(document).on('click', '.btn-printDocs', function (e) {
+  e.preventDefault()
   var id = $(this).data('id')
 
-  var printWindow = window.open('print_docs.php?' + 'id=' + id, '_blank')
-
-  if (
-    !printWindow ||
-    printWindow.closed ||
-    typeof printWindow.closed === 'undefined'
-  ) {
-    alert('Please allow pop-ups to print the document.')
-  }
+  $.ajax({
+    url: 'print.php',
+    type: 'POST',
+    data: { id: id },
+    success: function (response) {
+      if (response) {
+        if (response.documentClassification == 'Barangay Certificate') {
+          var barangayCertPrint = window.open(
+            'barangayCertificate.php?id=' + id,
+            '_blank'
+          )
+          if (
+            !barangayCertPrint ||
+            barangayCertPrint.closed ||
+            typeof barangayCertPrint.closed === 'undefined'
+          ) {
+            alert('Please allow pop-ups to print the document.')
+          }
+        } else if (response.documentClassification == 'Certificate of Indigency'){
+          var indigentCertPrint = window.open(
+            'certificateOfIndigency.php?id=' + id,
+            '_blank'
+          )
+          if (
+            !indigentCertPrint ||
+            indigentCertPrint.closed ||
+            typeof indigentCertPrint.closed === 'undefined'
+          ) {
+            alert('Please allow pop-ups to print the document.')
+          }
+        } else {
+          var barangayClearancePrint = window.open(
+            'barangayClearance.php?id=' + id,
+            '_blank'
+          )
+          if (
+            !barangayClearancePrint ||
+            barangayClearancePrint.closed ||
+            typeof barangayClearancePrint.closed === 'undefined'
+          ) {
+            alert('Please allow pop-ups to print the document.')
+          }
+        }
+      }
+    }
+  })
 })
 
-//Pending to Approved
-//Delete Data
-$(document).on('click', '#btn-delete', function (e) {
+// Mark done for approve docs
+$(document).on('click', '.btn-doneDocs', function (e) {
   e.preventDefault()
+  var id = $(this).data('id')
 
   Swal.fire({
     icon: 'warning',
     title: 'Are you sure?',
-    text: 'This action will delete all accounts except Admin accounts.',
+    text: 'This action will mark done the document as done.',
     showCancelButton: true,
-    confirmButtonColor: '#d33',
-    cancelButtonColor: '#3085d6',
+    confirmButtonColor: '#475569',
+    cancelButtonColor: '#d33',
     confirmButtonText: 'Yes'
   }).then(result => {
     if (result.isConfirmed) {
       $.ajax({
-        url: 'db_delete_accounts.php',
+        url: 'db_markdone_docs.php',
         type: 'POST',
         dataType: 'json',
-        data: { 'btn-delete': true },
+        contentType: 'application/x-www-form-urlencoded',
+        data: { id: id },
         success: function (response) {
           if (response.success) {
-            table.ajax.reload()
             Swal.fire({
               icon: 'success',
-              title: 'Successfully Deleted!',
-              text: 'Successfully deleted all accounts.'
+              title: 'Marked as Done!',
+              text: 'The document has been successfully updated.'
+            }).then(() => {
+              window.location.href = '../requested documents/'
             })
           } else {
             Swal.fire({
               icon: 'error',
               title: 'Error!',
-              text: 'Error Deleting all accounts.'
+              text: 'An error occurred while processing your request.'
             })
           }
         },
         error: function () {
-          alert('Error deleting client')
+          alert('Error marking done print')
         }
       })
     }

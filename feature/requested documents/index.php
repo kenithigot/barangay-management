@@ -28,6 +28,7 @@
     </style>
 
     <?php include('db_approve_request.php') ?>
+    <?php include('db_decline_request.php') ?>
 </head>
 
 <body class="font-sans">
@@ -58,7 +59,7 @@
                         </svg>
                     </li>
                     <li class="text-sm font-semibold text-gray-800 truncate" aria-current="page">
-                        Residents Record
+                        Requested Documents
                     </li>
                 </ol>
                 <!-- End Breadcrumb -->
@@ -68,7 +69,7 @@
     </div>
 
     <!-- Modal File -->
-    <?php include('modal.php')?>
+    <?php include('modal.php') ?>
 
     <!-- Content -->
     <div class="w-full lg:ps-64 min-h-screen">
@@ -80,16 +81,17 @@
                 <div class="px-4">
                     <h1 class="text-gray-800 text-lg font-semibold mb-5">Pending Request</h1>
                     <!-- DataTable -->
-                    <table id="displayPendingDocument" class="w-full text-gray-800">
+                    <table id="displayPendingDocument" class="w-full text-gray-800 hover">
                         <thead>
                             <tr>
-                                <th>Action</th>
+                                <th>Actions</th>
+                                <th>#</th>
                                 <th>Name</th>
                                 <th>Age</th>
                                 <th>Gender</th>
                                 <th>Address</th>
                                 <th>Document</th>
-                                <th>Purpose Request</th>
+                                <th>Purpose</th>
                             </tr>
                         </thead>
                     </table>
@@ -99,16 +101,17 @@
                 <div class="px-4">
                     <h1 class="text-gray-800 text-lg font-semibold mb-5">Approve Documents - Ready To Print </h1>
                     <!-- DataTable -->
-                    <table id="displayApproveDocument" class="w-full text-gray-800">
+                    <table id="displayApproveDocument" class="w-full text-gray-800 hover">
                         <thead>
                             <tr>
-                                <th>Action</th>
+                                <th>Actions</th>
+                                <th>#</th>
                                 <th>Name</th>
                                 <th>Age</th>
                                 <th>Gender</th>
                                 <th>Address</th>
                                 <th>Document</th>
-                                <th>Purpose Request</th>
+                                <th>Purpose</th>
                             </tr>
                         </thead>
                     </table>
