@@ -62,7 +62,7 @@
     </div>
     <!-- Content -->
     <div class="w-full lg:ps-64 min-h-screen">
-        <div class="p-8">
+        <div class="px-8 lg:py-8">
             <div class="hidden lg:block">
                 <h1 class="text-2xl font-extrabold text-gray-800 underline">Dashboard</h1>
             </div>

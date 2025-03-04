@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Barangay Labuay</title>
+    <title>Blotter - Barangay Labuay</title>
 
     <!-- Tailwind CSS -->
     <link href="../../src/output.css" rel="stylesheet">
@@ -19,10 +19,12 @@
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css">
 
+    <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    
+    <?php include('db_blotter_record.php') ?>
 </head>
 
 <body class="font-sans">
-
     <?php require("../../includes/sidebar.php"); ?>
     <!-- ========== MAIN CONTENT ========== -->
     <div class="-mt-px">
@@ -49,7 +51,7 @@
                         </svg>
                     </li>
                     <li class="text-sm font-semibold text-gray-800 truncate" aria-current="page">
-                        Settings
+                        Blotter Record
                     </li>
                 </ol>
                 <!-- End Breadcrumb -->
@@ -57,15 +59,44 @@
         </div>
         <!-- End Breadcrumb -->
     </div>
+
+    <?php include('modal_blotter.php') ?>
     <!-- Content -->
     <div class="w-full lg:ps-64 min-h-screen">
-        <div class="p-8">
+        <div class="px-8 lg:py-8">
             <div class="hidden lg:block">
-                <h1 class="text-2xl font-extrabold text-gray-800 underline">Settings</h1>
-            </div>  
+                <h1 class="text-2xl font-extrabold text-gray-800 underline">Blotter Record</h1>
+            </div>
+            <div class="pt-10">
+                <button type="submit" id="btn-addBlotter" class="w-auto border inline-flex items-center px-5 py-2 rounded-md text-sm text-white bg-slate-600 hover:bg-slate-500"
+                    aria-haspopup="dialog" aria-expanded="false" aria-controls="displayModalBlotter" data-hs-overlay="#displayModalBlotter">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    Add Blotter
+                </button>
+            </div>
+            <div class="my-5 py-5 shadow-lg rounded-md overflow-x-auto">
+                <div class="px-4">
+                    <h1 class="text-gray-800 text-lg font-semibold mb-5">Blotter Record</h1>
+                    <!-- DataTable -->
+                    <table id="displayBlotter" class="w-full text-gray-800 hover">
+                        <thead>
+                            <tr>
+                                <th>Actions</th>
+                                <th>#</th>
+                                <th>Complainant Name</th>
+                                <th>Incident Date</th>
+                                <th>Official in charge</th>
+                                <th>Date Filed</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-
     <?php require("../../includes/footer.php") ?>
-
-</html>
+    <script src="script.js"></script>
+</body>

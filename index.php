@@ -298,7 +298,6 @@
         </div>
     </div>
     
-    <script src="<?php BASE_URL ?>src/script.js"></script>
 </body>
 
 </html>

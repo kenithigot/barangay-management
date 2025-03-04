@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Barangay Labuay</title>
+    <title>Requested Document - Barangay Labuay</title>
 
     <!-- Tailwind CSS -->
     <link href="../../src/output.css" rel="stylesheet">
@@ -73,15 +73,15 @@
 
     <!-- Content -->
     <div class="w-full lg:ps-64 min-h-screen">
-        <div class="p-8">
+        <div class="lg:py-8 px-8">
             <div class="hidden lg:block">
                 <h1 class="text-2xl font-extrabold text-gray-800 underline">Requested Documents</h1>
             </div>
-            <div class="my-5 py-5 shadow-lg rounded-md bg-sla">
+            <div class="my-5 py-5 shadow-lg rounded-md overflow-x-auto">
                 <div class="px-4">
                     <h1 class="text-gray-800 text-lg font-semibold mb-5">Pending Request</h1>
                     <!-- DataTable -->
-                    <table id="displayPendingDocument" class="w-full text-gray-800 hover">
+                    <table id="displayPendingDocument" class="w-full hover min-w-max table-auto text-gray-800">
                         <thead>
                             <tr>
                                 <th>Actions</th>
@@ -97,11 +97,11 @@
                     </table>
                 </div>
             </div>
-            <div class="my-5 py-5 shadow-lg rounded-md bg-sla">
-                <div class="px-4">
+            <div class="my-5 py-5 shadow-lg rounded-md overflow-x-auto">
+                <div class="px-4 ">
                     <h1 class="text-gray-800 text-lg font-semibold mb-5">Approve Documents - Ready To Print </h1>
                     <!-- DataTable -->
-                    <table id="displayApproveDocument" class="w-full text-gray-800 hover">
+                    <table id="displayApproveDocument" class="w-full hover min-w-max table-auto text-gray-800">
                         <thead>
                             <tr>
                                 <th>Actions</th>
