@@ -17,8 +17,7 @@ backdrop.addEventListener("click", function() {
     mobileMenu.style.display = "none"; // Hide the menu if backdrop is clicked
 });
 
-
-
+//About Navbar
 const aboutUsContentLg = document.getElementById("aboutUs-ContentLg");
 const aboutUsDropdownLg = document.getElementById("aboutUs-dropdownLg");
 
@@ -79,39 +78,28 @@ document.addEventListener("click", function (event) {
     }
 });
 
+//Document Navbar
+const documentBlock = document.getElementById("documentBlock");
+const documentDropdown = document.getElementById("documentDropdown");
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     const buttons = document.querySelectorAll('.tab-button');
-//     const contents = document.querySelectorAll('.tab-content');
-//     const defaultTab = 'goal';
+documentBlock.addEventListener("click", function(event){
 
-//     // Function to deactivate all tabs and contents
-//     function deactivateAll() {
-//         buttons.forEach(button => button.classList.remove('bg-slate-500'));
-//         buttons.forEach(button => button.querySelector('button').classList.remove('active'));
-//         contents.forEach(content => content.classList.add('hidden'));
-//     }
+    if (documentDropdown.style.display === "block") {
+        documentDropdown.style.display = "none";
+    } else {
+        documentDropdown.style.display = "block";
+    }
 
-//     // Function to activate the clicked tab
-//     function activateTab(tabName) {
-//         deactivateAll();
-//         const activeButton = document.querySelector(`[data-tab="${tabName}"]`);
-//         activeButton.classList.add('bg-slate-500');
-//         activeButton.querySelector('button').classList.add('active');
-//         document.getElementById(tabName).classList.remove('hidden');
-//     }
+    event.stopPropagation();
+});
+// Document navbar outside click hide
+document.addEventListener("click", function(event){
+    if (!documentDropdown.contains(event.target)){
+        documentDropdown.style.display = "none";
+    }
+});
 
-//     // Set default tab
-//     activateTab(defaultTab);
-
-//     // Add event listeners to buttons
-//     buttons.forEach(button => {
-//         button.addEventListener('click', () => {
-//             const tabName = button.getAttribute('data-tab');
-//             activateTab(tabName);
-//         });
-//     });
-// });
+    
 
 
 

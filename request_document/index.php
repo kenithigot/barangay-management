@@ -159,9 +159,6 @@
             </div>
         </div>
     </div>
-
-
-    <script src="<?= BASE_URL ?>/src/script.js"></script>
 </body>
 
 </html>

@@ -8,6 +8,7 @@ module.exports = {
     './feature/**/*.php',
     './request_document/**/*.php',
     './account login/*.php',
+    './track request docs/*.php',
     './register/*.php',
   ],
   theme: {

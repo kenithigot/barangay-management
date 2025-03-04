@@ -28,16 +28,16 @@
             <a href="<?php echo BASE_URL; ?>"
                 class="text-base font-semibold text-gray-900 hover:text-slate-600">Home</a>
             <div class="relative inline-block">
-                <div  id="aboutUs-ContentLg" class="inline-block items-center hover:text-slate-600">
+                <div id="aboutUs-ContentLg" class="inline-block items-center hover:text-slate-600">
                     <button
-                        class="text-base font-semibold text-gray-900 hover:text-slate-600">About Us    
-                    </button>  
+                        class="text-base font-semibold text-gray-900 hover:text-slate-600">About Us
+                    </button>
                     <div class="inline-block">
                         <svg class="h-3 w-4 text-black right-0 hover:text-slate-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </div>
-                    
+
                 </div>
                 <div id="aboutUs-dropdownLg" class="hidden absolute left-0 z-10 py-2 mt-4 w-64 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu">
                     <div class="">
@@ -48,16 +48,16 @@
                             <a href="#" class="block px-4 py-2 text-base text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1" id="menu-item-2">Organizational Structure</a>
                             <a href="#" class="block px-4 py-2 text-base text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1" id="menu-item-3">Quality Policy Statement</a>
                             <div id="purok-content" class="flex items-center hover:bg-slate-300">
-                                <button  class="block pl-4 py-2 text-base text-gray-700" role="menuitem" tabindex="-1" id="menu-item-3">Barangay Purok(s)</button>
+                                <button class="block pl-4 py-2 text-base text-gray-700" role="menuitem" tabindex="-1" id="menu-item-3">Barangay Purok(s)</button>
                                 <svg class="ml-2 h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </div>
-                        </div> 
+                        </div>
                         <div id="purok-dropdown" class="hidden absolute w-32 right-0 z-10 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu">
                             <div class="py-1" role="none">
                                 <?php
-                                    include('src/database.php');
+                                include('src/database.php');
 
                                 $query = mysqli_query($conn, "SELECT prk FROM purok");
 
@@ -67,19 +67,43 @@
                                 }
                                 ?>
                             </div>
-                        </div>    
+                        </div>
                     </div>
-                        
+
                 </div>
-                    
-                
+
+
             </div>
             <a href="#"
                 class="text-base font-semibold text-gray-900 hover:text-slate-600">Projects/Programs</a>
             <a href="#"
                 class="text-base font-semibold text-gray-900 hover:text-slate-600">Contact</a>
-            <a href="<?= BASE_URL ?>/request_document/"
-                class="text-base font-semibold text-gray-900 hover:text-slate-600">Request Document</a>
+            <div class="relative inline-block">
+                <div id="documentBlock" class="inline-block items-center hover:text-slate-600">
+                    <button
+                        class="text-base font-semibold text-gray-900 hover:text-slate-600">Documents
+                    </button>
+                    <div class="inline-block">
+                        <svg class="h-3 w-4 text-black right-0 hover:text-slate-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+
+                </div>
+                <div id="documentDropdown" class="hidden absolute left-0 z-10 py-2 mt-4 w-64 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu">
+                    <div class="">
+                        <div class="py-1" role="none">
+                            <!-- Active: "bg-gray-100 text-gray-900 outline-none", Not Active: "text-gray-700" -->
+                            <a href="<?= BASE_URL ?>/request_document/" class="block px-4 py-2 text-base text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1" id="menu-item-0">Request Document</a>
+                            <a href="<?= BASE_URL ?>/track request docs/" class="block px-4 py-2 text-base text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1" id="menu-item-1">Track Document Request</a>       
+                        </div>
+                        
+                    </div>
+
+                </div>
+
+
+            </div>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
             <a href="<?= BASE_URL ?>/account login/"
@@ -153,3 +177,4 @@
         </div>
     </div>
 </header>
+<script src="<?php echo BASE_URL ?>/src/script.js"></script>
