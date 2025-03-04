@@ -1,5 +1,5 @@
 <?php
-include("../../src/database.php"); 
+include("../../src/database.php");
 
 //handling form submission 
 
@@ -19,7 +19,7 @@ if (isset($_POST['btn-addAccount'])) {
     $check_query->execute();
     $check_query->store_result();
 
-    if($check_query->num_rows > 0){
+    if ($check_query->num_rows > 0) {
         // Alert for existing username
         echo '<script>
             document.addEventListener("DOMContentLoaded", function() {
@@ -37,6 +37,33 @@ if (isset($_POST['btn-addAccount'])) {
         exit();
     };
     $check_query->close();
+
+    // Check official restriction
+    // Check if Barangay Officials (user_role = 3) are already 8
+    if ($user_type == 3) {
+        $check_barangayOfficial = $conn->prepare("SELECT COUNT(*) as totalOfficial FROM admin_staff_account WHERE user_role = 3");
+        $check_barangayOfficial->execute();
+        $result = $check_barangayOfficial->get_result();
+        $row = $result->fetch_assoc();
+        $totalOfficials = $row['totalOfficial'];
+        $check_barangayOfficial->close();
+
+        if ($totalOfficials >= 8) {
+            echo '<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    icon: "error",
+                    title: "Limit Reached!",
+                    text: "You cannot add more than 8 Barangay Officials."
+                }).then(() => {
+                    window.location.href = "add account.php";
+                });
+            });
+        </script>';
+            $conn->close();
+            exit();
+        }
+    }
 
     //Applying hash password
     $hashedpassword = password_hash($password, PASSWORD_BCRYPT);

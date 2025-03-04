@@ -32,7 +32,7 @@ $(document).ready(function () {
           return row.firstName + ' ' + row.lastName
         }
       },
-      { data: 'contactNum' },
+      { data: 'user_type' },
       { data: 'timestamp' }
     ],
 
@@ -231,12 +231,12 @@ $(document).on('click', "[name='btn-print']", function () {
         </head>
         <body>
             <div class="header-position pb-3">
-                <img class="px-img" src="../src/imgs-vid/logo.png">
+                <img class="px-img" src="../../src/imgs-vid/logo.png">
                 <div class="">
                     <h4 class="m-1 text-lg border-bottom">Barangay Labuay</h4>
                     <p class="m-0 pt-1">9206, Maigo, Lanao del Norte</p>
                 </div>  
-                <img class="px-img" src="../src/imgs-vid/logo.png">
+                <img class="px-img" src="../../src/imgs-vid/logo.png">
             </div>
             <div class="line"></div><br><br>
             <div class="text-center"> 

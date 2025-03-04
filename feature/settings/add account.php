@@ -221,7 +221,7 @@
                                     <th>Action</th>
                                     <th>No.</th>
                                     <th>Name</th>
-                                    <th>Contact Number</th>
+                                    <th>User type</th>
                                     <th>Date Created</th>
                                 </tr>
                             </thead>
