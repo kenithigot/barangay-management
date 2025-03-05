@@ -15,8 +15,8 @@
                 </button>
             </div>
             <form method="POST">
-                <div class="p-4 px-6">
-                    <p class="text-gray-800">
+                <div class="p-4 px-10">
+                    <p class="text-gray-800 text-justify">
                         A Blotter Record is an official log of incidents, complaints, or disputes reported to the barangay or local authorities. It serves as a legal record of events, helping to track and resolve conflicts within the community.
                     </p>
                     <div class="pt-6">
@@ -124,11 +124,11 @@
                     </div>
                 </div>
                 <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
-                    <button type="submit" name="btn-addBlotter" id="btn-addBlotter" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm text-white font-medium rounded-lg bg-slate-600 border border-gray-200 shadow-sm hover:bg-slate-500 focus:outline-none focus:bg-slate-500 disabled:opacity-50 disabled:pointer-events-none">
-                        Add Blotter
-                    </button>
                     <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#displayModalBlotter">
                         Close
+                    </button>
+                    <button type="submit" name="btn-addBlotter" id="btn-addBlotter" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm text-white font-medium rounded-lg bg-slate-600 border border-gray-200 shadow-sm hover:bg-slate-500 focus:outline-none focus:bg-slate-500 disabled:opacity-50 disabled:pointer-events-none">
+                        Add Blotter
                     </button>
                 </div>
             </form>

@@ -22,6 +22,7 @@ if (isset($_GET['id'])) {
         $lastName = isset($accountData['lastName']) ? $accountData['lastName'] : '';
         $address = isset($accountData['address']) ? $accountData['address'] : '';
         $contactNum = isset($accountData['contactNum']) ? $accountData['contactNum'] : '';
+        $officialClassification = isset($accountData['official']) ? $accountData['official'] : '';
         $userType = isset($accountData['user_role']) ? $accountData['user_role'] : '';
         $emailAddress = isset($accountData['email_address']) ? $accountData['email_address'] : '';
     } else {
@@ -45,21 +46,23 @@ if (isset($_GET['id'])) {
         $edit_contactNum = $_POST['edit_contactNum'?? ''];
         $edit_userType = $_POST['edit_userType'?? ''];
         $edit_emailAddress = $_POST['edit_emailAddress'?? ''];
+        $edit_officialRank = ($edit_userType == "3") ? ($_POST['edit_officialRank'] ?? '') : '';
 
         if (!empty($userId)){
             $updateQuery = "UPDATE admin_staff_account SET
                 firstName = ?, lastName = ?, address = ?,
-                contactNum = ?, user_role = ?, email_address = ?
+                contactNum = ?, user_role = ?, email_address = ?, official = ?
                 WHERE id = ?
             ";
             $updateStmt = $conn->prepare($updateQuery);
-            $updateStmt->bind_param("ssssssi", 
+            $updateStmt->bind_param("sssssssi", 
                 $edit_firstName, 
                 $edit_lastName, 
                 $edit_address, 
                 $edit_contactNum, 
                 $edit_userType, 
                 $edit_emailAddress,
+                $edit_officialRank,
                 $userId
             );
 

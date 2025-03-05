@@ -23,7 +23,7 @@
 
     <?php include("db_save_qrcode.php") ?>
     <?php include("routes.php") ?>
-    
+
 </head>
 
 <body class="font-sans">
@@ -77,30 +77,31 @@
 
                     </div>
                 </div>
-                <?php 
+                <?php
 
-                    include("../../src/database.php");
+                include("../../src/database.php");
 
-                    function fetchDocumentPrice($conn, $documentClassification) {
-                        $sql = "SELECT documentPrice FROM document_types WHERE documentClassification = ?";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->bind_param("s", $documentClassification);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
+                function fetchDocumentPrice($conn, $documentClassification)
+                {
+                    $sql = "SELECT documentPrice FROM document_types WHERE documentClassification = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("s", $documentClassification);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
 
-                        if ($result && $result->num_rows > 0) {
-                            $row = $result->fetch_assoc();
-                            return $row['documentPrice'];
-                        } else {
-                            return "N/A";
-                        }
+                    if ($result && $result->num_rows > 0) {
+                        $row = $result->fetch_assoc();
+                        return $row['documentPrice'];
+                    } else {
+                        return "N/A";
                     }
+                }
 
-                    $barangayCertPrice = fetchDocumentPrice($conn, 'Barangay Certificate');
-                    $certificateIndigencyPrice = fetchDocumentPrice($conn, 'Certificate of Indigency');
-                    $businessClearancePrice = fetchDocumentPrice($conn, 'Business Clearance');
+                $barangayCertPrice = fetchDocumentPrice($conn, 'Barangay Certificate');
+                $certificateIndigencyPrice = fetchDocumentPrice($conn, 'Certificate of Indigency');
+                $businessClearancePrice = fetchDocumentPrice($conn, 'Business Clearance');
 
-                     include("modal.php")
+                include("modal.php")
                 ?>
                 <div class="lg:col-span-4">
                     <!-- Card -->
@@ -240,47 +241,7 @@
                                 </button>
                             </div>
                         </div>
-
                     </form>
-
-                    <script>
-                        function displayFileName() {
-                            const imageQR = document.getElementById('imageQR')
-                            const inputImg = document.getElementById('uploadImg');
-                            const fileName = document.getElementById('fileName');
-
-                            if (inputImg.files && inputImg.files[0]) {
-                                const file = inputImg.files[0];
-
-                                // Check if the file is of type jpeg, jpg, or png
-                                const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-
-                                if (validTypes.includes(file.type)) {
-                                    let reader = new FileReader();
-
-                                    reader.onload = function(e) {
-                                        imageQR.src = e.target.result;
-                                    };
-
-                                    // Read the file as Data URL
-                                    reader.readAsDataURL(file);
-
-                                    // Display the file name
-                                    fileName.textContent = file.name;
-                                } else {
-                                    // If the file type is invalid, show a message or handle the error
-                                    Swal.fire({
-                                        icon: "error",
-                                        title: "Error uploading QR Code!",
-                                        text: "Invalid file type. Please upload a JPEG, JPG, or PNG file."
-                                    });
-                                    inputImg.value = ''; // Clear the file input
-                                    fileName.textContent = 'No Chosen File';
-                                }
-                            };
-                        };
-                    </script>
-                    <!-- End Icon Block -->
 
                     <?php
 
@@ -316,5 +277,6 @@
 
     <?php require("../../includes/footer.php") ?>
     <script src="script.js"></script>
+</body>
 
 </html>

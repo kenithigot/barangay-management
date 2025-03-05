@@ -17,7 +17,7 @@ if (isset($_POST['btn-updateIndigency'])) {
                         title: "Document Price updated!",
                         text: "Document Price has been updated successfully."    
                     }).then(() => {
-                        window.location.href = "../payment/";
+                        window.location.href = "../transaction panel/";
                     });
                 });
             </script>';

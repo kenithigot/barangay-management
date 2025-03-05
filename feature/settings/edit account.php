@@ -22,7 +22,7 @@
     <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
 
-<?php include("db_id_displayUpdate.php"); ?> 
+    <?php include("db_id_displayUpdate.php"); ?>
 
 </head>
 
@@ -48,7 +48,7 @@
                 <!-- Breadcrumb -->
                 <ol class="ms-3 flex items-center whitespace-nowrap">
                     <li class="flex items-center text-sm text-gray-800">
-                        <a href="../settings/add account.php" class="underline text-blue-600">Account</a>  
+                        <a href="../settings/add account.php" class="underline text-blue-600">Account</a>
                         <svg class="shrink-0 mx-3 overflow-visible size-2.5 text-gray-400" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         </svg>
@@ -124,22 +124,45 @@
                                                 <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
                                             </svg>
                                         </label>
-                                        <input required value="<?= htmlspecialchars($contactNum) ?>" id="edit_contactNum" name="edit_contactNum" type="number" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter contact number">
+                                        <input required value="<?= htmlspecialchars($contactNum) ?>" id="edit_contactNum" name="edit_contactNum" type="number" class="py-2 px-3 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter contact number">
                                     </div>
                                     <div class="flex-1 space-y-1">
                                         <label for="edit_userType" class="flex text-base font-medium text-gray-800 mt-3">
-                                            User Type<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
+                                            User Type
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
                                                 <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
                                             </svg>
                                         </label>
-                                        <select required id="edit_userType" name="edit_userType" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
+                                        <select required id="edit_userType" name="edit_userType"
+                                            class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
                                             <option selected disabled>Select user type</option>
                                             <option value="2" <?= $userType == 2 ? 'selected' : '' ?>>Staff</option>
-                                            <option value="3" <?= $userType == 3 ? 'selected' : '' ?>>Barangay Member</option>
+                                            <option value="3" <?= $userType == 3 ? 'selected' : '' ?>>Barangay Official</option>
                                             <option value="4" <?= $userType == 4 ? 'selected' : '' ?>>Others</option>
                                         </select>
                                     </div>
+                                    <div class="flex-1 space-y-1 <?= $userType == 3 ? '' : 'hidden' ?>" id="officialDropdownBlock">
+                                        <label for="edit_officialRank" class="flex text-base font-medium text-gray-800 mt-3">
+                                            Official Ranking
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
+                                                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
+                                            </svg>
+                                        </label>
+                                        <select required id="edit_officialRank" name="edit_officialRank"
+                                            class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
+                                            <option selected disabled>Select user type</option>
+                                            <option value="0" <?= $officialClassification == 0 ? 'selected' : '' ?>>Barangay Captain</option>
+                                            <option value="1" <?= $officialClassification == 1 ? 'selected' : '' ?>>Barangay Kagawad 1</option>
+                                            <option value="2" <?= $officialClassification == 2 ? 'selected' : '' ?>>Barangay Kagawad 2</option>
+                                            <option value="3" <?= $officialClassification == 3 ? 'selected' : '' ?>>Barangay Kagawad 3</option>
+                                            <option value="4" <?= $officialClassification == 4 ? 'selected' : '' ?>>Barangay Kagawad 4</option>
+                                            <option value="5" <?= $officialClassification == 5 ? 'selected' : '' ?>>Barangay Kagawad 5</option>
+                                            <option value="6" <?= $officialClassification == 6 ? 'selected' : '' ?>>Barangay Kagawad 6</option>
+                                            <option value="7" <?= $officialClassification == 7 ? 'selected' : '' ?>>Barangay Kagawad 7</option>
+                                        </select>
+                                    </div>
                                 </div>
+                                
                                 <div class="space-y-1">
                                     <label for="edit_emailAddress" class="flex text-base font-medium text-gray-800 mt-2.5">
                                         Email Address

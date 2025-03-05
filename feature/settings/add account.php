@@ -99,17 +99,35 @@
                             <form action="" method="POST">
                                 <div class="space-y-6 mt-4">
                                     <div class="space-y-1">
-                                        <label for="select-user-type" class="flex text-base font-medium text-gray-800 mt-2.5">
+                                        <label for="userType" class="flex text-base font-medium text-gray-800 mt-2.5">
                                             User Type<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
                                                 <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
                                             </svg>
                                         </label>
-                                        <select required id="select-user-type" name="userType" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
+                                        <select onchange="userTypeBlock()" required id="userType" name="userType" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
                                             <option selected disabled>Select user type</option>
                                             <option value="1">Admin</option>
                                             <option value="2">Stafff</option>
-                                            <option value="3">Barangay Member</option>
+                                            <option value="3">Barangay Official</option>
                                             <option value="4">Others</option>
+                                        </select>
+                                    </div>
+                                    <div class="hidden space-y-1" id="dropdownOfficial">
+                                        <label for="officialRanking" class="flex text-base font-medium text-gray-800 mt-2.5">
+                                            Official Ranking<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
+                                                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
+                                            </svg>
+                                        </label>
+                                        <select id="officialRanking" name="officialRanking" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
+                                            <option selected disabled>Select official ranking</option>
+                                            <option value="0">Barangay Captain</option>
+                                            <option value="1">Barangay Cagawad 1</option>
+                                            <option value="2">Barangay Cagawad 2</option>
+                                            <option value="3">Barangay Cagawad 3</option>
+                                            <option value="4">Barangay Cagawad 4</option>
+                                            <option value="5">Barangay Cagawad 5</option>
+                                            <option value="6">Barangay Cagawad 6</option>
+                                            <option value="7">Barangay Cagawad 7</option>
                                         </select>
                                     </div>
                                     <div class="space-y-1">
@@ -137,7 +155,7 @@
                                                 <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
                                             </svg>
                                         </label>
-                                        <input required id="contactNumber-input" name="contactNum" type="number" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter contact number">
+                                        <input required id="contactNumber-input" name="contactNum" type="number" class="py-2 px-3 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter contact number">
                                     </div>
                                     <div class="space-y-1">
                                         <label for="address-input" class="flex text-base font-medium text-gray-800 mt-2.5">
@@ -215,7 +233,7 @@
                             </div>
                         </form>
 
-                        <table id="addAccount-table" class="w-full table hover stripe text-gray-800">
+                        <table id="addAccount-table" class="w-full hover min-w-max table-auto text-gray-800">
                             <thead>
                                 <tr>
                                     <th>Action</th>
@@ -232,25 +250,10 @@
             </div>
         </div>
     </div>
-
-    <script>
-        document.getElementById("toggleButton").addEventListener("click", function() {
-            const section = document.getElementById("userAccountSection");
-            const buttonText = document.getElementById("buttonText");
-
-            section.classList.toggle("hidden");
-
-            // Change button text
-            if (section.classList.contains("hidden")) {
-                buttonText.textContent = "Add user account";
-            } else {
-                buttonText.textContent = "Close";
-            }
-        });
-    </script>
+    
+    <?php require("../../includes/footer.php") ?>
     <script src="script.js"></script>
     <script src="../../node_modules/preline/dist/preline.js"></script>
-    <?php require("../../includes/footer.php") ?>
 </body>
 
 </html>

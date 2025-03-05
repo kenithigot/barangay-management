@@ -13,9 +13,12 @@
         admin_staff_account.contactNum, 
         admin_staff_account.address,
         admin_staff_account.email_address,
-        admin_staff_account.timestamp  
+        admin_staff_account.timestamp,
+        official_ranking.official_classification,
+        official_ranking.official
         FROM admin_staff_account INNER JOIN admin_staff_role 
         ON admin_staff_role.user_role = admin_staff_account.user_role
+        LEFT JOIN official_ranking ON official_ranking.official = admin_staff_account.official
         WHERE admin_staff_account.id = ?";
 
         $query_result = $conn->prepare($query);

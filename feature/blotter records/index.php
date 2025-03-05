@@ -68,9 +68,9 @@
                 <h1 class="text-2xl font-extrabold text-gray-800 underline">Blotter Record</h1>
             </div>
             <div class="pt-10">
-                <button type="submit" id="btn-addBlotter" class="w-auto border inline-flex items-center px-5 py-2 rounded-md text-sm text-white bg-slate-600 hover:bg-slate-500"
+                <button type="submit" id="btn-addBlotter" class="w-auto border inline-flex items-center px-3 py-2 rounded-md text-sm text-white bg-slate-600 hover:bg-slate-500"
                     aria-haspopup="dialog" aria-expanded="false" aria-controls="displayModalBlotter" data-hs-overlay="#displayModalBlotter">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                     Add Blotter

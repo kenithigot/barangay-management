@@ -3,7 +3,6 @@ var table
 //Display Datatable
 $(document).ready(function () {
   table = $('#addAccount-table').DataTable({
-    processing: true,
     scrollX: true,
     ajax: {
       url: 'db_display_account.php',
@@ -38,6 +37,9 @@ $(document).ready(function () {
 
     order: [[1, 'asc']]
   })
+  setInterval(function () {
+    table.ajax.reload(null, false)
+  }, 2000)
 })
 
 //Delete Data
@@ -306,13 +308,20 @@ $(document).on('click', '#btn-viewAccount', function (e) {
         $('#view_contactNum').val(response.contactNum)
         $('#view_userRole').val(response.user_type)
         $('#view_emailAddress').val(response.email_address)
+        $('#view_officialRank').val(response.official_classification)
+
+        if (response.user_role == "3") {
+          $('#officialRankBlock').show(); 
+      } else {
+          $('#officialRankBlock').hide(); 
+      }
 
         // Dynamically update the "Edit" button link
         var editUrl = 'edit account.php?id=' + response.id
         $('#edit-button').attr('href', editUrl) // Assuming you gave the Edit button an id of 'edit-button'
 
         // Manually trigger the modal
-        HSOverlay.open('#hs-display-acc');
+        HSOverlay.open('#hs-display-acc')
       } else {
         console.error('No data available:', response.error)
       }
@@ -324,33 +333,53 @@ $(document).on('click', '#btn-viewAccount', function (e) {
   })
 })
 
-//Edit Account
-// $(document).on('click', '#editAccount', function(e){
-//     e.preventDefault();
-//     var id = $(this).data('id');
+// Show barangay official ranking block
+function userTypeBlock () {
+  var userType = document.getElementById('userType').value
+  var dropdownOfficial = document.getElementById('dropdownOfficial')
 
-//     $.ajax({
-//         url: 'db_edit_account.php',
-//         type: 'POST',
-//         data: { id: id },
-//         dataType: 'json',
-//         success: function(response){
-//             if(response && !response.error){
-//                 $('#id').val(response.id);
+  if (userType == '3') {
+    dropdownOfficial.style.display = 'block'
+  } else {
+    dropdownOfficial.style.display = 'none'
+    officialRanking.selectedIndex = 0;
+  }
+}
 
-//                 $('#edit_firstName').val(response.firstName);
-//                 $('#edit_lastName').val(response.lastName);
-//                 $('#edit_contactNum').val(response.contactNum);
-//                 $('#edit_userRole').val(response.user_type);
-//                 $('#edit_emailAddress').val(response.email_address);
+// Handling function of official ranking related
+document.addEventListener("DOMContentLoaded", function() {
+  // Toggle User Account Section
+  const toggleButton = document.getElementById('toggleButton');
+  const section = document.getElementById('userAccountSection');
+  const buttonText = document.getElementById('buttonText');
 
-//             } else {
-//                 console.error("No data available:", response.error);
-//             }
-//         },
-//         error: function(xhr, status, error) {
-//             console.error("AJAX Error:", error);
-//             console.log("Response Text:", xhr.responseText);
-//         }
-//     });
-// });
+  if (toggleButton && section && buttonText) {
+      toggleButton.addEventListener('click', function () {
+          section.classList.toggle('hidden');
+          buttonText.textContent = section.classList.contains('hidden') ? 'Add user account' : 'Close';
+      });
+  }
+
+  // Show Barangay Official Ranking Block
+  const userTypeSelect = document.getElementById("edit_userType");
+  const officialDropdownBlock = document.getElementById("officialDropdownBlock");
+  const officialRankSelect = document.getElementById("edit_officialRank");
+
+  function officialRankBlock() {
+      if (!userTypeSelect || !officialDropdownBlock || !officialRankSelect) return;
+
+      if (userTypeSelect.value === "3") {
+          officialDropdownBlock.classList.remove("hidden");
+          officialRankSelect.required = true;
+      } else {
+          officialDropdownBlock.classList.add("hidden");
+          officialRankSelect.required = false;
+          officialRankSelect.selectedIndex = 0;
+      }
+  }
+
+  if (userTypeSelect) {
+      userTypeSelect.addEventListener("change", officialRankBlock);
+      officialRankBlock(); // Run on load to set initial state
+  }
+});

@@ -5,6 +5,7 @@ include("../../src/database.php");
 
 if (isset($_POST['btn-addAccount'])) {
     $user_type = isset($_POST['userType']) ? $_POST['userType'] : '';
+    $officialRanking = isset($_POST['officialRanking']) ? $_POST['officialRanking'] : '';
     $firstName = isset($_POST['firstName']) ? $_POST['firstName'] : '';
     $lastName = isset($_POST['lastName']) ? $_POST['lastName'] : '';
     $contactNum = isset($_POST['contactNum']) ? $_POST['contactNum'] : '';
@@ -62,26 +63,27 @@ if (isset($_POST['btn-addAccount'])) {
         </script>';
             $conn->close();
             exit();
-        }
-    }
+        };
+    };
 
     //Applying hash password
     $hashedpassword = password_hash($password, PASSWORD_BCRYPT);
 
     //Prepare statement query insert
     $query = $conn->prepare("INSERT INTO admin_staff_account
-            (user_role, firstName, lastName, contactNum, address, email_address, username, password, timestamp)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())
+            (user_role, official, firstName, lastName, contactNum, address, email_address, username, password, timestamp)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
         ");
 
     if (!$query) {
         echo ("Error in Prepare Statement" . $conn->error);
-    }
+    };
 
     //Binding variable
     $query->bind_param(
-        "isssssss",
+        "iisssssss",
         $user_type,
+        $officialRanking,
         $firstName,
         $lastName,
         $contactNum,
@@ -120,5 +122,5 @@ if (isset($_POST['btn-addAccount'])) {
                 });
             });
         </script>';
-    }
+    };
 };
