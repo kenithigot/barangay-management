@@ -74,7 +74,7 @@
                         <div class="lg:col-span-4">
                             <div class="flex flex-col justify-center gap-y-5">
                                 <!-- Card -->
-                                <div class="h-[180px] flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
+                                <div class="border-l-4 border-l-green-600 h-[180px] flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
                                     <div class="p-4">
                                         <div class="inline-flex gap-x-3 items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-9">
@@ -94,7 +94,7 @@
                                 <!-- End Card -->
 
                                 <!-- Card -->
-                                <div class="h-[180px] flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
+                                <div class="border-l-4 border-l-green-600 h-[180px] flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
                                     <div class="p-4">
                                         <div class="inline-flex gap-x-3 items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-9">
@@ -116,7 +116,7 @@
                         </div>
                         <div class="lg:col-span-8">
                             <!-- Card -->
-                            <div class="flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
+                            <div class="border-l-4 border-l-green-600 flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
                                 <div class="p-4">
                                     <div calss="text-left">
                                         <p class="text-left text-lg uppercase tracking-wide font-bold text-gray-800">

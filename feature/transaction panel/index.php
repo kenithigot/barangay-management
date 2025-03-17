@@ -185,7 +185,7 @@
                             <div class="grow">
                                 <div class="flex items-center gap-x-2">
                                     <p class="text-xs uppercase tracking-wide text-slate-200 font-bold">
-                                        Business Clearance
+                                        Barangay Clearance
                                     </p>
                                 </div>
                                 <div class="mt-1 flex items-center gap-x-2">

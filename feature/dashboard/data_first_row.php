@@ -34,26 +34,25 @@ $query_result = mysqli_query($conn, $query);
 
 $barangayOfficial = 0;
 $staff = 0;
-$others = 0;
+
 
 while ($row = mysqli_fetch_assoc($query_result)) {
-    if ($row['user_type'] == 'Barangay Member') {
+    if ($row['user_type'] == 'Barangay Official') {
         $barangayOfficial++;
-    } elseif ($row['user_type'] == 'Staff') {
+    } elseif ($row['user_type'] == 'Staff' || $row['user_type'] == 'Treasurer' || $row['user_type'] == 'Secretary') {
         $staff++;
-    } elseif ($row['user_type'] == 'Others') {
-        $others++;
     }
 }
 $conn->close();
+$query_result->close();
 ?>
 
 <!-- Card -->
-<div class="flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
+<div class="border-l-4 border-l-green-600 flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
     <div class="p-4">
         <div calss="text-left">
             <p class="text-left text-lg uppercase tracking-wide font-bold text-gray-800">
-                Residents Registered
+                Residents Requested
             </p>
         </div>
         <div class="min-h-[170px] flex items-center justify-center">
@@ -66,7 +65,7 @@ $conn->close();
 <!-- End Card -->
 
 <!-- Card -->
-<div class="flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
+<div class="border-l-4 border-l-green-600 flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
     <div class="p-4 overflow-x-hidden">
         <div calss="text-left">
             <p class="text-left text-lg uppercase tracking-wide font-bold text-gray-800">
@@ -81,7 +80,7 @@ $conn->close();
 <!-- End Card -->
 
 <!-- Card -->
-<div class="flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
+<div class="border-l-4 border-l-green-600 flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
     <div class="p-4">
         <div calss="text-left">
             <p class="text-left text-lg uppercase tracking-wide font-bold text-gray-800">
@@ -101,7 +100,7 @@ $conn->close();
     var maleGender = <?php echo $male ?>;
 
     //Barangay Officials and Staff Selection
-    var barangayOfficials = <?php echo $barangayOfficial ?>;
+    var barangayOfficial = <?php echo $barangayOfficial ?>;
     var staff = <?php echo $staff ?>;
-    var others = <?php echo $others ?>;
+
 </script>

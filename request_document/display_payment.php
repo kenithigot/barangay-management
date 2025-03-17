@@ -56,9 +56,9 @@
                                 <?php
                                 // Map numeric values to corresponding document types
                                 $documentTypes = [
-                                    1 => "Barangay Clearance",
+                                    1 => "Barangay Certificate",
                                     2 => "Certificate of Indigency",
-                                    3 => "Barangay Residency"
+                                    3 => "Barangay Clearance"
                                 ];
 
                                 // Get the document type value from session and map it

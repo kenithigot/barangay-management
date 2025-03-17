@@ -105,7 +105,7 @@
                 <div class="p-4 overflow-y-auto">
                     <div class="space-y-3 px-2">
                         <div class="rounded-lg">
-                            <label for="businessClearance" class="block text-base text-gray-800 font-medium">Business Clearance Price</label>
+                            <label for="businessClearance" class="block text-base text-gray-800 font-medium">Barangay Clearance Price</label>
                             <div class="flex rounded-lg shadow-sm">
                                 <div class="px-4 inline-flex items-center min-w-fit rounded-s-md border border-e-0 border-gray-200 bg-gray-50">
                                     <span class="text-base text-gray-800">Php</span>

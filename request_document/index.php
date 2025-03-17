@@ -37,9 +37,9 @@
                                     </label>
                                     <select required id="documentType" name="documentType" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
                                         <option selected disabled>Select request document</option>
-                                        <option value="1">Barangay Clearance</option>
+                                        <option value="1">Barangay Certificate</option>
                                         <option value="2">Certificate of Indigency</option>
-                                        <option value="3">Business Clearance</option>
+                                        <option value="3">Barangay Clearance</option>
                                     </select>
                                 </div>
                                 <div class="flex-1 space-y-1">

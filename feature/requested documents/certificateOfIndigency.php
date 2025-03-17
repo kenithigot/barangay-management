@@ -125,18 +125,32 @@
         </div>
         <div class="px-6 py-5">
             <h1 class="uppercase tracking-wider font-semibold pb-3">To whom it may concern:</h1>
-            <p class="text-justify py-3 indent-12">This is to certify that <span class="uppercase"><?php echo ($fullName ?? "") . ', ' . ($row['age'] ?? "")?></span> years old and permanently residing at <?php echo ($row['address'] ?? "") . '. ' . ($callSign ?? "") ?> belongs to the poor families of this Barangay.</p>
+            <p class="text-justify py-3 indent-12">This is to certify that <span class="uppercase"><?php echo ($fullName ?? "") . ', ' . ($row['age'] ?? "") ?></span> years old and permanently residing at <?php echo ($row['address'] ?? "") . '. ' . ($callSign ?? "") ?> belongs to the poor families of this Barangay.</p>
             <p class="text-justify py-3 indent-12">This certification is hereby issued upon the request of the above-mentioned name for whatever purpose it may serve.</p>
             <p class="text-justify py-3 indent-12">Issued this <?php echo ($dateDay ?? "") . ' day of ' . ($dateMonth ?? "") . ', ' . ($dateYear ?? "") ?> at the Barangay Hall, Labuay, Maigo, Lanao del Norte.</p>
         </div>
-       <div class="px-6 py-6">
-         <div class="flex items-end justify-end py-5">
-             <div class="flex flex-col justify-center items-center space-y-1">
-                 <h1 class="border-b border-b-black px-2 font-semibold text-lg uppercase">Kenith S. Igasdasdot</h1>
-                 <h1 class="text-center">Punong Barangay</h1>
-             </div>
-         </div>
-       </div>
+        <div class="px-6 py-6">
+            <div class="flex items-end justify-end py-5">
+                <div class="flex flex-col justify-center items-center space-y-1">
+                    <?php
+                    include("../../src/database.php");
+
+                    $query = "SELECT * FROM admin_staff_account WHERE official = '0'";
+                    $query_result = mysqli_query($conn, $query);
+
+                    if ($query_result && mysqli_num_rows($query_result) > 0) {
+                        $row = mysqli_fetch_array($query_result);
+                        echo '<h1 class="min-w-36 border-b border-b-black px-2 font-semibold text-lg uppercase text-center">' . $row["firstName"] . ' ' . $row["lastName"] . '</h1>';
+                    } else {
+                        echo '<h1 class="min-w-36 border-b border-b-black px-2 font-semibold text-lg uppercase text-center">No Official</h1>';
+                    }
+                    $conn->close();
+                    $query_result->close();
+                    ?>
+                    <h1 class="text-center">Punong Barangay</h1>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

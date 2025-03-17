@@ -67,7 +67,7 @@ $query_result = $query->get_result();
 
 $barangayCertificate = 0;
 $certificateOfIndigency = 0;
-$businessClearance = 0;
+$barangayClearance = 0;
 
 while ($row = mysqli_fetch_assoc($query_result)) {
 
@@ -76,14 +76,14 @@ while ($row = mysqli_fetch_assoc($query_result)) {
     } elseif ($row['documentClassification'] == 'Certificate of Indigency') {
         $certificateOfIndigency++;
     } else {
-        $businessClearance++;
+        $barangayClearance++;
     }
 }
 $conn->close();
 ?>
 
 <!-- Card -->
-<div class="flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
+<div class="border-l-4 border-l-green-600 flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
     <div class="p-4 overflow-x-hidden">
         <div calss="text-left">
             <p class="text-left text-lg uppercase tracking-wide font-bold text-gray-800">
@@ -98,7 +98,7 @@ $conn->close();
 <!-- End Card -->
 
 <!-- Card -->
-<div class="flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
+<div class="border-l-4 border-l-green-600 flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
     <div class="p-4 overflow-x-hidden">
         <div calss="text-left">
             <p class="text-left text-lg uppercase tracking-wide font-bold text-gray-800">
@@ -113,7 +113,7 @@ $conn->close();
 <!-- End Card -->
 
 <!-- Card -->
-<div class="flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
+<div class="border-l-4 border-l-green-600 flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
     <div class="p-4 overflow-x-hidden">
         <div calss="text-left">
             <p class="text-left text-lg uppercase tracking-wide font-bold text-gray-800">
@@ -143,5 +143,5 @@ $conn->close();
     //Approve Documents
     var barangayCertificate = <?php echo $barangayCertificate ?>;
     var certificateOfIndigency = <?php echo $certificateOfIndigency ?>;
-    var businessClearance = <?php echo $businessClearance ?>;
+    var barangayClearance = <?php echo $barangayClearance ?>;
 </script>

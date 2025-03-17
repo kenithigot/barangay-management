@@ -109,7 +109,8 @@
                                             <option value="1">Admin</option>
                                             <option value="2">Stafff</option>
                                             <option value="3">Barangay Official</option>
-                                            <option value="4">Others</option>
+                                            <option value="4">Secretary</option>
+                                            <option value="5">Treasurer</option>
                                         </select>
                                     </div>
                                     <div class="hidden space-y-1" id="dropdownOfficial">
@@ -121,13 +122,13 @@
                                         <select id="officialRanking" name="officialRanking" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
                                             <option selected disabled>Select official ranking</option>
                                             <option value="0">Barangay Captain</option>
-                                            <option value="1">Barangay Cagawad 1</option>
-                                            <option value="2">Barangay Cagawad 2</option>
-                                            <option value="3">Barangay Cagawad 3</option>
-                                            <option value="4">Barangay Cagawad 4</option>
-                                            <option value="5">Barangay Cagawad 5</option>
-                                            <option value="6">Barangay Cagawad 6</option>
-                                            <option value="7">Barangay Cagawad 7</option>
+                                            <option value="1">Barangay Kagawad 1</option>
+                                            <option value="2">Barangay Kagawad 2</option>
+                                            <option value="3">Barangay Kagawad 3</option>
+                                            <option value="4">Barangay Kagawad 4</option>
+                                            <option value="5">Barangay Kagawad 5</option>
+                                            <option value="6">Barangay Kagawad 6</option>
+                                            <option value="7">Barangay Kagawad 7</option>
                                         </select>
                                     </div>
                                     <div class="space-y-1">

@@ -23,8 +23,8 @@ window.addEventListener('load', () => {
             }
           }
         },
-        series: [barangayOfficials, staff, others],
-        labels: ['Barangay Officials', 'Staff', 'Others'],
+        series: [barangayOfficial, staff],
+        labels: ['Barangay Officials', 'Staff'],
         legend: {
           show: true,
           position: 'bottom',
@@ -137,7 +137,7 @@ window.addEventListener('load', () => {
   })()
 })
 
-//Resident Docs
+//Donut Approve Docs
 window.addEventListener('load', () => {
   ;(function () {
     buildChart(
@@ -160,7 +160,7 @@ window.addEventListener('load', () => {
         series: [
           barangayCertificate,
           certificateOfIndigency,
-          businessClearance
+          barangayClearance
         ],
         labels: ['Certificate', 'Indigency', 'Clearance'],
         legend: {
