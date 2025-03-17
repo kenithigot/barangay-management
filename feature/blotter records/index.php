@@ -20,8 +20,17 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css">
 
     <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-    
+
     <?php include('db_blotter_record.php') ?>
+
+    <style>
+        table.dataTable th.dt-type-numeric,
+        table.dataTable th.dt-type-date,
+        table.dataTable td.dt-type-numeric,
+        table.dataTable td.dt-type-date {
+            text-align: start;
+        }
+    </style>
 </head>
 
 <body class="font-sans">
@@ -76,7 +85,7 @@
                     Add Blotter
                 </button>
             </div>
-            <div class="my-5 py-5 shadow-lg rounded-md overflow-x-auto">
+            <div class="border-l-4 border-l-green-600 my-5 py-5 shadow-lg rounded-md overflow-x-auto">
                 <div class="px-4">
                     <h1 class="text-gray-800 text-lg font-semibold mb-5">Blotter Record</h1>
                     <!-- DataTable -->
@@ -86,8 +95,8 @@
                                 <th>Actions</th>
                                 <th>#</th>
                                 <th>Complainant Name</th>
+                                <th>Incident Type</th>
                                 <th>Incident Date</th>
-                                <th>Official in charge</th>
                                 <th>Date Filed</th>
                                 <th>Status</th>
                             </tr>

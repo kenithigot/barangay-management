@@ -1,9 +1,9 @@
 // Display Pending Docs
 $(document).ready(function () {
-  let table = $('#displayPendingDocument').DataTable({
+  let table = $('#displayBlotter').DataTable({
     searching: true,
     ajax: {
-      url: 'db_pending_docs.php',
+      url: 'db_display_blotter_record.php',
       type: 'POST'
     },
     columns: [
@@ -23,17 +23,11 @@ $(document).ready(function () {
           return meta.row + 1
         }
       },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return row.firstName + ' ' + row.middleInitial + ' ' + row.lastName
-        }
-      },
-      { data: 'age' },
-      { data: 'gender' },
-      { data: 'address' },
-      { data: 'documentClassification' },
-      { data: 'purpose' }
+      { data: 'complainant_name' },
+      { data: 'incident_classification' },
+      { data: 'date_of_incident' },
+      { data: 'complainant_name' },
+      { data: 'complainant_name' }
     ]
   })
 
