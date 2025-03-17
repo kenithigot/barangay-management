@@ -77,7 +77,7 @@
             <div class="hidden lg:block">
                 <h1 class="text-2xl font-extrabold text-gray-800 underline">Requested Documents</h1>
             </div>
-            <div class="my-5 py-5 shadow-lg rounded-md overflow-x-auto">
+            <div class="border-l-4 border-l-green-600 my-5 py-5 shadow-lg rounded-md overflow-x-auto">
                 <div class="px-4">
                     <h1 class="text-gray-800 text-lg font-semibold mb-5">Pending Request</h1>
                     <!-- DataTable -->
@@ -96,8 +96,8 @@
                         </thead>
                     </table>
                 </div>
-            </div>
-            <div class="my-5 py-5 shadow-lg rounded-md overflow-x-auto">
+            </div><br>
+            <div class="border-l-4 border-l-green-600 my-5 py-5 shadow-lg rounded-md overflow-x-auto">
                 <div class="px-4 ">
                     <h1 class="text-gray-800 text-lg font-semibold mb-5">Approve Documents - Ready To Print </h1>
                     <!-- DataTable -->
