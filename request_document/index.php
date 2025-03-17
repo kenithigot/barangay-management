@@ -11,7 +11,10 @@
 </head>
 
 <body class="font-sans">
-    <?php include '../includes/header.php' ?>
+    <?php
+    include __DIR__ . '/../includes/config.php';
+    include BASE_DIR . '/../includes/header.php';
+    ?>
     <div class="bg-slate-600">
         <div class="pt-32 md:p-32 lg:p-40 text-gray-800">
             <div class="border-white bg-white rounded-xl shadow-lg pt-8">
@@ -34,7 +37,7 @@
                                     </label>
                                     <select required id="documentType" name="documentType" class="py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
                                         <option selected disabled>Select request document</option>
-                                        <option value="1">Barangay Certificate</option>
+                                        <option value="1">Barangay Clearance</option>
                                         <option value="2">Certificate of Indigency</option>
                                         <option value="3">Business Clearance</option>
                                     </select>

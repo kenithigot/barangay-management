@@ -194,7 +194,7 @@
                         $row = mysqli_fetch_array($stmt_run);
                         $gcashPicCode = $row['gcashPicCode'];
                     } else {
-                        $gcashPicCode = '../src/imgs-vid/default_qrCode.jpg'; // Display default image if no record is found
+                        $gcashPicCode = 'default_qrCode.jpg'; // Display default image if no record is found
                     }
                     ?>
 

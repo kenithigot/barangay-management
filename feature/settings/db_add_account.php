@@ -81,7 +81,7 @@ if (isset($_POST['btn-addAccount'])) {
 
     //Binding variable
     $query->bind_param(
-        "iisssssss",
+        "issssssss",
         $user_type,
         $officialRanking,
         $firstName,

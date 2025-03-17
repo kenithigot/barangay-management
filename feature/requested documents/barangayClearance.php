@@ -124,28 +124,44 @@
         </div>
         <div class="px-6 py-4">
             <h1 class="uppercase tracking-wider font-medium pb-3"><i>To whom it may concern:</i></h1>
-            <p class="text-justify py-3 indent-12">This is to certify that <span class="uppercase"><?php echo ($fullName ?? "") . ', ' . ($row['age'] ?? "")?></span> of legal age, <span class="lowercase"><?php echo ($row['gender'] ?? " ") . ', ' . ($row['civilStatus'] ?? " ") ?></span> with residence and postal address at <?php echo ($row['address'] ?? " ") ?> has no derogatory record filed in our Barangay Office.</p>
+            <p class="text-justify py-3 indent-12">This is to certify that <span class="uppercase"><?php echo ($fullName ?? "") . ', ' . ($row['age'] ?? "") ?></span> of legal age, <span class="lowercase"><?php echo ($row['gender'] ?? " ") . ', ' . ($row['civilStatus'] ?? " ") ?></span> with residence and postal address at <?php echo ($row['address'] ?? " ") ?> has no derogatory record filed in our Barangay Office.</p>
             <p class="text-justify py-3 indent-12">The above-named individual who is a bonafide resident of this barangay is a person of good moral character, peace-loving and civic minded citizen.</p>
             <p class="text-justify py-3 indent-12">This certification/clearance is hereby issued in connection with the subject's application for <span class="uppercase"><?php echo $row['purpose'] ?? " " ?></span> and for whatever legal purpose it may serve <?php echo $callSign ?? " " ?> best, and is valid for six (6) months from the date issued.</p>
             <p class="text-justify py-3 indent-12">Given this <?php echo ($dateDay ?? " ") . ', ' . ($dateMonth ?? " ") . ' ' . ($dateYear ?? " ") ?></p>
         </div>
-       <div class="px-6 py-6">
-         <div class="flex items-end justify-end py-5">
-             <div class="flex flex-col justify-center items-center space-y-1">
-                 <h1 class="border-b border-b-black px-2 font-semibold text-lg uppercase">Kenith S. Igasdasdot</h1>
-                 <h1 class="text-center">Punong Barangay</h1>
-             </div>
-         </div>
-       </div>
+        <div class="px-6 py-6">
+            <div class="flex items-end justify-end py-5">
+                <div class="flex flex-col justify-center items-center space-y-1">
+                    <?php
+                    include("../../src/database.php");
 
-       <div class="px-6 py-6">
-         <div class="flex items-start justify-start py-5">
-             <div class="flex flex-col justify-center items-center space-y-1">
-                <h1 class="min-w-60 border-b border-b-black px-2 font-semibold text-lg uppercase text-center"><?php echo $fullName ?? " " ?></h1>
-                <h1 class="text-center">Specimen Signature of Applicant</h1>
-             </div>
-         </div>
-       </div>
+                    $query = "SELECT * FROM admin_staff_account WHERE official = '0'";
+                    $query_result = mysqli_query($conn, $query);
+
+                    if ($query_result && mysqli_num_rows($query_result) > 0) {
+                        $row = mysqli_fetch_array($query_result);
+                        echo '<h1 class="min-w-36 border-b border-b-black px-2 font-semibold text-lg uppercase text-center">'. $row["firstName"]. ' ' . $row["lastName"].'</h1>';
+                    
+                    } else {
+                        echo '<h1 class="min-w-36 border-b border-b-black px-2 font-semibold text-lg uppercase text-center">No Official</h1>';
+                    }
+                    $conn->close();
+                    $query_result->close();
+                    ?>
+                    
+                    <h1 class="text-center">Punong Barangay</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="px-6 py-6">
+            <div class="flex items-start justify-start py-5">
+                <div class="flex flex-col justify-center items-center space-y-1">
+                    <h1 class="min-w-60 border-b border-b-black px-2 font-semibold text-lg uppercase text-center"><?php echo $fullName ?? " " ?></h1>
+                    <h1 class="text-center">Specimen Signature of Applicant</h1>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

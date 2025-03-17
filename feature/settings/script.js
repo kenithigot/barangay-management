@@ -342,7 +342,7 @@ function userTypeBlock () {
     dropdownOfficial.style.display = 'block'
   } else {
     dropdownOfficial.style.display = 'none'
-    officialRanking.selectedIndex = 0;
+    officialRanking.selectedIndex = " ";
   }
 }
 
@@ -374,7 +374,7 @@ document.addEventListener("DOMContentLoaded", function() {
       } else {
           officialDropdownBlock.classList.add("hidden");
           officialRankSelect.required = false;
-          officialRankSelect.selectedIndex = 0;
+          officialRankSelect.selectedIndex = " ";
       }
   }
 

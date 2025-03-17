@@ -57,7 +57,8 @@
                         <div id="purok-dropdown" class="hidden absolute w-32 right-0 z-10 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu">
                             <div class="py-1" role="none">
                                 <?php
-                                include('src/database.php');
+
+                                include __DIR__ . '/../src/database.php';
 
                                 $query = mysqli_query($conn, "SELECT prk FROM purok");
 
@@ -95,9 +96,9 @@
                         <div class="py-1" role="none">
                             <!-- Active: "bg-gray-100 text-gray-900 outline-none", Not Active: "text-gray-700" -->
                             <a href="<?= BASE_URL ?>/request_document/" class="block px-4 py-2 text-base text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1" id="menu-item-0">Request Document</a>
-                            <a href="<?= BASE_URL ?>/track request docs/" class="block px-4 py-2 text-base text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1" id="menu-item-1">Track Document Request</a>       
+                            <a href="<?= BASE_URL ?>/track request docs/" class="block px-4 py-2 text-base text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1" id="menu-item-1">Track Document Request</a>
                         </div>
-                        
+
                     </div>
 
                 </div>
