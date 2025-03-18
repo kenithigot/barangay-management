@@ -41,6 +41,15 @@
                                     <input required id="respondentName" name="respondentName" type="text" class="text-gray-800 py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter respondent name">
                                 </div>
                             </div>
+                            <div class="flex-1 space-y-1 mb-4">
+                                <label for="locationOfIncident" class="flex text-base font-medium text-gray-800 mt-2.5">
+                                    Location of Incident
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
+                                        <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
+                                    </svg>
+                                </label>
+                                <input required id="locationOfIncident" name="locationOfIncident" type="text" class="text-gray-800 py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter location of incident">
+                            </div>
                             <div class="lg:flex gap-x-6 space-y-5 lg:space-y-0">
                                 <div class="flex-1 space-y-1 mb-4">
                                     <label for="dateAndTimeIncident" class="flex text-base font-medium text-gray-800 mt-2.5">
@@ -52,17 +61,6 @@
                                     <input required id="dateAndTimeIncident" name="dateAndTimeIncident" type="datetime-local" class="text-gray-800 py-2 px-3 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
                                 </div>
                                 <div class="flex-1 space-y-1 mb-4">
-                                    <label for="locationOfIncident" class="flex text-base font-medium text-gray-800 mt-2.5">
-                                        Location of Incident
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
-                                            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
-                                        </svg>
-                                    </label>
-                                    <input required id="locationOfIncident" name="locationOfIncident" type="text" class="text-gray-800 py-2 px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter location of incident">
-                                </div>
-                            </div>
-                            <div class="lg:flex gap-x-6 space-y-5 lg:space-y-0">
-                                <div class="flex-1 space-y-1 mb-4">
                                     <label for="dateOfFiling" class="flex text-base font-medium text-gray-800 mt-2.5">
                                         Date of Filing
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
@@ -71,6 +69,8 @@
                                     </label>
                                     <input required id="dateOfFiling" name="dateOfFiling" type="datetime-local" class="text-gray-800 py-2 px-3 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
                                 </div>
+                            </div>
+                            <!-- <div class="lg:flex gap-x-6 space-y-5 lg:space-y-0">                      
                                 <div class="flex-1 space-y-1 mb-4">
                                     <label for="blotterStatus" class="flex text-base font-medium text-gray-800 mt-2.5">
                                         Blotter Status <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk size-2 mx-1 text-red-600" viewBox="0 0 16 16">
@@ -84,7 +84,7 @@
                                         <option value="Dismissed">Dismissed</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="lg:flex gap-x-6 space-y-5 lg:space-y-0">
                                 <div class="flex-1 space-y-1 mb-4">
                                     <label for="incidentType" class="flex text-base font-medium text-gray-800 mt-2.5">
@@ -93,11 +93,11 @@
                                         </svg>
                                     </label>
                                     <?php
-                                        include("../../src/database.php");
+                                    include("../../src/database.php");
 
-                                        $query = $conn->prepare("SELECT * FROM incident_types");
-                                        $query->execute();
-                                        $result_query = $query->get_result();
+                                    $query = $conn->prepare("SELECT * FROM incident_types");
+                                    $query->execute();
+                                    $result_query = $query->get_result();
                                     ?>
                                     <select required id="incidentType" name="incidentType" class="text-gray-800 py-[11px] px-3 pe-9 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
                                         <option selected disabled>Select incident type</option>

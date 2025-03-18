@@ -70,6 +70,7 @@
     </div>
 
     <?php include('modal_blotter.php') ?>
+    <?php include('modal_view.php') ?>
     <!-- Content -->
     <div class="w-full lg:ps-64 min-h-screen">
         <div class="px-8 lg:py-8">
@@ -87,18 +88,18 @@
             </div>
             <div class="border-l-4 border-l-green-600 my-5 py-5 shadow-lg rounded-md overflow-x-auto">
                 <div class="px-4">
-                    <h1 class="text-gray-800 text-lg font-semibold mb-5">Blotter Record</h1>
+                    <h1 class="text-gray-800 text-lg font-semibold mb-5">Blotter Record - Ongoing</h1>
                     <!-- DataTable -->
                     <table id="displayBlotter" class="w-full text-gray-800 hover">
                         <thead>
                             <tr>
                                 <th>Actions</th>
                                 <th>#</th>
+                                <th>Case No.</th>
                                 <th>Complainant Name</th>
                                 <th>Incident Type</th>
                                 <th>Incident Date</th>
-                                <th>Date Filed</th>
-                                <th>Status</th>
+                                <th>Date Filed</th>                          
                             </tr>
                         </thead>
                     </table>
