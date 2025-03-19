@@ -8,7 +8,7 @@ if (isset($_POST["id"])) {
     // Set date
     $dismissedCase = date('m-d-Y h:i A');
 
-    $queryDelete = "UPDATE blotter_record SET blotter_status = 'Dismissed',caseTime = ? WHERE id = ?";
+    $queryDelete = "UPDATE blotter_record SET blotter_status = 'Dismissed', caseTime = ? WHERE id = ?";
     
     $query_resultDelete = $conn->prepare($queryDelete);
     $query_resultDelete->bind_param("si", $dismissedCase, $id);
@@ -19,6 +19,6 @@ if (isset($_POST["id"])) {
         echo json_encode(["success" => false, "message" => "Error executing query: " . $query->error]);
     }
     $query_resultDelete->close();
-    $conn->close
+    $conn->close();
 }
 ?>

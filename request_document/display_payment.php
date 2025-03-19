@@ -207,7 +207,7 @@
                                     <p
                                         class="text-2xl lg:text-4xl font-bold text-gray-800 underline underline-offset-8">
                                         ₱
-                                        <span class="text-3xl lg:text-5xl" id="documentPrice">
+                                        <span class="text-3xl lg:text-4xl" id="documentPrice">
                                             <?php
                                             echo isset($_SESSION['fetchedDocumentPrice'])
                                                 ? number_format(htmlspecialchars($_SESSION['fetchedDocumentPrice'], ENT_QUOTES, 'UTF-8'), 2)

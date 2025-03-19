@@ -73,6 +73,7 @@ if (isset($_POST['btn-confirmPayment'])) {
     $paymentSelection = $_POST['paymentSelectionBlock'] ?? '';
     $documentPrice = $_POST['documentPrice'] ?? '';
     $transactionCode = $_SESSION['transactionCode'];
+    $documentPrice = $_SESSION['fetchedDocumentPrice'];
 
     //Timestamp for each request
     $currentDate = date('d-F-Y');
@@ -94,8 +95,8 @@ if (isset($_POST['btn-confirmPayment'])) {
             $targetFile = $targetDir . $uniqueFileName;
 
             // Prepare the SQL statement
-            $stmt = $conn->prepare("INSERT INTO resident_request_docs (documentType, firstName, middleInitial, lastName, age, gender, civilStatus, contactNum, address, purpose, referenceNum, paymentMethod, uploadReceipt, requestStatus, residencyYear, transactionCode, docs_timestamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssissssssssssss", $documentType, $firstName, $middleInitial, $lastName, $ageUserRequest, $userGender, $civilStatus, $contactNum, $address, $purposeText, $referenceNum, $paymentSelection, $uniqueFileName, $requestStatus, $residencyYear, $hashedTransactionCode, $docs_timestamp);
+            $stmt = $conn->prepare("INSERT INTO resident_request_docs (documentType, docsPrice, firstName, middleInitial, lastName, age, gender, civilStatus, contactNum, address, purpose, referenceNum, paymentMethod, uploadReceipt, requestStatus, residencyYear, transactionCode, docs_timestamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssssissssssssssss", $documentType, $documentPrice, $firstName, $middleInitial, $lastName, $ageUserRequest, $userGender, $civilStatus, $contactNum, $address, $purposeText, $referenceNum, $paymentSelection, $uniqueFileName, $requestStatus, $residencyYear, $hashedTransactionCode, $docs_timestamp);
 
             if ($stmt->execute()) {
                 // Move the uploaded file to the target directory

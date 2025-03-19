@@ -70,7 +70,6 @@
                 <div class="py-2 lg:py-3 mx-auto">
                     <!-- Grid -->
                     <div class="grid sm:grid-cols-2 lg:grid-cols-12 gap-4 sm:gap-6">
-
                         <div class="lg:col-span-4">
                             <div class="flex flex-col justify-center gap-y-5">
                                 <!-- Card -->
@@ -86,9 +85,7 @@
                                         </div>
                                     </div>
                                     <div class="mx-auto">
-                                        <p class="text-5xl uppercase tracking-wide font-semibold text-gray-800">
-                                            20,300
-                                        </p>
+                                        <p id="revenueTotal" class="text-5xl uppercase tracking-wide font-semibold text-gray-800"></p>
                                     </div>
                                 </div>
                                 <!-- End Card -->
@@ -106,9 +103,7 @@
                                         </div>
                                     </div>
                                     <div class="mx-auto">
-                                        <p class="text-5xl uppercase tracking-wide font-semibold text-gray-800">
-                                            20,300
-                                        </p>
+                                        <p id="revenueMonthly" class="text-5xl uppercase tracking-wide font-semibold text-gray-800"></p>
                                     </div>
                                 </div>
                                 <!-- End Card -->
@@ -118,10 +113,31 @@
                             <!-- Card -->
                             <div class="border-l-4 border-l-green-600 flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
                                 <div class="p-4">
-                                    <div calss="text-left">
+                                    <div class="flex items-center gap-x-2">
                                         <p class="text-left text-lg uppercase tracking-wide font-bold text-gray-800">
                                             Revenue Over Time
                                         </p>
+                                        <div>
+                                            <select id="yearRevenue" name="yearRevenue" class="py-1 px-2 block w-32 border border-gray-200 rounded-md text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
+                                                <?php
+                                                    include("../../src/database.php");
+
+                                                    $query = $conn->prepare("SELECT DISTINCT DATE_FORMAT(STR_TO_DATE(printrequest_docs,'%d-%M-%Y %h:%i:%s %p'), '%Y') AS year FROM resident_request_docs");
+                                                    $query->execute();
+                                                    $result = $query->get_result();
+
+                                                    while($row = $result->fetch_assoc()) {
+                                                        echo '<option value="'.$row['year'].'">'."Year-".$row['year'].'</option>';
+                                                    }
+
+                                                    echo json_encode([
+                                                        'year'=> 'year'
+                                                    ]);
+                                                    $result->close();
+                                                    $conn->close();
+                                                ?>                                           
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="">
                                         <div id="hs-revenueOverTime"></div>
@@ -138,7 +154,6 @@
                 <div class="py-2 lg:py-4 mx-auto">
                     <!-- Grid -->
                     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-
                         <!-- Residents, Officials and Staff and Gender Data -->
                         <?php include('data_first_row.php') ?>
                         <!-- End of Residents, Officials and Staff and Gender Data -->
@@ -146,6 +161,10 @@
                         <!-- Certificates, Clearances and Age Data -->
                         <?php include('data_second_row.php') ?>
                         <!-- End of Certificates, Clearances and Age Data -->
+
+                        <!-- Blotter Record Data -->
+                        <?php include('data_third_row.php') ?>
+                        <!-- End of Blotter Record Data -->
                     </div>
                     <!-- End Grid -->
                 </div>
