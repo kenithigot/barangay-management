@@ -12,7 +12,10 @@
 </head>
 
 <body class="font-sans">
-    <?php include '../includes/header.php' ?>
+    <?php
+        include __DIR__ . '/../includes/config.php';
+        include '../includes/header.php';
+    ?>
     <div class="bg-slate-600 ">
         <div class="pt-32 md:p-32 lg:p-40 text-gray-800 lg:flex justify-center items-center h-screen">
             <div class="border-white bg-white md:rounded-xl lg:rounded-xl shadow-lg pt-8">

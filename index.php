@@ -11,7 +11,10 @@
 </head>
 
 <body class="font-sans">
-    <?php require 'includes/header.php' ?>
+    <?php 
+        include __DIR__ . '/includes/config.php';
+        include 'includes/header.php'; 
+    ?>
 
     <div class="w-full h-screen overflow-hidden relative">
         <video src="src/imgs-vid/labuay-vid.mp4" autoplay muted loop class="w-full h-full object-cover"></video>
