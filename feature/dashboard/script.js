@@ -1,6 +1,197 @@
-new DataTable("#transactionTable", {
-  processing: true,
-  scrollX: true,
+$(document).ready(function () {
+  let table = $("#requested_table").DataTable({
+    searching: true,
+    ajax: {
+      url: "db_transaction_requestDoc.php",
+      type: "POST",
+    },
+    columns: [
+      { data: "documentClassification" },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return "Php " + Number(row.documentPrice).toLocaleString();
+        },
+      },
+      { data: "requestStatus" },
+      { data: "docs_timestamp" },
+      { data: "printrequest_docs" },
+    ],
+    dom:
+      "<'lg:flex justify-center lg:justify-between items-center mt-3 mb-2'lf>" + // Length menu (l) on left, Search (f) on right
+      "<'lg:flex lg:justify-start mb-2'B>" + // Buttons in a row
+      "<'table-responsive'tr>" + // Table wrapper
+      "<'flex justify-between items-center mt-2'ip>", // Info (i) on left, Pagination (p) on right
+    lengthMenu: [
+      [10, 25, 50, 100],
+      [10, 25, 50, 100],
+    ],
+    buttons: [
+      {
+        extend: "copy",
+        className: "hidden", // Hide default button
+      },
+      {
+        extend: "excelHtml5",
+        className: "hidden",
+      },
+      {
+        extend: "pdfHtml5",
+        className: "hidden",
+        orientation: "portrait", // Keep it portrait
+        pageSize: "A4", // A4 size
+        title: "Transaction History",
+        customize: function (doc) {
+          // Reduce margins to minimize right-side gaps
+          doc.pageMargins = [20, 20, 20, 20];
+
+          // Adjust table width to fit page
+          doc.content[1].table.widths = Array(
+            doc.content[1].table.body[0].length
+          ).fill("*");
+
+          // Style adjustments for table headers
+          doc.styles.tableHeader = {
+            fillColor: "#cbd5e1",
+            color: "black",
+            alignment: "left",
+            bold: true,
+          };
+
+          // Align text properly
+          doc.styles.tableBodyEven = { alignment: "center" };
+          doc.styles.tableBodyOdd = { alignment: "center" };
+
+          // Reduce default font size for better fitting
+          doc.defaultStyle.fontSize = 10;
+        },
+      },
+      {
+        extend: "print",
+        className: "hidden",
+      },
+    ],
+    order: [[8, "desc"]],
+  });
+
+  setInterval(function () {
+    table.ajax.reload(null, false);
+  }, 2000);
+
+  // Custom Button Click Events
+  $("#btn-requestCopy").on("click", function () {
+    table.button(".buttons-copy").trigger();
+  });
+
+  $("#btn-requestExcel").on("click", function () {
+    table.button(".buttons-excel").trigger();
+  });
+
+  $("#btn-requestPdf").on("click", function () {
+    table.button(".buttons-pdf").trigger();
+  });
+
+  $("#btn-requestPrint").on("click", function () {
+    table.button(".buttons-print").trigger();
+  });
+});
+
+$(document).ready(function () {
+  let table = $("#blotter_table").DataTable({
+    searching: true,
+    ajax: {
+      url: "db_transaction_blotter.php",
+      type: "POST",
+    },
+    columns: [
+      {
+        data: null,
+        render: function (data, type, row) {
+          return "CN-" + row.blotter_caseNumber;
+        },
+      },
+      { data: "incident_classification" },
+      { data: "date_of_incident" },
+      { data: "date_filing" },
+      { data: "caseTime" },
+    ],
+    dom:
+      "<'lg:flex justify-center lg:justify-between items-center mt-3 mb-2'lf>" + // Length menu (l) on left, Search (f) on right
+      "<'lg:flex lg:justify-start mb-2'B>" + // Buttons in a row
+      "<'table-responsive'tr>" + // Table wrapper
+      "<'flex justify-between items-center mt-2'ip>", // Info (i) on left, Pagination (p) on right
+    lengthMenu: [
+      [10, 25, 50, 100],
+      [10, 25, 50, 100],
+    ],
+    buttons: [
+      {
+        extend: "copy",
+        className: "hidden", // Hide default button
+      },
+      {
+        extend: "excelHtml5",
+        className: "hidden",
+      },
+      {
+        extend: "pdfHtml5",
+        className: "hidden",
+        orientation: "portrait", // Keep it portrait
+        pageSize: "A4", // A4 size
+        title: "Blotter Record History",
+        customize: function (doc) {
+          // Reduce margins to minimize right-side gaps
+          doc.pageMargins = [20, 20, 20, 20];
+
+          // Adjust table width to fit page
+          doc.content[1].table.widths = Array(
+            doc.content[1].table.body[0].length
+          ).fill("*");
+
+          // Style adjustments for table headers
+          doc.styles.tableHeader = {
+            fillColor: "#cbd5e1",
+            color: "black",
+            alignment: "left",
+            bold: true,
+          };
+
+          // Align text properly
+          doc.styles.tableBodyEven = { alignment: "center" };
+          doc.styles.tableBodyOdd = { alignment: "center" };
+
+          // Reduce default font size for better fitting
+          doc.defaultStyle.fontSize = 10;
+        },
+      },
+      {
+        extend: "print",
+        className: "hidden",
+      },
+    ],
+    order: [[8, "desc"]],
+  });
+
+  setInterval(function () {
+    table.ajax.reload(null, false);
+  }, 2000);
+
+  // Custom Button Click Events
+  $("#btn-blotterCopy").on("click", function () {
+    table.button(".buttons-copy").trigger();
+  });
+
+  $("#btn-blotterExcel").on("click", function () {
+    table.button(".buttons-excel").trigger();
+  });
+
+  $("#btn-blotterPdf").on("click", function () {
+    table.button(".buttons-pdf").trigger();
+  });
+
+  $("#btn-blotterPrint").on("click", function () {
+    table.button(".buttons-print").trigger();
+  });
 });
 
 // Function fetch and update monthly revenue
@@ -709,8 +900,8 @@ $(document).ready(function () {
         fontWeight: "400",
         fontFamily: "Inter, ui-sans-serif",
       },
-      y: { 
-        formatter: (value) => `Php ${value.toLocaleString()}` 
+      y: {
+        formatter: (value) => `Php ${value.toLocaleString()}`,
       },
     },
     colors: ["#1d4ed8"],
@@ -726,18 +917,23 @@ $(document).ready(function () {
     $.ajax({
       url: "db_request_revenue_table.php",
       type: "GET",
-      data: {year: year},
+      data: { year: year },
       dataType: "json",
       success: function (response) {
-        console.log(response);
+        //Update the yearly revenue display
+        let yearlyRevenue = response.revenues.reduce(
+          (acc, val) => acc + Number(val),
+          0
+        );
+        $("#yearlyRevenue").text(`${yearlyRevenue.toLocaleString()} PHP`);
 
         chart.updateOptions({
           xaxis: { categories: response.months },
           series: [
-            { 
-              name: "Revenue", 
-              data: response.revenues.map(Number) 
-            }
+            {
+              name: "Revenue",
+              data: response.revenues.map(Number),
+            },
           ],
         });
       },
@@ -758,9 +954,9 @@ $(document).ready(function () {
 
     // Clear and restart the interval with the new year
     clearInterval(autoUpdate);
-    autoUpdate = setInterval(() => fetchRevenueData(selectedYear), 2000); // ✅ Refresh every 10 seconds
+    autoUpdate = setInterval(() => fetchRevenueData(selectedYear), 2000); // ✅ Refresh every 2 seconds
   });
 
-  // Set an interval to refresh data every 10 seconds
+  // Set an interval to refresh data every 2 seconds
   let autoUpdate = setInterval(() => fetchRevenueData(selectedYear), 2000);
 });

@@ -1,15 +1,15 @@
 <?php 
 include("../../src/database.php");
 
-if (isset($_POST['btn-businessClearance'])) {
-    $businessClearancePrice = $_POST['businessClearance'] ?? '';
+if (isset($_POST['btn-barangayClearance'])) {
+    $barangayClearancePrice = $_POST['barangayClearance'] ?? '';
 
-    if (!empty($businessClearancePrice)) {
-        $updateQueryBusiness = "UPDATE document_types SET documentPrice = ? WHERE documentType = 3 ";
-        $updateStmtBusiness = $conn->prepare($updateQueryBusiness);
-        $updateStmtBusiness->bind_param("i", $businessClearancePrice);
+    if (!empty($barangayClearancePrice)) {
+        $updateQueryClearance = "UPDATE document_types SET documentPrice = ? WHERE documentType = 3 ";
+        $updateStmtClearance = $conn->prepare($updateQueryClearance);
+        $updateStmtClearance->bind_param("i", $barangayClearancePrice);
 
-        if ($updateStmtBusiness->execute()) {
+        if ($updateStmtClearance->execute()) {
             echo '<script>
                 document.addEventListener("DOMContentLoaded", function() {
                     Swal.fire({
@@ -22,10 +22,10 @@ if (isset($_POST['btn-businessClearance'])) {
                 });
             </script>';
         } else {
-            echo json_encode(["success" => false, "message" => "Error executing query: " . $updateStmtBusiness->error]);
+            echo json_encode(["success" => false, "message" => "Error executing query: " . $updateStmtClearance->error]);
         }
 
-        $updateStmtBusiness->close();
+        $updateStmtClearance->close();
     } else {
         echo json_encode(["success" => false, "message" => "Price cannot be empty."]);
     }

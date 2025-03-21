@@ -15,7 +15,10 @@
 </head>
 
 <body class="font-sans">
-    <?php require_once '../includes/header.php' ?>
+    <?php 
+        include __DIR__ . '/../includes/config.php';
+        include '../includes/header.php' 
+    ?>
     <div class="bg-slate-600 h-auto">
         <div class="pt-32 md:p-32 lg:p-32 text-gray-800">
             <div class="border-white bg-white sm:rounded-xl md:rounded-xl lg:rounded-xl shadow-lg pt-8">

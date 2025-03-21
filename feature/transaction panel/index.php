@@ -99,7 +99,7 @@
 
                 $barangayCertPrice = fetchDocumentPrice($conn, 'Barangay Certificate');
                 $certificateIndigencyPrice = fetchDocumentPrice($conn, 'Certificate of Indigency');
-                $businessClearancePrice = fetchDocumentPrice($conn, 'Business Clearance');
+                $barangayClearancePrice = fetchDocumentPrice($conn, 'Barangay Clearance');
 
                 include("modal.php")
                 ?>
@@ -190,7 +190,7 @@
                                 </div>
                                 <div class="mt-1 flex items-center gap-x-2">
                                     <h3 class="text-base lg:text-2xl font-semibold text-slate-200">
-                                        Php <?php echo number_format((float)$businessClearancePrice, 2); ?>
+                                        Php <?php echo number_format((float)$barangayClearancePrice, 2); ?>
                                     </h3>
                                 </div>
                             </div>

@@ -74,9 +74,10 @@ if (isset($_POST['btn-confirmPayment'])) {
     $documentPrice = $_POST['documentPrice'] ?? '';
     $transactionCode = $_SESSION['transactionCode'];
     $documentPrice = $_SESSION['fetchedDocumentPrice'];
-
+    
+    date_default_timezone_set('Asia/Manila');
     //Timestamp for each request
-    $currentDate = date('d-F-Y');
+    $currentDate = date('d-F-Y h:i A');
     $docs_timestamp = $currentDate;
 
     //Hashed transaction Code

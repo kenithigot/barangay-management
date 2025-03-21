@@ -105,12 +105,12 @@
                 <div class="p-4 overflow-y-auto">
                     <div class="space-y-3 px-2">
                         <div class="rounded-lg">
-                            <label for="businessClearance" class="block text-base text-gray-800 font-medium">Barangay Clearance Price</label>
+                            <label for="barangayClearance" class="block text-base text-gray-800 font-medium">Barangay Clearance Price</label>
                             <div class="flex rounded-lg shadow-sm">
                                 <div class="px-4 inline-flex items-center min-w-fit rounded-s-md border border-e-0 border-gray-200 bg-gray-50">
                                     <span class="text-base text-gray-800">Php</span>
                                 </div>
-                                <input type="number" name="businessClearance" id="businessClearance" value="<?php echo htmlspecialchars($businessClearancePrice); ?>" class="py-2 px-3 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter price">
+                                <input type="number" name="barangayClearance" id="barangayClearance" value="<?php echo htmlspecialchars($businessClearancePrice); ?>" class="py-2 px-3 block w-full border border-gray-200 rounded-lg text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none" placeholder="Enter price">
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                     <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-businessClearance-modal">
                         Close
                     </button>
-                    <button type="submit" name="btn-businessClearance" id="btn-businessClearance" class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-slate-600 text-white hover:bg-slate-500 focus:outline-none focus:bg-slate-500 disabled:opacity-50 disabled:pointer-events-none">
+                    <button type="submit" name="btn-barangayClearance" id="btn-barangayClearance" class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-slate-600 text-white hover:bg-slate-500 focus:outline-none focus:bg-slate-500 disabled:opacity-50 disabled:pointer-events-none">
                         Save changes
                     </button>
                 </div>

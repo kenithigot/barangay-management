@@ -1,3 +1,4 @@
+
 <header class="fixed left-0 w-full inset-x-0 top-0 z-50 bg-white">
     <nav class="flex items-center justify-between p-4 lg:px-8"
         aria-label="Global">

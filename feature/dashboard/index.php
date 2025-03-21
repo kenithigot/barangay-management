@@ -21,7 +21,24 @@
     <link rel="stylesheet" href="../../node_modules/apexcharts/dist/apexcharts.css">
 
     <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <style>
+        table.dataTable th.dt-type-numeric,
+        table.dataTable th.dt-type-date,
+        table.dataTable td.dt-type-numeric,
+        table.dataTable td.dt-type-date {
+            text-align: start;
+        }
+    </style>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.2.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.2.2/js/buttons.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.2.2/js/buttons.print.min.js"></script>
 </head>
 
 <body class="font-sans">
@@ -70,74 +87,83 @@
                 <div class="py-2 lg:py-3 mx-auto">
                     <!-- Grid -->
                     <div class="grid sm:grid-cols-2 lg:grid-cols-12 gap-4 sm:gap-6">
-                        <div class="lg:col-span-4">
-                            <div class="flex flex-col justify-center gap-y-5">
-                                <!-- Card -->
-                                <div class="border-l-4 border-l-green-600 h-[180px] flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
-                                    <div class="p-4">
-                                        <div class="inline-flex gap-x-3 items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-9">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
-                                            </svg>
-                                            <p class="text-left text-lg uppercase tracking-wide font-bold text-gray-800">
-                                                Total Revenue
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mx-auto">
-                                        <p id="revenueTotal" class="text-5xl uppercase tracking-wide font-semibold text-gray-800"></p>
+                        <div class="lg:col-span-4 h-full flex flex-col justify-between gap-y-6">
+                            <!-- Card -->
+                            <div class="border-l-4 border-l-green-600 flex flex-col bg-gray-200 border shadow-md rounded-xl h-full">
+                                <div class="p-4">
+                                    <div class="inline-flex gap-x-3 items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-9">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                                        </svg>
+                                        <p class="text-left text-lg uppercase tracking-wide font-bold text-gray-800">
+                                            Total Revenue
+                                        </p>
                                     </div>
                                 </div>
-                                <!-- End Card -->
-
-                                <!-- Card -->
-                                <div class="border-l-4 border-l-green-600 h-[180px] flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
-                                    <div class="p-4">
-                                        <div class="inline-flex gap-x-3 items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-9">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
-                                            </svg>
-                                            <p class="text-left text-lg uppercase tracking-wide font-bold text-gray-800">
-                                                Monthly Revenue
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mx-auto">
-                                        <p id="revenueMonthly" class="text-5xl uppercase tracking-wide font-semibold text-gray-800"></p>
-                                    </div>
+                                <div class="mx-auto pb-7">
+                                    <p id="revenueTotal" class="text-5xl uppercase tracking-wide font-semibold text-gray-800"></p>
                                 </div>
-                                <!-- End Card -->
+                                <span class="px-4 text-end text-lg uppercase tracking-wide font-semibold text-gray-800">Php</span>
                             </div>
+                            <!-- End Card -->
+
+                            <!-- Card -->
+                            <div class="border-l-4 border-l-green-600 flex flex-col bg-gray-200 border shadow-md rounded-xl h-full">
+                                <div class="p-4">
+                                    <div class="inline-flex gap-x-3 items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-9">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                                        </svg>
+                                        <p class="text-left text-lg uppercase tracking-wide font-bold text-gray-800">
+                                            Monthly Revenue
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mx-auto pb-7">
+                                    <p id="revenueMonthly" class="text-5xl uppercase tracking-wide font-semibold text-gray-800"></p>
+                                </div>
+                                <span class="px-4 text-end text-lg uppercase tracking-wide font-semibold text-gray-800">Php</span>
+                            </div>
+                            <!-- End Card -->
                         </div>
+
                         <div class="lg:col-span-8">
                             <!-- Card -->
-                            <div class="border-l-4 border-l-green-600 flex flex-col bg-gray-200 border shadow-md rounded-xl min-w-48">
+                            <div class="border-l-4 border-l-green-600 flex flex-col bg-gray-200 border shadow-md rounded-xl">
                                 <div class="p-4">
-                                    <div class="flex items-center gap-x-2">
-                                        <p class="text-left text-lg uppercase tracking-wide font-bold text-gray-800">
-                                            Revenue Over Time
-                                        </p>
+                                    <div class="flex justify-between pb-4">
+                                        <div class="flex items-center gap-x-2">
+                                            <p class="text-left text-lg uppercase tracking-wide font-bold text-gray-800">
+                                                Revenue Over Time
+                                            </p>
+                                        </div>
                                         <div>
                                             <select id="yearRevenue" name="yearRevenue" class="py-1 px-2 block w-32 border border-gray-200 rounded-md text-base focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
                                                 <?php
-                                                    include("../../src/database.php");
+                                                include("../../src/database.php");
 
-                                                    $query = $conn->prepare("SELECT DISTINCT DATE_FORMAT(STR_TO_DATE(printrequest_docs,'%d-%M-%Y %h:%i:%s %p'), '%Y') AS year FROM resident_request_docs");
-                                                    $query->execute();
-                                                    $result = $query->get_result();
+                                                $query = $conn->prepare("SELECT DISTINCT DATE_FORMAT(STR_TO_DATE(printrequest_docs,'%d-%M-%Y %h:%i:%s %p'), '%Y') AS year FROM resident_request_docs");
+                                                $query->execute();
+                                                $result = $query->get_result();
 
-                                                    while($row = $result->fetch_assoc()) {
-                                                        echo '<option value="'.$row['year'].'">'."Year-".$row['year'].'</option>';
-                                                    }
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo '<option value="' . $row['year'] . '">' . "Year-" . $row['year'] . '</option>';
+                                                }
 
-                                                    echo json_encode([
-                                                        'year'=> 'year'
-                                                    ]);
-                                                    $result->close();
-                                                    $conn->close();
-                                                ?>                                           
+                                                echo json_encode([
+                                                    'year' => 'year'
+                                                ]);
+                                                $result->close();
+                                                $conn->close();
+                                                ?>
                                             </select>
                                         </div>
+                                    </div>
+                                    <div class="flex items-center px-4 gap-x-4 justify-center lg:justify-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-9">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                                        </svg>
+                                        <p id="yearlyRevenue" class="text-3xl tracking-wide font-semibold text-gray-800"></p>
                                     </div>
                                     <div class="">
                                         <div id="hs-revenueOverTime"></div>
@@ -171,12 +197,49 @@
                 <!-- End Card Section -->
             </div>
 
-            <div class="my-5 py-5 shadow-md rounded-md bg-slate-200">
+            <div class="my-5 py-5 shadow-md rounded-md bg-slate-200 overflow-x-auto">
                 <div class="px-4">
-                    <h1 class="text-lg font-semibold mb-5 underline">Transaction History</h1>
-                    <?php require("transaction-Table.php") ?>
+                    <div class="lg:flex justify-center lg:justify-between items-center">
+                        <h1 class="text-lg font-semibold underline">Transaction History - Requested Documents</h1>
+                        <div class="flex justify-center mt-3 lg:mt-0">
+                            <button type="submit" id="btn-requestCopy" name="btn-excelDownload" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                Copy
+                            </button>
+                            <button type="submit" id="btn-requestExcel" name="btn-pdfDownload" class="py-2 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                Excel
+                            </button>
+                            <button type="submit" id="btn-requestPdf" name="btn-excelDownload" class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                Pdf
+                            </button>
+                            <button type="submit" id="btn-requestPrint" name="btn-pdfDownload" class="py-2 px-3 gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                Print
+                            </button>
+                        </div>
+                    </div>
+                    <?php include("transaction_requestedDocs.php") ?>
+                </div>
+            </div>
 
-
+            <div class="my-5 py-5 shadow-md rounded-md bg-slate-200 overflow-x-auto">
+                <div class="px-4">
+                    <div class="lg:flex justify-center lg:justify-between items-center">
+                        <h1 class="text-lg font-semibold underline">Transaction History - Blotter Records</h1>
+                        <div class="flex justify-center mt-3 lg:mt-0">
+                            <button type="submit" id="btn-blotterCopy" name="btn-excelDownload" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                Copy
+                            </button>
+                            <button type="submit" id="btn-blotterExcel" name="btn-pdfDownload" class="py-2 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                Excel
+                            </button>
+                            <button type="submit" id="btn-blotterPdf" name="btn-excelDownload" class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                Pdf
+                            </button>
+                            <button type="submit" id="btn-blotterPrint" name="btn-pdfDownload" class="py-2 px-3 gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                Print
+                            </button>
+                        </div>
+                    </div>
+                    <?php include("transaction_blotterRecord.php") ?>
                 </div>
             </div>
         </div>
@@ -187,5 +250,7 @@
     <script src="../../node_modules/apexcharts/dist/apexcharts.min.js"></script>
     <script src="../../node_modules/preline/dist/helper-apexcharts.js"></script>
     <script type="text/javascript" src="script.js"></script>
+
+
 
 </html>
