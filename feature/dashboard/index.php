@@ -201,20 +201,34 @@
                 <div class="px-4">
                     <div class="lg:flex justify-center lg:justify-between items-center">
                         <h1 class="text-lg font-semibold underline">Transaction History - Requested Documents</h1>
-                        <div class="flex justify-center mt-3 lg:mt-0">
-                            <button type="submit" id="btn-requestCopy" name="btn-excelDownload" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
-                                Copy
-                            </button>
-                            <button type="submit" id="btn-requestExcel" name="btn-pdfDownload" class="py-2 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
-                                Excel
-                            </button>
-                            <button type="submit" id="btn-requestPdf" name="btn-excelDownload" class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
-                                Pdf
-                            </button>
-                            <button type="submit" id="btn-requestPrint" name="btn-pdfDownload" class="py-2 px-3 gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
-                                Print
-                            </button>
-                        </div>
+                        <?php
+                        include '../../src/database.php';
+
+                        $id = $_SESSION['id'];
+                        $query_data = "SELECT * FROM admin_staff_account WHERE id = $id AND user_role = 1";
+                        $result_query = mysqli_query($conn, $query_data);
+                        if ($result_query && mysqli_num_rows($result_query) > 0) {
+                            $user = mysqli_fetch_assoc($result_query);
+
+                            if ($user['user_role'] == 1) {
+                                // User has role = 1, so show full sidebar
+                        ?>
+                                <div class="flex justify-center mt-3 lg:mt-0">
+                                    <button type="submit" id="btn-requestCopy" name="btn-excelDownload" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                        Copy
+                                    </button>
+                                    <button type="submit" id="btn-requestExcel" name="btn-pdfDownload" class="py-2 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                        Excel
+                                    </button>
+                                    <button type="submit" id="btn-requestPdf" name="btn-excelDownload" class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                        Pdf
+                                    </button>
+                                    <button type="submit" id="btn-requestPrint" name="btn-pdfDownload" class="py-2 px-3 gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                        Print
+                                    </button>
+                                </div>
+                        <?php }
+                        } ?>
                     </div>
                     <?php include("transaction_requestedDocs.php") ?>
                 </div>
@@ -224,20 +238,34 @@
                 <div class="px-4">
                     <div class="lg:flex justify-center lg:justify-between items-center">
                         <h1 class="text-lg font-semibold underline">Transaction History - Blotter Records</h1>
-                        <div class="flex justify-center mt-3 lg:mt-0">
-                            <button type="submit" id="btn-blotterCopy" name="btn-excelDownload" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
-                                Copy
-                            </button>
-                            <button type="submit" id="btn-blotterExcel" name="btn-pdfDownload" class="py-2 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
-                                Excel
-                            </button>
-                            <button type="submit" id="btn-blotterPdf" name="btn-excelDownload" class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
-                                Pdf
-                            </button>
-                            <button type="submit" id="btn-blotterPrint" name="btn-pdfDownload" class="py-2 px-3 gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
-                                Print
-                            </button>
-                        </div>
+                        <?php
+                        include '../../src/database.php';
+
+                        $id = $_SESSION['id'];
+                        $query_data = "SELECT * FROM admin_staff_account WHERE id = $id AND user_role = 1";
+                        $result_query = mysqli_query($conn, $query_data);
+                        if ($result_query && mysqli_num_rows($result_query) > 0) {
+                            $user = mysqli_fetch_assoc($result_query);
+
+                            if ($user['user_role'] == 1) {
+                                // User has role = 1, so show full sidebar
+                        ?>
+                                <div class="flex justify-center mt-3 lg:mt-0">
+                                    <button type="submit" id="btn-blotterCopy" name="btn-excelDownload" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                        Copy
+                                    </button>
+                                    <button type="submit" id="btn-blotterExcel" name="btn-pdfDownload" class="py-2 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                        Excel
+                                    </button>
+                                    <button type="submit" id="btn-blotterPdf" name="btn-excelDownload" class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                        Pdf
+                                    </button>
+                                    <button type="submit" id="btn-blotterPrint" name="btn-pdfDownload" class="py-2 px-3 gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-800 text-white hover:bg-green-900 focus:outline-none focus:bg-green-800 disabled:opacity-50 disabled:pointer-events-none mr-1">
+                                        Print
+                                    </button>
+                                </div>
+                        <?php }
+                        } ?>
                     </div>
                     <?php include("transaction_blotterRecord.php") ?>
                 </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add account - Barangay Labuay</title>
+    <title>Account Information - Barangay Labuay</title>
 
     <!-- Tailwind CSS -->
     <link href="../../src/output.css" rel="stylesheet">
@@ -21,11 +21,9 @@
 
     <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
-
 </head>
 
 <body class="font-sans">
-
     <?php require("../../includes/sidebar.php"); ?>
     <!-- ========== MAIN CONTENT ========== -->
     <div class="-mt-px">
@@ -88,7 +86,9 @@
                         <div class="hs-tooltip-toggle relative inline-block">
                             <img id="imgDisplay" name="imgDisplay"
                                 class="inline-block w-40 h-40 object-cover object-center rounded-full border border-slate-600"
-                                src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                                src="<?php echo isset($row['profile_picture']) && $row['profile_picture'] != ''
+                                            ? '../../src/imgs-vid/' . $row['profile_picture']
+                                            : '../../src/imgs-vid/unknownUser.png' ?>"
                                 alt="Avatar">
                             <span
                                 class="absolute bottom-0 end-0 block size-8 rounded-full ring-2 ring-white bg-green-600"></span>
@@ -98,52 +98,108 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex text-center flex-col space-y-3 pt-2">
-                        <label for="uploadImg"
-                            class="cursor-pointer hover:text-blue-600 hover:underline hover:underline-offset-4 text-sm font-medium">Choose
-                            a photo</label>
-                        <input type="file" id="uploadImg" name="uploadImg" accept="image/*" class="hidden"
-                            onchange="displayFileName()">
-                        <button
-                            class="px-1 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-slate-600 text-white hover:bg-slate-500 focus:outline-none focus:bg-slate-500 disabled:opacity-50 disabled:pointer-events-none">Upload
-                            Photo</button>
-                    </div>
+                    <?php
+                    include '../../src/database.php';
+                    $id = $_SESSION['id'];
+
+                    if (isset($_POST['uploadBtn']) && isset($_FILES['uploadImg'])) {
+                        $file = $_FILES['uploadImg'];
+                        $fileName = $file['name'];
+                        $fileTmp = $file['tmp_name'];
+                        $fileType = $file['type'];
+
+                        // Allow only image files
+                        $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+
+                        if (in_array($fileType, $allowedTypes)) {
+                            // Get current profile picture from DB
+                            $query = "SELECT profile_picture FROM admin_staff_account WHERE id = $id";
+                            $result = mysqli_query($conn, $query);
+                            $row = mysqli_fetch_assoc($result);
+                            $currentImage = $row['profile_picture'];
+
+                            // Optional: Rename the file to prevent duplicates
+                            $newFileName = uniqid('profile_', true) . '.' . pathinfo($fileName, PATHINFO_EXTENSION);
+                            $destination = '../../src/imgs-vid/' . $newFileName;
+
+                            // Move file
+                            if (move_uploaded_file($fileTmp, $destination)) {
+                                // Delete old image if it exists and is not from external source
+                                $oldImagePath = '../../src/imgs-vid/' . $currentImage;
+                                if (!empty($currentImage) && file_exists($oldImagePath)) {
+                                    unlink($oldImagePath);
+                                }
+
+                                // Save filename in DB
+                                $updateQuery = "UPDATE admin_staff_account SET profile_picture = '$newFileName' WHERE id = $id";
+                                if (mysqli_query($conn, $updateQuery)) {
+                                    echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function() {
+                                            Swal.fire({
+                                                icon: "success",
+                                                title: "Saved Successfully!",
+                                                text: "Your profile image has been updated."
+                                            }).then(() => {
+                                                window.location.href = "../dashboard/account information.php";
+                                            });
+                                        });
+                                    </script>';
+                                }
+                            }
+                        }
+                    }
+                    ?>
+
+
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="flex text-center flex-col space-y-3 pt-2">
+                            <label for="uploadImg"
+                                class="cursor-pointer hover:text-blue-600 hover:underline hover:underline-offset-4 text-sm font-medium">Choose
+                                a photo</label>
+                            <input type="file" id="uploadImg" name="uploadImg" accept="image/*" class="hidden"
+                                onchange="displayFileName()">
+                            <button type="submit" name="uploadBtn"
+                                class="px-1 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-slate-600 text-white hover:bg-slate-500 focus:outline-none focus:bg-slate-500 disabled:opacity-50 disabled:pointer-events-none">Upload
+                                Photo</button>
+                        </div>
+                    </form>
 
                     <script>
-                    function displayFileName() {
-                        const imageDisplay = document.getElementById('imgDisplay');
-                        const inputImg = document.getElementById('uploadImg');
+                        function displayFileName() {
+                            const imageDisplay = document.getElementById('imgDisplay');
+                            const inputImg = document.getElementById('uploadImg');
 
-                        if (inputImg.files && inputImg.files[0]) {
-                            const file = inputImg.files[0];
+                            if (inputImg.files && inputImg.files[0]) {
+                                const file = inputImg.files[0];
 
-                            // Check if the file is of type jpeg, jpg, or png
-                            const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+                                // Check if the file is of type jpeg, jpg, or png
+                                const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
 
-                            if (validTypes.includes(file.type)) {
-                                let reader = new FileReader();
+                                if (validTypes.includes(file.type)) {
+                                    let reader = new FileReader();
 
-                                reader.onload = function(e) {
-                                    imageDisplay.src = e.target.result;
+                                    reader.onload = function(e) {
+                                        imageDisplay.src = e.target.result;
 
-                                    // Ensure image does not stretch when updated
-                                    imageDisplay.classList.remove("w-auto", "h-auto");
-                                    imageDisplay.classList.add("w-40", "h-40", "object-cover", "object-center");
-                                };
+                                        // Ensure image does not stretch when updated
+                                        imageDisplay.classList.remove("w-auto", "h-auto");
+                                        imageDisplay.classList.add("w-40", "h-40", "object-cover", "object-center");
+                                    };
 
-                                // Read the file as Data URL
-                                reader.readAsDataURL(file);
+                                    // Read the file as Data URL
+                                    reader.readAsDataURL(file);
 
-                            } else {
-                                // If the file type is invalid, show a message or handle the error
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Error uploading QR Code!",
-                                    text: "Invalid file type. Please upload a JPEG, JPG, or PNG file."
-                                });
-                            }
+                                } else {
+                                    // If the file type is invalid, show a message or handle the error
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Error uploading QR Code!",
+                                        text: "Invalid file type. Please upload a JPEG, JPG, or PNG file."
+                                    });
+                                }
+                            };
                         };
-                    };
                     </script>
                 </div>
                 <?php

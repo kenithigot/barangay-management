@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Barangay Labuay</title>
+    <title>Official and Staff - Barangay Labuay</title>
 
     <!-- Tailwind CSS -->
     <link href="../../src/output.css" rel="stylesheet">
@@ -49,7 +49,7 @@
                         </svg>
                     </li>
                     <li class="text-sm font-semibold text-gray-800 truncate" aria-current="page">
-                        Settings
+                        Official and Staff
                     </li>
                 </ol>
                 <!-- End Breadcrumb -->
@@ -61,8 +61,11 @@
     <div class="w-full lg:ps-64 min-h-screen">
         <div class="p-8">
             <div class="hidden lg:block">
-                <h1 class="text-2xl font-extrabold text-gray-800 underline">Settings</h1>
-            </div>  
+                <h1 class="text-2xl font-extrabold text-gray-800 underline">Official and Staff</h1>
+            </div>
+            <div class="py-4">
+                <h3 class="font-semibold text-gray-900">No content.</h3>
+            </div>
         </div>
     </div>
 

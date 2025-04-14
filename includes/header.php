@@ -42,15 +42,15 @@
                     <div class="">
                         <div class="py-1" role="none">
                             <!-- Active: "bg-gray-100 text-gray-900 outline-none", Not Active: "text-gray-700" -->
-                            <a href="#" class="block px-4 py-2 text-base text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1" id="menu-item-0">Mission/Vision</a>
-                            <a href="#" class="block px-4 py-2 text-base text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1" id="menu-item-1">History</a>
-                            <a href="#" class="block px-4 py-2 text-base text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1" id="menu-item-2">Organizational Structure</a>
-                            <a href="#" class="block px-4 py-2 text-base text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1" id="menu-item-3">Quality Policy Statement</a>
+                            <a href="/barangay-management/#missionTab" class="block px-4 py-2 text-base text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1" id="menu-item-0">Mission/Vision</a>
+                            <a href="/barangay-management/#historyTab" class="block px-4 py-2 text-base text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1" id="menu-item-1">History</a>
+                            <a href="/barangay-management/#officialTab" class="block px-4 py-2 text-base text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1" id="menu-item-2">Organizational Structure</a>
+                            <a href="/barangay-management/#" class="block px-4 py-2 text-base text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1" id="menu-item-3">Quality Policy Statement</a>
                             <div id="purok-content" class="flex items-center hover:bg-slate-300">
-                                <button class="block pl-4 py-2 text-base text-gray-700" role="menuitem" tabindex="-1" id="menu-item-3">Barangay Purok(s)</button>
+                                <!-- <button class="block pl-4 py-2 text-base text-gray-700" role="menuitem" tabindex="-1" id="menu-item-3">Barangay Purok(s)</button>
                                 <svg class="ml-2 h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
+                                </svg> -->
                             </div>
                         </div>
                         <div id="purok-dropdown" class="hidden absolute w-32 right-0 z-10 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu">
@@ -63,7 +63,7 @@
 
                                 while ($row = mysqli_fetch_array($query)) {
                                     // Dynamically generate the href with the prk query parameter
-                                    echo '<a href="' . BASE_URL . '/purok/?prk=' . $row['prk'] . '" class="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1">Purok ' . ($row['prk']) . '</a>';
+                                    echo '<a href="' . BASE_URL . '/purok/?prk=' . $row['prk'] . '" class="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-300" role="menuitem" tabindex="-1">' . ($row['prk']) . '</a>';
                                 }
                                 ?>
                             </div>
@@ -74,9 +74,9 @@
 
 
             </div>
-            <a href="#"
+            <a href="/barangay-management/#projectsTab"
                 class="text-base font-semibold text-gray-900 hover:text-slate-600">Projects/Programs</a>
-            <a href="#"
+            <a href="/barangay-management/#contactTab"
                 class="text-base font-semibold text-gray-900 hover:text-slate-600">Contact</a>
             <div class="relative inline-block">
                 <div id="documentBlock" class="inline-block items-center hover:text-slate-600">
@@ -88,7 +88,6 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </div>
-
                 </div>
                 <div id="documentDropdown" class="hidden absolute left-0 z-10 py-2 mt-4 w-64 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu">
                     <div class="">

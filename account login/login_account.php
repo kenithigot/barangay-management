@@ -43,8 +43,6 @@ if (isset($_POST['btn-userLogin'])) {
                 $_SESSION['id'] = $id;
                 $_SESSION['user_role'] = $user_role;
 
-                $redirectUrl = ($user_role == 1) ? "../feature/dashboard/" : (($user_role == 2) ? "../staff/dashboard/" : "../other/page/");
-
                 echo '<script>
                     document.addEventListener("DOMContentLoaded", function() {
                         Swal.fire({
@@ -52,7 +50,7 @@ if (isset($_POST['btn-userLogin'])) {
                             title: "Login Successful!",
                             html: "Welcome <span class=\"font-semibold uppercase\">' . $firstName . '</span>!<br>You have successfully logged in."
                         }).then(() => {
-                            window.location.href = "' . $redirectUrl . '";
+                            window.location.href = "../feature/dashboard/";
                         });
                     });
                 </script>';

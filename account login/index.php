@@ -54,7 +54,7 @@
                                 <div class="mb-4">
                                     <div class="flex justify-between items-center">
                                         <label for="password" class="block text-sm mb-2">Password</label>
-                                        <a class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:underline font-medium" href="../dashboard/">Forgot password?</a>
+                                        <a class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:underline font-medium" href="../register/">Forgot password?</a>
                                     </div>
                                     <div class="relative">
                                         <input type="password" id="userPassword" name="userPassword" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none disabled:opacity-50 disabled:pointer-events-none" aria-describedby="password-error">

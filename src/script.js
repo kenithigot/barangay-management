@@ -58,25 +58,7 @@ document.addEventListener("click", function (event) {
     }
 });
 
-const purokContent = document.getElementById("purok-content");
-const purokDropdown = document.getElementById("purok-dropdown");
 
-purokContent.addEventListener("click", function(event){
-    // Toggle dropdown visibility
-    if (purokDropdown.style.display === "block") {
-        purokDropdown.style.display = "none";
-    } else {
-        purokDropdown.style.display = "block";
-    }
-    event.stopPropagation();
-});
-
-// Hide the dropdown when clicking outside of it
-document.addEventListener("click", function (event) {
-    if (!purokDropdown.contains(event.target)) {
-        purokDropdown.style.display = "none";
-    }
-});
 
 //Document Navbar
 const documentBlock = document.getElementById("documentBlock");
